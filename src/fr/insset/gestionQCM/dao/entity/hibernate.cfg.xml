@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.password">rootroot</property>
+        <property name="hibernate.connection.pool_size">1</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/qcm_db</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.search.autoregister_listeners">false</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.validator.apply_to_ddl">false</property>
+        <mapping class="AvoirRole" />
+        <mapping class="Etudiant" />
+        <mapping class="Groupe" />
+        <mapping class="Resultat" />
+        <mapping class="Membre" />
+        <mapping class="Commentaire" />
+        <mapping class="Page" />
+        <mapping class="QcmAffGroupe" />
+        <mapping class="Auteur" />
+        <mapping class="Role" />
+        <mapping class="EtudiantChoix" />
+        <mapping class="Reponse" />
+        <mapping class="Theme" />
+        <mapping class="Qcm" />
+        <mapping class="Question" />
+        <mapping class="Utilisateur" />
+        <mapping class="Session" />
+    </session-factory>
+</hibernate-configuration>
