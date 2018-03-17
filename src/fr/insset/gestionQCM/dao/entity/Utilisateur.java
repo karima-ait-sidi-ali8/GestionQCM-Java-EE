@@ -1,3 +1,5 @@
+package fr.insset.gestionQCM.dao.entity;
+
 // default package
 // Generated 8 mars 2018 16:48:46 by Hibernate Tools 4.3.1.Final
 
@@ -18,6 +20,10 @@ import javax.persistence.TemporalType;
 @Table(name = "utilisateur", catalog = "qcm_db")
 public class Utilisateur implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String nom;
 	private String prenom;

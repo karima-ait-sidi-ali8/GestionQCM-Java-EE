@@ -1,5 +1,6 @@
-// default package
-// Generated 8 mars 2018 16:48:46 by Hibernate Tools 4.3.1.Final
+package fr.insset.gestionQCM.dao.entity;
+
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,10 @@ import javax.persistence.Table;
 @Table(name = "avoir_role", catalog = "qcm_db")
 public class AvoirRole implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private int idRole;
 	private int idUser;

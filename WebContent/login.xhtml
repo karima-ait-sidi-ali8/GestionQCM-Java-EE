@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Easy Eval</title>
+        <meta name="author" content="The Author"></meta>
+        <h:outputStylesheet library="css" name="animate.css"></h:outputStylesheet>
+    </h:head>
+    <!-- Add 50px padding top to the body for the navbar -->
+    <h:body style="padding-top: 50px; padding-bottom: 20px;">
+        <b:navBar brand="Easy Eval" brandHref="#" inverse="true" fixed="top">
+          
+            <h:form styleClass="navbar-form navbar-right">
+                <div class="form-group">
+                    <b:inputText placeholder="Email" fieldSize="sm" value="#{UserLogin.email}" required="true" requiredMessage="Email non valide ! Ressayer"/>
+                    <!--input type="text" class="form-control" placeholder="Search"/-->
+                </div>
+                <div class="form-group">
+                    <b:inputSecret placeholder="Password" fieldSize="sm" required="true" requiredMessage="Error : email is not ras lambour" />
+                </div> 
+                #{' '}
+                <b:commandButton action="a" value="Connexion" look="success" icon="chevron-right" iconAlign="right"/><br/>
+
+
+            </h:form>
+           
+        </b:navBar>
+       
+        
+        <b:jumbotron>
+            <b:container>
+            
+             <h:messages style="float: right; color: red" ></h:messages>
+                <h2>Bienvenue !</h2>
+                <p> <STRONG> Easy Eval</STRONG> nouveau logiciel de questionnaire gratuit en ligne pour 
+                                     créer et gérer vos examens.<br/>
+                                     Passez du temps sur les sujets plutot que sur les corrections !
+                </p>
+                <p>
+                    <a href="#" class="btn btn-lg btn-info">Inscrivez-vous ! »</a>
+                </p>
+            </b:container>
+
+        </b:jumbotron>
+        <b:container>
+            <b:row> <center><h2>Votre premier QCM en 3 étapes</h2></center></b:row><br />
+            <b:row>
+                <b:column col-md="4">
+                	
+                    <h3>Creez votre classe</h3>
+                    <p>Avec les prénoms noms et adresse email personnes que vous souhaitez évaluer : une classe, une équipe projet, un groupe de 200 candidats... </p>
+                   
+                </b:column>
+                <b:column col-md="4">
+                    <h3>Creez votre quiz</h3>
+                    <p>Par tirage au sort ou sélection manuelle de questions, qui peuvent être illustrées, et dont la durée de réponse peut être limitée (ou pas !)</p>
+                    
+                </b:column>
+                <b:column col-md="4">
+                    <h3>Planifiez/surveillez analysez...</h3>
+                    <p>Invitez les candidats, relaxez vous, laissez la console de surveillance vous assister, et <strong>Easy Eval</strong> va vous permettre de corriger tout cela automatiquement !</p>
+                   
+                </b:column>
+            </b:row>
+            <hr/>
+            <footer>
+            <p>© Easy Eval 2018</p>
+            </footer>
+        </b:container>
+
+    </h:body>
+</html>
