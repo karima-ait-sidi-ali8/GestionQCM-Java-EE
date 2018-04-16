@@ -1,0 +1,408 @@
+/*--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+--*/
+/* reset */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
+article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {display: block;}
+ol,ul{list-style:none;margin:0px;padding:0px;}
+blockquote,q{quotes:none;}
+blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
+table{border-collapse:collapse;border-spacing:0;}
+/* start editing from here */
+a{text-decoration:none;}
+.txt-rt{text-align:right;}/* text align right */
+.txt-lt{text-align:left;}/* text align left */
+.txt-center{text-align:center;}/* text align center */
+.float-rt{float:right;}/* float right */
+.float-lt{float:left;}/* float left */
+.clear{clear:both;}/* clear float */
+.pos-relative{position:relative;}/* Position Relative */
+.pos-absolute{position:absolute;}/* Position Absolute */
+.vertical-base{	vertical-align:baseline;}/* vertical align baseline */
+.vertical-top{	vertical-align:top;}/* vertical align top */
+nav.vertical ul li{	display:block;}/* vertical menu */
+nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
+img{max-width:100%;}
+/*end reset*/
+body{
+	font-family: 'Open Sans', sans-serif;
+background: #DDC481;
+}
+.header {
+    text-align: center;
+    margin-top: 3.5em;
+}
+.header h1 {
+    font-size: 3.5em;
+    color: #fff;
+	font-family: 'Varela Round', sans-serif;
+}
+.main-section {
+    width: 27%;
+    margin: 2em auto 0;
+	text-align: center;
+}
+.request {
+    background: #fff;
+	padding: 1.5em 0 1em;
+	border-radius: 6px;
+}
+.request-form h2 {
+    font-size: 1.2em;
+    padding: 0 0 .5em;
+    line-height: 1.5em;
+    color: #955835;
+	font-family: 'Varela Round', sans-serif;
+}
+.request-form input[type="text"] {
+    padding: .8em 1em;
+    width: 85%;
+    outline: none;
+    color: #555;
+    font-size: .9em;
+	border: 1px solid #E2E1DE;
+	border-radius: 3px;
+}
+.email {
+    margin: 1em 0;
+}
+.preferred {
+    padding: 1em 0;
+}
+.preferred h3 {
+    font-size: 1.2em;
+    padding: 0 0 .8em 0;
+    color: #955835;
+    text-transform: capitalize;
+	font-family: 'Varela Round', sans-serif;
+}
+.preferred label {
+    font-size: .95em;
+    color: #555;
+	padding: 0px 0 0 14px ;
+    vertical-align: sub;
+}
+.radio {
+    margin: 0 6px 6px 0px;
+}
+/*start-checkbox*/
+.checkbox {
+padding-left: 25px;
+color: #B6B6B6;
+cursor: pointer;
+position:relative;
+font-size:12px;
+}
+ .checkbox:last-child {
+margin-bottom: 0;
+}
+.checkbox input {
+position: absolute;
+left: -9999px;
+}
+.checkbox i {
+position: absolute;
+bottom: 7px;
+left: 0px;
+display: block;
+width: 19px;
+height: 20px;
+outline: none;
+  border: 3px solid #DF1E1C;
+  background: #fff;
+border-radius:3px;
+-webkit-border-radius:3px;
+-moz-border-radius:3px;
+-o-border-radius:3px;
+}
+.checkbox input + i:after {
+position: absolute;
+opacity: 0;
+transition: opacity 0.1s;
+-o-transition: opacity 0.1s;
+-ms-transition: opacity 0.1s;
+-moz-transition: opacity 0.1s;
+-webkit-transition: opacity 0.1s;
+}
+.checkbox input + i:after {
+content: '';
+background: url("../images/tick-mark1.png") no-repeat center;
+top: -6px;
+left: 0px;
+width: 18px;
+height: 18px;
+text-align: center;
+}
+.checkbox input:checked + i:after {
+opacity: 1;
+}
+.checkbox input:checked + i {
+  border: 3px solid #DF1E1C;
+  background: #fff;
+}
+.radio {
+position: relative;
+display:inline-block;
+}
+.radio:first-child {
+margin-left: 0;
+margin: 0;
+}
+.radio {
+    padding-left: 22px;
+    line-height: 25px;
+    color: #404040;
+    cursor: pointer;
+    margin: 16px 0 0 0;
+}
+.radio  input[type="radio"]{
+position: absolute;
+left: -9999px;
+}
+.radio-btns label {
+  font-size: 17px;
+  color: #A9A8A8;
+  padding: 0px 0 0 10px !important;
+  border:none !important;
+  }
+.radio i {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    display: block;
+    width: 20px;
+    height: 20px;
+    outline: none;
+    border: 5px solid #955835;
+    background: #fff;
+    cursor: pointer;
+}
+.radio i {
+border-radius: 50%;
+}
+.radio input + i:after {
+position: absolute;
+opacity: 0;
+transition: opacity 0.1s;
+-o-transition: opacity 0.1s;
+-ms-transition: opacity 0.1s;
+-moz-transition: opacity 0.1s;
+-webkit-transition: opacity 0.1s;
+}
+ .radio input + i:after {
+content: '';
+top: 6px;
+left: 7px;
+width: 5px;
+height: 5px;
+border-radius: 50%;
+-webkit-border-radius: 50%;
+-moz-border-radius: 50%;
+-o-border-radius: 50%;
+}
+.radio input:checked + i:after{
+opacity: 1;
+}
+.check_box {
+    margin-right: 25px;
+	    display: inline-block;
+}
+
+/*** normal state ***/
+.radio i {
+transition: border-color 0.3s;
+-o-transition: border-color 0.3s;
+-ms-transition: border-color 0.3s;
+-moz-transition: border-color 0.3s;
+-webkit-transition: border-color 0.3s;
+}
+/*** checked state ***/
+.radio input + i:after {
+  content: '';
+  background: url("../images/tick-mark1.png") no-repeat center;
+  top: 5px;
+  left: 5px;
+  width: 9px;
+  height: 9px;
+  text-align: center;
+}
+.radio input:checked + i {
+    border: 5px solid #DDC481;
+    background: #fff;
+}
+
+.services h3{
+	font-size: 1.2em;
+	 padding: 0 0 .5em 0;
+    color: #955835;
+    text-transform: capitalize;
+}
+.sel {
+    width: 60%;
+    padding: .5em;
+    border: 1px solid#ddd;
+    outline: none;
+	font-size: 1em;
+    color: #555;
+	border-radius: 6px;
+	font-family: 'Varela Round', sans-serif;
+}
+.services input[type="submit"] {
+     padding: .7em 3em;
+    font-size: 1em;
+    text-transform: capitalize;
+    color: #fff;
+    border: 8px solid #fff;
+    outline: 1px solid #DDC481;
+    margin: 1.5em 0em;
+    background: #955835;
+    cursor: pointer;
+    font-family: 'Varela Round', sans-serif;
+	transition: 0.5s all;
+	-webkit-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-ms-transition: 0.5s all;
+}
+.services input[type="submit"]:hover {
+    background: #DDC481;
+}
+.social-icons {
+    display: block;
+    text-align: center;
+}
+.social-icons h5{
+    text-align: center;
+    font-size: 1em;
+   margin-bottom: 1em;
+    background-color: #DDC481;
+    color: #fff;
+}
+.social-icons ul li {
+  display: inline-block;
+  margin-right: 5px;
+}
+.social-icons a {
+    background: url(../images/sprite.png)no-repeat 0px 0px;
+    display: block;
+    width: 33px;
+    height: 33px;
+    transition: 0.5s all;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	-ms-transition: 0.5s all;
+}
+.social-icons a:hover {
+    transform: rotatey(360deg);
+}
+.social-icons a.fb{
+	background:url(../images/sprite.png)no-repeat 0px -33px;
+}
+.social-icons a.be{
+	background:url(../images/sprite.png)no-repeat 0px -66px;
+}
+.social-icons a.gg{
+	background:url(../images/sprite.png)no-repeat 0px -99px;
+}
+::-web-input-placeholder{
+	font-size:.95em;
+}
+.footer {
+    text-align: center;
+	padding:2.4em 0;
+}
+.footer p {
+    font-size: .9em;
+    color: #fff;
+    margin: 0px;
+}
+.footer p a {
+    color: #fff;
+}
+.footer p a:hover {
+    color: #fff;
+}
+/**responsive*/
+@media(max-width:1366px){
+.main-section {
+    width: 30%;
+}
+}
+@media (max-width: 1280px){
+.main-section {
+    width: 32%;
+}
+}
+@media (max-width: 1080px){
+.main-section {
+    width: 35%;
+}
+.header h1 {
+    font-size: 3em;
+}
+}
+@media (max-width: 991px){
+.main-section {
+    width: 45%;
+}
+}
+@media (max-width: 800px){
+.main-section {
+    width: 47%;
+}
+}
+@media (max-width: 768px){
+.main-section {
+    width: 50%;
+}
+}
+@media (max-width: 640px){
+.header h1 {
+    font-size: 2.8em;
+}
+.main-section {
+    width: 65%;
+}
+.header {
+    margin-top: 3em;
+}
+}
+@media (max-width: 480px){
+.header {
+    margin-top: 2em;
+}
+.main-section {
+    width: 80%;
+}
+}
+@media (max-width: 414px){
+.header h1 {
+    font-size: 2.5em;
+}
+.main-section {
+    width: 87%;
+}
+}
+@media (max-width: 375px){
+.header h1 {
+    font-size: 2.2em;
+}
+.main-section {
+    width: 90%;
+}
+.services input[type="submit"] {
+    padding: .7em 1em;
+}
+}
+@media (max-width: 320px){
+.header h1 {
+    font-size: 2.1em;
+}
+.main-section {
+    width: 98%;
+}
+}

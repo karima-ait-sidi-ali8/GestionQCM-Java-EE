@@ -1,12 +1,11 @@
-package fr.insset.gestionQCM.dao;
+package fr.insset.gestionQCM.metier;
 
 import java.util.List;
 
 import fr.insset.gestionQCM.dao.entity.Utilisateur;
 
-public interface UserDAO {
+public interface UserMetier {
 	
 	public List<Utilisateur> getStatus(String email, String password);
-	
 
 }

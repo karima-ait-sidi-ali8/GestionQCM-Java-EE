@@ -1,7 +1,6 @@
 package fr.insset.gestionQCM.dao.entity;
 
-// default package
-// Generated 8 mars 2018 16:48:46 by Hibernate Tools 4.3.1.Final
+
 
 import java.util.Date;
 import javax.persistence.Column;

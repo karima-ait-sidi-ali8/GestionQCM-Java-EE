@@ -1,10 +1,19 @@
 package fr.insset.gestionQCM.presentation;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+
 
 import org.apache.log4j.Logger;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import fr.insset.gestionQCM.dao.entity.Utilisateur;
+import fr.insset.gestionQCM.metier.UserMetier;
 
 
 
@@ -14,21 +23,58 @@ public class UserBean {
 	public Logger log = Logger.getLogger(UserBean.class);
 	private String email;
 	private String password;
+	private String userType;
+	private UserMetier metier;
 	public UserBean() {
 		super();
 	}
-	public UserBean(Logger log, String email, String password) {
-		super();
-		this.log = log;
-		this.email = email;
-		this.password = password;
-	}
+
 	
 	@PostConstruct
 	public void initBean(){
-		this.email = "frifita1@gmail.com";
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"config/config.xml"});
+		UserMetier metier = (UserMetier) context.getBean("metier"); 
+		this.metier = metier;
+		context.close();
 		
 	}
+	
+
+	public void authenticate(){
+		if("".equalsIgnoreCase(email) || "".equalsIgnoreCase(password)){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur!", "Login ou Mot de passe ne doivent pas être vides"));	
+		}
+		else {
+			List<Utilisateur> listUser = metier.getStatus(email, password);
+			if(listUser.isEmpty())
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur!", "Login ou Mot de passe sont incorrectes."));
+			
+			else{	
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Done !", "Connecté."));
+			}
+			
+		}	
+
+	}	
+	
+	public UserBean(String email, String password, String userType) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.userType = userType;
+	}
+
+
+	public String getUserType() {
+		return userType;
+	}
+
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
+
 	public Logger getLog() {
 		return log;
 	}
@@ -48,7 +94,7 @@ public class UserBean {
 		this.password = password;
 	}
 	
-	
+
 	
 
 }

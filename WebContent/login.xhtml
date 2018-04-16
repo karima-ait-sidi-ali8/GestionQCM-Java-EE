@@ -2,12 +2,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Easy Eval</title>
         <meta name="author" content="The Author"></meta>
         <h:outputStylesheet library="css" name="animate.css"></h:outputStylesheet>
+
     </h:head>
     <!-- Add 50px padding top to the body for the navbar -->
     <h:body style="padding-top: 50px; padding-bottom: 20px;">
@@ -15,52 +17,70 @@
           
             <h:form styleClass="navbar-form navbar-right">
                 <div class="form-group">
-                    <b:inputText placeholder="Email" fieldSize="sm" value="#{UserLogin.email}" required="true" requiredMessage="Email non valide ! Ressayer"/>
+                    <b:inputText placeholder="Email" fieldSize="sm" value="#{UserLogin.email}" />
                     <!--input type="text" class="form-control" placeholder="Search"/-->
                 </div>
                 <div class="form-group">
-                    <b:inputSecret placeholder="Password" fieldSize="sm" required="true" requiredMessage="Error : email is not ras lambour" />
+                 			
+
+		
+			     <b:inputSecret placeholder="Password" fieldSize="sm" id="password" style-class="pass" value="#{UserLogin.password}">
+
+			     </b:inputSecret>
+				
+                   
                 </div> 
-                #{' '}
-                <b:commandButton action="a" value="Connexion" look="success" icon="chevron-right" iconAlign="right"/><br/>
+               
 
+			       <b:commandButton action="a"   value="Connexion" look="success" icon="chevron-right" iconAlign="right">
+                	<f:ajax execute="@form" listener="#{UserLogin.authenticate}" ></f:ajax>
+                   </b:commandButton><br/>
+				
 
+			
             </h:form>
+            
+            
+           
            
         </b:navBar>
        
         
         <b:jumbotron>
-            <b:container>
-            
-             <h:messages style="float: right; color: red" ></h:messages>
+
+            <b:container >
+         
+          					<p:messages id="messages" showDetail="true" closable="true" ></p:messages>
+					<p:autoUpdate />          
+         
                 <h2>Bienvenue !</h2>
                 <p> <STRONG> Easy Eval</STRONG> nouveau logiciel de questionnaire gratuit en ligne pour 
                                      créer et gérer vos examens.<br/>
                                      Passez du temps sur les sujets plutot que sur les corrections !
                 </p>
                 <p>
-                    <a href="#" class="btn btn-lg btn-info">Inscrivez-vous ! »</a>
+                    <a class="btn btn-lg btn-info" href="#amodal" data-toggle="modal">Inscrivez-vous ! »</a>
                 </p>
+               
             </b:container>
 
         </b:jumbotron>
         <b:container>
-            <b:row> <center><h2>Votre premier QCM en 3 étapes</h2></center></b:row><br />
+            <b:row> <center><h3>Votre premier QCM en 3 étapes</h3></center></b:row><br />
             <b:row>
                 <b:column col-md="4">
                 	
-                    <h3>Creez votre classe</h3>
+                    <h4>Creez votre classe</h4>
                     <p>Avec les prénoms noms et adresse email personnes que vous souhaitez évaluer : une classe, une équipe projet, un groupe de 200 candidats... </p>
                    
                 </b:column>
                 <b:column col-md="4">
-                    <h3>Creez votre quiz</h3>
+                    <h4>Creez votre quiz</h4>
                     <p>Par tirage au sort ou sélection manuelle de questions, qui peuvent être illustrées, et dont la durée de réponse peut être limitée (ou pas !)</p>
                     
                 </b:column>
                 <b:column col-md="4">
-                    <h3>Planifiez/surveillez analysez...</h3>
+                    <h4>Planifiez/surveillez analysez...</h4>
                     <p>Invitez les candidats, relaxez vous, laissez la console de surveillance vous assister, et <strong>Easy Eval</strong> va vous permettre de corriger tout cela automatiquement !</p>
                    
                 </b:column>
@@ -70,6 +90,56 @@
             <p>© Easy Eval 2018</p>
             </footer>
         </b:container>
-
+        <b:modal id="amodal" title="Modal Example" styleClass="modalPseudoClass">
+   			
+			<b:form horizontal="true">
+			<b:row>
+			<b:column >
+			  <b:inputText placeholder="Email" required="true" label="Email" colMd="10" labelColMd="2">
+			    <f:facet name="prepend">
+			      <b:icon name="user" />
+			    </f:facet>
+			  </b:inputText>
+			  </b:column>
+			 </b:row>
+			 <b:row>
+			<b:column >
+			  <b:inputText placeholder="Password" required="true" label="Password" colMd="10" labelColMd="2">
+			    <f:facet name="prepend">
+			      <b:iconAwesome name="key" />
+			    </f:facet>
+			  </b:inputText>
+			  </b:column>
+			  </b:row>
+			   <b:row>
+			<b:column span="2" offset="2">
+			  <b:radiobutton value="#{UserLogin.userType}" itemLabel="Etudiant" itemValue="etudiant" required="true" />
+    		  <b:radiobutton value="#{UserLogin.userType}" itemLabel="Personnel" itemValue="Personnel" required="true" />
+    		  </b:column>
+			  </b:row>
+			     
+<b:tabLinks>
+  <b:navLink href="http://www.bootsfaces.net" value="BootsFaces"
+             icon="globe" iconAlign="right"/>
+  <b:navLink></b:navLink>
+  <b:navLink href="http://getbootstrap.com/components/#navbar" value="Bootstrap" icon="link"></b:navLink>
+  <b:navLink value="Labels and Badges" outcome="/bootstrap/labelsbadge"
+             icon="tag" iconAlign="right" active="true"/>
+  <b:navLink value="Slider" outcome="/jquery-ui/slider" iconAwesome="sliders"/>
+  <b:navCommandLink value="AJAX actionListener" actionListener="#{messagesBean.info}"
+                    icon="tag" iconAlign="right" update="@form"/>
+</b:tabLinks>
+			</b:form>
+		
+			  <f:facet name="footer">
+			    <b:button value="Close" dismiss="modal" />
+			    <b:button value="Ok" look="primary" dismiss="modal" />
+			  </f:facet>
+			  
+		</b:modal>
     </h:body>
+     
+    
+  <h:outputScript library="js" name="notify.js"></h:outputScript>
+    <h:outputScript library="js" name="loginjs.js"></h:outputScript>
 </html>
