@@ -21,37 +21,23 @@
                     <!--input type="text" class="form-control" placeholder="Search"/-->
                 </div>
                 <div class="form-group">
-                 			
-
-		
-			     <b:inputSecret placeholder="Password" fieldSize="sm" id="password" style-class="pass" value="#{UserLogin.password}">
-
-			     </b:inputSecret>
-				
-                   
+				     <b:inputSecret placeholder="Password" fieldSize="sm" id="password" style-class="pass" value="#{UserLogin.password}">
+				     </b:inputSecret>
                 </div> 
-               
-
-			       <b:commandButton action="a"   value="Connexion" look="success" icon="chevron-right" iconAlign="right">
-                	<f:ajax execute="@form" listener="#{UserLogin.authenticate}" ></f:ajax>
-                   </b:commandButton><br/>
-				
-
-			
+		       <b:commandButton action="a"   value="Connexion" look="success" icon="chevron-right" iconAlign="right">
+               		<f:ajax execute="@form" listener="#{UserLogin.authenticate}" ></f:ajax>
+               </b:commandButton><br/>
             </h:form>
-            
-            
-           
-           
+
         </b:navBar>
        
         
         <b:jumbotron>
 
             <b:container >
-         
-          					<p:messages id="messages" showDetail="true" closable="true" ></p:messages>
-					<p:autoUpdate />          
+
+          		<p:messages for="auth" id="messages" showDetail="true" closable="true" ></p:messages>
+				<p:autoUpdate />          
          
                 <h2>Bienvenue !</h2>
                 <p> <STRONG> Easy Eval</STRONG> nouveau logiciel de questionnaire gratuit en ligne pour 
@@ -59,13 +45,14 @@
                                      Passez du temps sur les sujets plutot que sur les corrections !
                 </p>
                 <p>
-                    <a class="btn btn-lg btn-info" href="#amodal" data-toggle="modal">Inscrivez-vous ! »</a>
+                    <a class="btn btn-lg btn-info" href=".modalPseudoClass" data-toggle="modal">Inscrivez-vous ! »</a>
                 </p>
-               
+
             </b:container>
 
         </b:jumbotron>
         <b:container>
+          
             <b:row> <center><h3>Votre premier QCM en 3 étapes</h3></center></b:row><br />
             <b:row>
                 <b:column col-md="4">
@@ -90,53 +77,40 @@
             <p>© Easy Eval 2018</p>
             </footer>
         </b:container>
-        <b:modal id="amodal" title="Modal Example" styleClass="modalPseudoClass">
-   			
-			<b:form horizontal="true">
-			<b:row>
-			<b:column >
-			  <b:inputText placeholder="Email" required="true" label="Email" colMd="10" labelColMd="2">
-			    <f:facet name="prepend">
-			      <b:icon name="user" />
-			    </f:facet>
-			  </b:inputText>
-			  </b:column>
-			 </b:row>
-			 <b:row>
-			<b:column >
-			  <b:inputText placeholder="Password" required="true" label="Password" colMd="10" labelColMd="2">
-			    <f:facet name="prepend">
-			      <b:iconAwesome name="key" />
-			    </f:facet>
-			  </b:inputText>
-			  </b:column>
-			  </b:row>
-			   <b:row>
-			<b:column span="2" offset="2">
-			  <b:radiobutton value="#{UserLogin.userType}" itemLabel="Etudiant" itemValue="etudiant" required="true" />
-    		  <b:radiobutton value="#{UserLogin.userType}" itemLabel="Personnel" itemValue="Personnel" required="true" />
-    		  </b:column>
-			  </b:row>
+        <h:form styleClass="formInscri">
+        <b:modal id="amodal" title="Commencez à utiliser EasyEval dès aujourd'hui." styleClass="modalPseudoClass" style="widh:200px">
+      		
+			     <p:messages for="nom" >
+			 
 			     
-<b:tabLinks>
-  <b:navLink href="http://www.bootsfaces.net" value="BootsFaces"
-             icon="globe" iconAlign="right"/>
-  <b:navLink></b:navLink>
-  <b:navLink href="http://getbootstrap.com/components/#navbar" value="Bootstrap" icon="link"></b:navLink>
-  <b:navLink value="Labels and Badges" outcome="/bootstrap/labelsbadge"
-             icon="tag" iconAlign="right" active="true"/>
-  <b:navLink value="Slider" outcome="/jquery-ui/slider" iconAwesome="sliders"/>
-  <b:navCommandLink value="AJAX actionListener" actionListener="#{messagesBean.info}"
-                    icon="tag" iconAlign="right" update="@form"/>
-</b:tabLinks>
-			</b:form>
+			   
+			     <p:autoUpdate></p:autoUpdate>
+			     </p:messages>
+                  
+				 <b:inputText id="nom" placeholder="Nom..."  label="Nom *" colMd="5" labelColMd="2" value="#{UserLogin.nom}" />
+				 <b:inputText placeholder="Prénom..."  label="Prénom *" colMd="5" labelColMd="2" value="#{UserLogin.prenom}"/>	
+				 <b:inputText placeholder="Email..."  label="Email *" colMd="5" labelColMd="2" value="#{UserLogin.email}" />
+				 <b:inputSecret placeholder="Password..."  label="Password *" colMd="5" labelColMd="2" value="#{UserLogin.password}" />
+	
+			
+
+			   <h:outputText value="En remplissant le formulaire ci-dessous et cliquant sur Auteur / Étudiant vous déclarez accepter entièrement et sans réserves les Conditions Générales d'utilisation de la plateforme"></h:outputText>
 		
 			  <f:facet name="footer">
-			    <b:button value="Close" dismiss="modal" />
-			    <b:button value="Ok" look="primary" dismiss="modal" />
+ 					 
+ 					<b:commandButton  ajax="true" value="Étudiant" look="success" style="width:80px;margin-right:5px;">
+						<f:ajax execute="@form" listener="#{UserLogin.inscriptionEtudiant}"></f:ajax>
+					</b:commandButton>
+					
+    				<b:commandButton value="Auteur"  look="warning" style="width:80px">
+						<f:ajax execute="@form" listener="#{UserLogin.inscriptionAuteur}"></f:ajax>    				
+    				</b:commandButton>			
+					<b:button value="Fermer" look="danger" dismiss="modal"  />
+ 					 
 			  </f:facet>
-			  
 		</b:modal>
+		
+		</h:form>
     </h:body>
      
     

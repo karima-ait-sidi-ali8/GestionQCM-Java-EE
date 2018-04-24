@@ -19,8 +19,8 @@
 </welcome-file-list>
 
 <context-param>
-<param-name>primefaces.THEME</param-name>
-<param-value>bootstrap</param-value>
+    <param-name>BootsFaces_USETHEME</param-name>
+    <param-value>default</param-value>
 </context-param>
 
 <mime-mapping>

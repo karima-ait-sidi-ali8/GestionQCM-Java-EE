@@ -23,7 +23,9 @@ public class UserBean {
 	public Logger log = Logger.getLogger(UserBean.class);
 	private String email;
 	private String password;
-	private String userType;
+	private String nom;
+	private String prenom;
+
 	private UserMetier metier;
 	public UserBean() {
 		super();
@@ -42,36 +44,54 @@ public class UserBean {
 
 	public void authenticate(){
 		if("".equalsIgnoreCase(email) || "".equalsIgnoreCase(password)){
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur!", "Login ou Mot de passe ne doivent pas être vides"));	
+			FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur!", "Login ou Mot de passe ne doivent pas être vides"));	
 		}
 		else {
 			List<Utilisateur> listUser = metier.getStatus(email, password);
 			if(listUser.isEmpty())
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur!", "Login ou Mot de passe sont incorrectes."));
+				FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur!", "Login ou Mot de passe sont incorrectes."));
 			
 			else{	
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Done !", "Connecté."));
+				FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_INFO, "Done !", "Connecté."));
 			}
 			
 		}	
 
-	}	
+	}
 	
-	public UserBean(String email, String password, String userType) {
-		super();
-		this.email = email;
-		this.password = password;
-		this.userType = userType;
+	public void inscriptionEtudiant(){
+		System.out.println(nom+" "+prenom+" "+email+" "+password);
+
+		FacesContext.getCurrentInstance().addMessage("nom", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Done etudiant!", "Etudiant."));
+	}
+	
+	public void inscriptionAuteur(){
+
+		FacesContext.getCurrentInstance().addMessage("nom", new FacesMessage(FacesMessage.SEVERITY_INFO, "Done person", "Auteur."));
+	}
+	
+
+
+
+
+
+	public String getNom() {
+		return nom;
 	}
 
 
-	public String getUserType() {
-		return userType;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
 
-	public void setUserType(String userType) {
-		this.userType = userType;
+	public String getPrenom() {
+		return prenom;
+	}
+
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
 	}
 
 
