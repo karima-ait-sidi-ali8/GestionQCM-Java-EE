@@ -19,4 +19,18 @@ public class UserMetierImpl implements UserMetier {
 		 return daoUser.getStatus(email, password);
 	}
 
+	@Override
+	public Utilisateur addUser(Utilisateur u, String role) {
+		
+		return daoUser.addUser(u, role);
+	}
+
+	@Override
+	public boolean findbyAdresseAndRole(String adresse, String role) {
+		
+		return daoUser.findbyAdresseAndRole(adresse, role);
+	}
+
+
+
 }

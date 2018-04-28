@@ -24,8 +24,13 @@
 				     <b:inputSecret placeholder="Password" fieldSize="sm" id="password" style-class="pass" value="#{UserLogin.password}">
 				     </b:inputSecret>
                 </div> 
-		       <b:commandButton action="a"   value="Connexion" look="success" icon="chevron-right" iconAlign="right">
-               		<f:ajax execute="@form" listener="#{UserLogin.authenticate}" ></f:ajax>
+                
+		       <b:commandButton action="a"   value="Étudiant" look="success" icon="chevron-right" iconAlign="right" style="margin-right:5px;">
+               		<f:ajax execute="@form" listener="#{UserLogin.etudiantAuthenticate}" ></f:ajax>
+               </b:commandButton>
+               
+               	<b:commandButton action="a"   value="Auteur" look="success" icon="chevron-right" iconAlign="right">
+               		<f:ajax execute="@form" listener="#{UserLogin.auteurAuthenticate}" ></f:ajax>
                </b:commandButton><br/>
             </h:form>
 

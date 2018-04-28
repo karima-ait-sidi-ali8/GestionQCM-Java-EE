@@ -42,7 +42,24 @@ public class UserBean {
 	}
 	
 
-	public void authenticate(){
+	public void etudiantAuthenticate(){
+		if("".equalsIgnoreCase(email) || "".equalsIgnoreCase(password)){
+			FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur!", "Login ou Mot de passe ne doivent pas être vides"));	
+		}
+		else {
+			List<Utilisateur> listUser = metier.getStatus(email, password);
+			if(listUser.isEmpty())
+				FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur!", "Login ou Mot de passe sont incorrectes."));
+			
+			else{	
+				FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_INFO, "Done !", "Connecté."));
+			}
+			
+		}	
+
+	}
+	
+	public void auteurAuthenticate(){
 		if("".equalsIgnoreCase(email) || "".equalsIgnoreCase(password)){
 			FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur!", "Login ou Mot de passe ne doivent pas être vides"));	
 		}

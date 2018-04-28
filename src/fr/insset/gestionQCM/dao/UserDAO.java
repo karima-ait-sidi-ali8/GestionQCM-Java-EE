@@ -8,5 +8,9 @@ public interface UserDAO {
 	
 	public List<Utilisateur> getStatus(String email, String password);
 	
+	public Utilisateur addUser(Utilisateur u, String role);
+	
+	public boolean findbyAdresseAndRole(String adresse, String role);
+	
 
 }

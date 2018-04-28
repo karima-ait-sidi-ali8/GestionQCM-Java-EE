@@ -17,22 +17,23 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.validator.apply_to_ddl">false</property>
         <property name="hbm2ddl.auto">update</property>
-        <mapping class="AvoirRole" />
-        <mapping class="Etudiant" />
-        <mapping class="Groupe" />
-        <mapping class="Resultat" />
-        <mapping class="Membre" />
-        <mapping class="Commentaire" />
-        <mapping class="Page" />
-        <mapping class="QcmAffGroupe" />
-        <mapping class="Auteur" />
-        <mapping class="Role" />
-        <mapping class="EtudiantChoix" />
-        <mapping class="Reponse" />
-        <mapping class="Theme" />
-        <mapping class="Qcm" />
-        <mapping class="Question" />
-        <mapping class="Utilisateur" />
-        <mapping class="Session" />
+        
+        
+        <mapping class="fr.insset.gestionQCM.dao.entity.Etudiant" />
+        <mapping class="fr.insset.gestionQCM.dao.entity.Groupe" />
+        <mapping class="fr.insset.gestionQCM.dao.entity.Resultat" />
+        <mapping class="fr.insset.gestionQCM.dao.entity.Membre" />
+        <mapping class="fr.insset.gestionQCM.dao.entity.Commentaire" />
+        <mapping class="fr.insset.gestionQCM.dao.entity.Page" />
+        <mapping class="fr.insset.gestionQCM.dao.entity.QcmAffGroupe" />
+        <mapping class="fr.insset.gestionQCM.dao.entity.Auteur" />
+        <mapping class="fr.insset.gestionQCM.dao.entity.Role" />
+        <mapping class="fr.insset.gestionQCM.dao.entity.EtudiantChoix" />
+        <mapping class="fr.insset.gestionQCM.dao.entity.Reponse" />
+        <mapping class="fr.insset.gestionQCM.dao.entity.Theme" />
+        <mapping class="fr.insset.gestionQCM.dao.entity.Qcm" />
+        <mapping class="fr.insset.gestionQCM.dao.entity.Question" />
+        <mapping class="fr.insset.gestionQCM.dao.entity.Utilisateur" />
+        <mapping class="fr.insset.gestionQCM.dao.entity.Session" />
     </session-factory>
 </hibernate-configuration>
