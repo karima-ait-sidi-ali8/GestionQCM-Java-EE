@@ -85,18 +85,21 @@
         <h:form styleClass="formInscri">
         <b:modal id="amodal" title="Commencez à utiliser EasyEval dès aujourd'hui." styleClass="modalPseudoClass" style="widh:200px">
       		
-			     <p:messages for="nom" >
+			     <p:messages for="inscri" id ="inscri" >
 			 
 			     
 			   
 			     <p:autoUpdate></p:autoUpdate>
 			     </p:messages>
                   
-				 <b:inputText id="nom" placeholder="Nom..."  label="Nom *" colMd="5" labelColMd="2" value="#{UserLogin.nom}" />
-				 <b:inputText placeholder="Prénom..."  label="Prénom *" colMd="5" labelColMd="2" value="#{UserLogin.prenom}"/>	
-				 <b:inputText placeholder="Email..."  label="Email *" colMd="5" labelColMd="2" value="#{UserLogin.email}" />
-				 <b:inputSecret placeholder="Password..."  label="Password *" colMd="5" labelColMd="2" value="#{UserLogin.password}" />
-	
+				 <b:inputText id="nom" placeholder="Nom..."  label="Nom" colMd="5" labelColMd="2" value="#{UserLogin.nom}" required="true" />
+				 <b:message for="nom"><p:autoUpdate></p:autoUpdate></b:message>
+				 <b:inputText id="prenom" placeholder="Prénom..."  label="Prénom" colMd="5" labelColMd="2" value="#{UserLogin.prenom}" required="true"/>	
+				 <b:message for="prenom"><p:autoUpdate></p:autoUpdate></b:message>
+				 <b:inputText id="email" placeholder="Email..."  label="Email" colMd="5" labelColMd="2" value="#{UserLogin.email}" required="true" />
+				 <b:message for="email"><p:autoUpdate></p:autoUpdate></b:message>
+				 <b:inputSecret id="password" placeholder="Password..."  label="Password" colMd="5" labelColMd="2" value="#{UserLogin.password}" required="true" />
+				 <b:message for="password"><p:autoUpdate></p:autoUpdate></b:message>
 			
 
 			   <h:outputText value="En remplissant le formulaire ci-dessous et cliquant sur Auteur / Étudiant vous déclarez accepter entièrement et sans réserves les Conditions Générales d'utilisation de la plateforme"></h:outputText>
