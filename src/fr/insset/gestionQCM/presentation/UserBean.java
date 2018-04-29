@@ -51,8 +51,15 @@ public class UserBean {
 			if(listUser.isEmpty())
 				FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur!", "Login ou Mot de passe sont incorrectes."));
 			
-			else{	
-				FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_INFO, "Done !", "Connecté."));
+			else{
+				
+				Boolean  isEtudiant =	metier.findbyAdresseAndRole(listUser.get(0).getEmail(), "etudiant");
+				if(!isEtudiant){
+					FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_INFO, "Done !", "Cette adresse email est enregistrée"
+							+ " avec un compte AUTEUR. Inscrivez-vous en tant que auteur ou bien vérifiez votre adesse email si vous vous êtes trompé"));
+				}
+				else
+					FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_INFO, "Done !", "Connecté."));
 			}
 			
 		}	
@@ -68,12 +75,18 @@ public class UserBean {
 			if(listUser.isEmpty())
 				FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur!", "Login ou Mot de passe sont incorrectes."));
 			
-			else{	
-				FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_INFO, "Done !", "Connecté."));
+			else{
+				
+				Boolean  isAuteur =	metier.findbyAdresseAndRole(listUser.get(0).getEmail(), "auteur");
+				if(!isAuteur){
+					FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_INFO, "Done !", "Cette adresse email est enregistrée"
+							+ " avec un compte AUTEUR. Inscrivez-vous en tant que étudiant ou bien vérifiez votre adesse email si vous vous êtes trompé"));
+				}
+				else
+					FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_INFO, "Done !", "Connecté."));
 			}
 			
 		}	
-
 	}
 	
 	public void inscriptionEtudiant(){
