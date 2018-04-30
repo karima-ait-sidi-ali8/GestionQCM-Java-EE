@@ -13,6 +13,7 @@
     </h:head>
     <!-- Add 50px padding top to the body for the navbar -->
     <h:body style="padding-top: 50px; padding-bottom: 20px;">
+    <f:loadBundle  basename="Messages" var="res"></f:loadBundle>
         <b:navBar brand="Easy Eval" brandHref="#" inverse="true" fixed="top">
           
             <h:form styleClass="navbar-form navbar-right">
@@ -85,20 +86,26 @@
         <h:form styleClass="formInscri">
         <b:modal id="amodal" title="Commencez à utiliser EasyEval dès aujourd'hui." styleClass="modalPseudoClass" style="widh:200px">
       		
-			     <p:messages for="inscri" id ="inscri" >
-			 
 			     
-			   
-			     <p:autoUpdate></p:autoUpdate>
-			     </p:messages>
                   
-				 <b:inputText id="nom" placeholder="Nom..."  label="Nom" colMd="5" labelColMd="2" value="#{UserLogin.nom}" required="true" />
+				 <b:inputText id="nom" placeholder="Nom..."  label="Nom" colMd="5" labelColMd="2" value="#{UserLogin.nom}" required="true">
+				 	<f:validateLength minimum = "3"  />
+				 	
+				 	
+				 </b:inputText>
 				 <b:message for="nom"><p:autoUpdate></p:autoUpdate></b:message>
-				 <b:inputText id="prenom" placeholder="Prénom..."  label="Prénom" colMd="5" labelColMd="2" value="#{UserLogin.prenom}" required="true"/>	
+				 <b:inputText id="prenom" placeholder="Prénom..."  label="Prénom" colMd="5" labelColMd="2" value="#{UserLogin.prenom}" required="true">
+				 	<f:validateLength minimum = "3"  />
+				 </b:inputText>	
 				 <b:message for="prenom"><p:autoUpdate></p:autoUpdate></b:message>
-				 <b:inputText id="email" placeholder="Email..."  label="Email" colMd="5" labelColMd="2" value="#{UserLogin.email}" required="true" />
+				 <b:inputText id="email" placeholder="Email..."  label="Email" colMd="5" labelColMd="2" value="#{UserLogin.email}" required="true" validatorMessage="#{res['emailError']}" styleClass="emailClass">
+				 	<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+				 </b:inputText>
+				 <p:messages for="inscri" showDetail="true"  ><p:autoUpdate></p:autoUpdate></p:messages>
 				 <b:message for="email"><p:autoUpdate></p:autoUpdate></b:message>
-				 <b:inputSecret id="password" placeholder="Password..."  label="Password" colMd="5" labelColMd="2" value="#{UserLogin.password}" required="true" />
+				 <b:inputSecret id="password" placeholder="Password..."  label="Password" colMd="5" labelColMd="2" value="#{UserLogin.password}" required="true" >
+				 	<f:validateLength minimum = "5"  />
+				 </b:inputSecret>
 				 <b:message for="password"><p:autoUpdate></p:autoUpdate></b:message>
 			
 

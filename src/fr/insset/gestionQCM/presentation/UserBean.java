@@ -1,5 +1,6 @@
 package fr.insset.gestionQCM.presentation;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -17,9 +18,12 @@ import fr.insset.gestionQCM.metier.UserMetier;
 
 
 
+
 @ManagedBean(name="UserLogin")
 @RequestScoped
-public class UserBean {
+public class UserBean implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	public Logger log = Logger.getLogger(UserBean.class);
 	private String email;
 	private String password;
@@ -90,14 +94,31 @@ public class UserBean {
 	}
 	
 	public void inscriptionEtudiant(){
-		System.out.println(nom+" "+prenom+" "+email+" "+password);
+		
+		boolean isEtudiant = metier.findbyAdresseAndRole(email, "etudiant");
+		
+		if(isEtudiant) 
+			FacesContext.getCurrentInstance().addMessage("inscri", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Il exite déjà un compte étudiant avec cette adresse email."));
+		else {
+			Utilisateur u = new Utilisateur(nom,prenom,password,email);
+			metier.addUser(u, "etudiant");
+			
+		}
+		
 
-		FacesContext.getCurrentInstance().addMessage("nom", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Done etudiant!", "Etudiant."));
 	}
 	
 	public void inscriptionAuteur(){
 
-		FacesContext.getCurrentInstance().addMessage("nom", new FacesMessage(FacesMessage.SEVERITY_INFO, "Done person", "Auteur."));
+		boolean isAuetur = metier.findbyAdresseAndRole(email, "auteur");
+		
+		if(isAuetur) 
+			FacesContext.getCurrentInstance().addMessage("inscri", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Il exite déjà un compte auteur avec cette adresse email."));
+		else {
+			Utilisateur u = new Utilisateur(nom,prenom,password,email);
+			metier.addUser(u, "auteur");
+			
+		}
 	}
 	
 

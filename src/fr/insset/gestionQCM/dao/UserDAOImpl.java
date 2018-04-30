@@ -42,24 +42,24 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public boolean findbyAdresseAndRole(String adresse, String role) {
+		boolean verif = true;
 		Query q = session.createQuery("from Utilisateur u where u.email=:x");
 		q.setParameter("x", adresse);
 		if(q.list().isEmpty())
-			return false;
+			verif = false;
 		else{
 			
 			Utilisateur user = (Utilisateur) q.list().get(0);
-			System.out.println(user.getIdUser()); 
 			Query q2 = session.createSQLQuery("select * from avoir_role INNER JOIN role ON avoir_role.idRole = role.id_role where avoir_role.idUser=:x and role.NomRole=:y");
 			q2.setParameter("x", user.getIdUser());
 			q2.setParameter("y", role);
 			
-			if(q2.list().isEmpty()) return false;
+			if(q2.list().isEmpty()) verif = false;
 			
 		}
 		
 		
-		return true;
+		return verif;
 	}
 
 

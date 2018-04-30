@@ -28,7 +28,7 @@ public class Test {
 		UserMetier metier = (UserMetier) context.getBean("metier"); 
 		context.close();
 		
-		System.out.println(metier.findbyAdresseAndRole("frifita1@gmail.com","auteur"));
+		System.out.println(metier.findbyAdresseAndRole("alex@gmail.com","etudiant"));
 		
 		
 		

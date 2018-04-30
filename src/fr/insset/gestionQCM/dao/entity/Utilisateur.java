@@ -41,8 +41,6 @@ public class Utilisateur implements java.io.Serializable {
 	public Utilisateur(String nom, String prenom, String password, String email) {
 		this.nom = nom;
 		this.prenom = prenom;
-
-		
 		this.password = password;
 		this.email = email;
 	}
