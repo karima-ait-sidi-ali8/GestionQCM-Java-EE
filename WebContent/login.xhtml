@@ -86,12 +86,10 @@
         <h:form styleClass="formInscri">
         <b:modal id="amodal" title="Commencez à utiliser EasyEval dès aujourd'hui." styleClass="modalPseudoClass" style="widh:200px">
       		
-			     
-                  
+			     <p:messages for="success" showDetail="true"  ><p:autoUpdate></p:autoUpdate></p:messages>
+                  <h:panelGrid id="panelInscription" width="565" >
 				 <b:inputText id="nom" placeholder="Nom..."  label="Nom" colMd="5" labelColMd="2" value="#{UserLogin.nom}" required="true">
 				 	<f:validateLength minimum = "3"  />
-				 	
-				 	
 				 </b:inputText>
 				 <b:message for="nom"><p:autoUpdate></p:autoUpdate></b:message>
 				 <b:inputText id="prenom" placeholder="Prénom..."  label="Prénom" colMd="5" labelColMd="2" value="#{UserLogin.prenom}" required="true">
@@ -107,17 +105,18 @@
 				 	<f:validateLength minimum = "5"  />
 				 </b:inputSecret>
 				 <b:message for="password"><p:autoUpdate></p:autoUpdate></b:message>
+				 </h:panelGrid>
 			
-
 			   <h:outputText value="En remplissant le formulaire ci-dessous et cliquant sur Auteur / Étudiant vous déclarez accepter entièrement et sans réserves les Conditions Générales d'utilisation de la plateforme"></h:outputText>
 		
 			  <f:facet name="footer">
  					 
- 					<b:commandButton  ajax="true" value="Étudiant" look="success" style="width:80px;margin-right:5px;">
-						<f:ajax execute="@form" listener="#{UserLogin.inscriptionEtudiant}"></f:ajax>
+ 					<b:commandButton  ajax="true" update="panelInscription" value="Étudiant" look="success" style="width:80px;margin-right:5px;">
+						<f:ajax  execute="@form" listener="#{UserLogin.inscriptionEtudiant}" ></f:ajax>
+						
 					</b:commandButton>
 					
-    				<b:commandButton value="Auteur"  look="warning" style="width:80px">
+    				<b:commandButton value="Auteur" update="panelInscription"  look="warning" style="width:80px">
 						<f:ajax execute="@form" listener="#{UserLogin.inscriptionAuteur}"></f:ajax>    				
     				</b:commandButton>			
 					<b:button value="Fermer" look="danger" dismiss="modal"  />

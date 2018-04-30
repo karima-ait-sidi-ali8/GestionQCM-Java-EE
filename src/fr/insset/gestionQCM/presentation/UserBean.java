@@ -59,8 +59,8 @@ public class UserBean implements Serializable {
 				
 				Boolean  isEtudiant =	metier.findbyAdresseAndRole(listUser.get(0).getEmail(), "etudiant");
 				if(!isEtudiant){
-					FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_INFO, "Done !", "Cette adresse email est enregistrée"
-							+ " avec un compte AUTEUR. Inscrivez-vous en tant que auteur ou bien vérifiez votre adesse email si vous vous êtes trompé"));
+					FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_INFO, "Info !", "Cette adresse email est enregistrée"
+							+ " avec un compte AUTEUR. Inscrivez-vous en tant que étudiant ou bien vérifiez votre adesse email si vous vous êtes trompé"));
 				}
 				else
 					FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_INFO, "Done !", "Connecté."));
@@ -84,7 +84,7 @@ public class UserBean implements Serializable {
 				Boolean  isAuteur =	metier.findbyAdresseAndRole(listUser.get(0).getEmail(), "auteur");
 				if(!isAuteur){
 					FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_INFO, "Done !", "Cette adresse email est enregistrée"
-							+ " avec un compte AUTEUR. Inscrivez-vous en tant que étudiant ou bien vérifiez votre adesse email si vous vous êtes trompé"));
+							+ " avec un compte étudiant. Inscrivez-vous en tant que auteur ou bien vérifiez votre adesse email si vous vous êtes trompé"));
 				}
 				else
 					FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_INFO, "Done !", "Connecté."));
@@ -102,6 +102,9 @@ public class UserBean implements Serializable {
 		else {
 			Utilisateur u = new Utilisateur(nom,prenom,password,email);
 			metier.addUser(u, "etudiant");
+			initAll();
+			FacesContext.getCurrentInstance().addMessage("success", new FacesMessage(FacesMessage.SEVERITY_INFO, "Success !", "votre inscription a été enregistrée avec succès."));
+			
 			
 		}
 		
@@ -117,10 +120,19 @@ public class UserBean implements Serializable {
 		else {
 			Utilisateur u = new Utilisateur(nom,prenom,password,email);
 			metier.addUser(u, "auteur");
-			
+			initAll();
+			FacesContext.getCurrentInstance().addMessage("success", new FacesMessage(FacesMessage.SEVERITY_INFO, "Success !", "votre inscription a été enregistrée avec succès."));
 		}
 	}
 	
+	public void initAll(){
+		
+		this.nom = "";
+		this.prenom = "";
+		this.email = "";
+		this.password = "";
+		
+	}
 
 
 
