@@ -6,9 +6,9 @@ public interface GroupeDAO {
 	
 	public Groupe addGroupe(Groupe g);
 	
-	public void deleteGroupe(Groupe g);
+	public void deleteGroupe(Integer id);
 	
-	public void getbyId(Long id);
+	public Groupe findById(Integer id);
 	
 
 }
