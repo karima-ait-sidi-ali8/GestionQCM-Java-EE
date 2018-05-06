@@ -16,17 +16,17 @@
         <property name="hibernate.search.autoregister_listeners">false</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.validator.apply_to_ddl">false</property>
-        <property name="hbm2ddl.auto">update</property>
+        <property name="hbm2ddl.auto">create</property>
         
         
-        <mapping class="fr.insset.gestionQCM.dao.entity.Etudiant" />
+       
         <mapping class="fr.insset.gestionQCM.dao.entity.Groupe" />
         <mapping class="fr.insset.gestionQCM.dao.entity.Resultat" />
         <mapping class="fr.insset.gestionQCM.dao.entity.Membre" />
         <mapping class="fr.insset.gestionQCM.dao.entity.Commentaire" />
         <mapping class="fr.insset.gestionQCM.dao.entity.Page" />
         <mapping class="fr.insset.gestionQCM.dao.entity.QcmAffGroupe" />
-        <mapping class="fr.insset.gestionQCM.dao.entity.Auteur" />
+
         <mapping class="fr.insset.gestionQCM.dao.entity.Role" />
         <mapping class="fr.insset.gestionQCM.dao.entity.EtudiantChoix" />
         <mapping class="fr.insset.gestionQCM.dao.entity.Reponse" />

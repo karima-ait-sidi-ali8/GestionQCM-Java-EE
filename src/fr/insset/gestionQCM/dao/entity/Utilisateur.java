@@ -9,7 +9,9 @@ import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -33,7 +35,7 @@ public class Utilisateur implements java.io.Serializable {
 	
 	
 	private List<Role> userRoles = new ArrayList<Role>();
-	
+	private Set<Groupe> listOfGroupe = new HashSet<Groupe>();
 	
 	public Utilisateur() {
 	}
@@ -105,6 +107,18 @@ public class Utilisateur implements java.io.Serializable {
 
 	public void setUserRoles(List<Role> userRoles) {
 		this.userRoles = userRoles;
+	}
+
+	
+	@ManyToMany
+	@JoinTable(name="groupe_utilisateur",
+	joinColumns={@JoinColumn(name="idUser")}, inverseJoinColumns={@JoinColumn(name="idGroupe")})
+	public Set<Groupe> getListOfGroupe() {
+		return listOfGroupe;
+	}
+
+	public void setListOfGroupe(Set<Groupe> listOfGroupe) {
+		this.listOfGroupe = listOfGroupe;
 	}
 	
 	
