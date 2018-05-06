@@ -34,7 +34,7 @@
                     <b:row styleClass="placeholders">
 							
 							
-                    <h:dataTable styleClass="table table-bordered" value="#{itemBean.items}" var="item" >
+                    <h:dataTable styleClass="table table-bordered" value="#{groupeBean.listeGroupes}" var="item" >
                         <h:column>
                             <f:facet name="header"><h:outputText value="#" /></f:facet>
                             
@@ -42,15 +42,15 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header"><h:outputText value="Nom de classe" /></f:facet>
-                            <h:outputText value="" />
+                            <h:outputText value="#{item.nomGroupe}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header"><h:outputText value="Date de création" /></f:facet>
-                            <h:outputText value="" />
+                            <h:outputText value="#{item.dateCreation}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header"><h:outputText value="Nombre des étudiants" /></f:facet>
-                            <b:label value="5" severity="danger"/>
+                            <b:label value="0" severity="danger"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header"><h:outputText value="" /></f:facet>

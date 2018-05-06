@@ -2,12 +2,15 @@ package fr.insset.gestionQCM.dao.entity;
 
 
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+
+import java.util.List;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
@@ -31,7 +34,7 @@ public class Groupe implements java.io.Serializable {
 	private Date dateCreation;
 	private int idUser;
 
-	private Set<Utilisateur> listOfUsers = new HashSet<Utilisateur>();
+	private List<Utilisateur> listOfUsers = new ArrayList<Utilisateur>();
 	
 	public Groupe() {
 	}
@@ -85,14 +88,14 @@ public class Groupe implements java.io.Serializable {
 	}
 
 	
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="groupe_utilisateur",
 	joinColumns={@JoinColumn(name="idGroupe")}, inverseJoinColumns={@JoinColumn(name="idUser")})
-	public Set<Utilisateur> getListOfUsers() {
+	public List<Utilisateur> getListOfUsers() {
 		return listOfUsers;
 	}
 
-	public void setListOfUsers(Set<Utilisateur> listOfUsers) {
+	public void setListOfUsers(List<Utilisateur> listOfUsers) {
 		this.listOfUsers = listOfUsers;
 	}
 	

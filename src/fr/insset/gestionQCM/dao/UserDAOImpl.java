@@ -62,6 +62,14 @@ public class UserDAOImpl implements UserDAO {
 		return verif;
 	}
 
+	@Override
+	public Utilisateur finByOne(Integer id) {
+		session.beginTransaction();
+		Utilisateur u = (Utilisateur) session.get(Utilisateur.class, id);
+		session.getTransaction().commit();
+		return u;
+	}
+
 
 	
 	

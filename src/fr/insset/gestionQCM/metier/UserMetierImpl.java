@@ -31,6 +31,12 @@ public class UserMetierImpl implements UserMetier {
 		return daoUser.findbyAdresseAndRole(adresse, role);
 	}
 
+	@Override
+	public Utilisateur finByOne(Integer id) {
+		
+		return daoUser.finByOne(id);
+	}
+
 
 
 }

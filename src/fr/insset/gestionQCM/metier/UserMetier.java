@@ -12,4 +12,6 @@ public interface UserMetier {
 	
 	public boolean findbyAdresseAndRole(String adresse, String role);
 	
+	public Utilisateur finByOne(Integer id);
+	
 }
