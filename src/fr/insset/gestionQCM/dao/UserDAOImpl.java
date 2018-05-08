@@ -6,6 +6,8 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import fr.insset.gestionQCM.dao.entity.Auteur;
+import fr.insset.gestionQCM.dao.entity.Etudiant;
 import fr.insset.gestionQCM.dao.entity.Role;
 import fr.insset.gestionQCM.dao.entity.Utilisateur;
 import fr.insset.gestionQCM.utils.HibernateUtil;
@@ -68,6 +70,33 @@ public class UserDAOImpl implements UserDAO {
 		Utilisateur u = (Utilisateur) session.get(Utilisateur.class, id);
 		session.getTransaction().commit();
 		return u;
+	}
+
+	@Override
+	public Utilisateur addEtudiant(Etudiant e) {
+		Query q = session.createQuery("from Role r where r.nomRole= :x");
+		q.setParameter("x", "etudiant");
+		
+		Role eRole = (Role) q.list().get(0);
+		e.getUserRoles().add(eRole);
+		session.beginTransaction();
+		Etudiant etudiant = (Etudiant) session.merge(e);
+		session.getTransaction().commit();
+		return etudiant;
+	}
+
+	@Override
+	public Utilisateur addAuteur(Auteur a) {
+		Query q = session.createQuery("from Role r where r.nomRole= :x");
+		q.setParameter("x", "auteur");
+		
+		Role eRole = (Role) q.list().get(0);
+		a.getUserRoles().add(eRole);
+		session.beginTransaction();
+		Auteur auteur = (Auteur) session.merge(a);
+		session.getTransaction().commit();
+		return auteur;
+		
 	}
 
 

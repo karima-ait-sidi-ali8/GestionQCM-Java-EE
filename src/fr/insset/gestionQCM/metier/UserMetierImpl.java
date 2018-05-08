@@ -3,6 +3,8 @@ package fr.insset.gestionQCM.metier;
 import java.util.List;
 
 import fr.insset.gestionQCM.dao.UserDAO;
+import fr.insset.gestionQCM.dao.entity.Auteur;
+import fr.insset.gestionQCM.dao.entity.Etudiant;
 import fr.insset.gestionQCM.dao.entity.Utilisateur;
 
 public class UserMetierImpl implements UserMetier {
@@ -35,6 +37,18 @@ public class UserMetierImpl implements UserMetier {
 	public Utilisateur finByOne(Integer id) {
 		
 		return daoUser.finByOne(id);
+	}
+
+	@Override
+	public Utilisateur addEtudiant(Etudiant e) {
+		
+		return daoUser.addEtudiant(e);
+	}
+
+	@Override
+	public Utilisateur addAuteur(Auteur a) {
+		
+		return daoUser.addAuteur(a);
 	}
 
 
