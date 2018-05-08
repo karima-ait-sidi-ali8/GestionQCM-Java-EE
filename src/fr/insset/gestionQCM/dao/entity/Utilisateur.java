@@ -15,6 +15,8 @@ import java.util.List;
 
 
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -24,6 +26,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "utilisateur", catalog = "qcm_db")
+@Inheritance(strategy=InheritanceType.JOINED)
 public class Utilisateur implements java.io.Serializable {
 
 
