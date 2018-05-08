@@ -6,13 +6,16 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 
 import org.apache.log4j.Logger;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import fr.insset.gestionQCM.dao.entity.Auteur;
+import fr.insset.gestionQCM.dao.entity.Etudiant;
 import fr.insset.gestionQCM.dao.entity.Utilisateur;
 import fr.insset.gestionQCM.metier.UserMetier;
 
@@ -20,7 +23,7 @@ import fr.insset.gestionQCM.metier.UserMetier;
 
 
 @ManagedBean(name="UserLogin")
-@RequestScoped
+@ViewScoped
 public class UserBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -100,8 +103,8 @@ public class UserBean implements Serializable {
 		if(isEtudiant) 
 			FacesContext.getCurrentInstance().addMessage("inscri", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Il exite déjà un compte étudiant avec cette adresse email."));
 		else {
-			Utilisateur u = new Utilisateur(nom,prenom,password,email);
-			metier.addUser(u, "etudiant");
+			Etudiant e = new Etudiant(nom,prenom,password,email);
+			metier.addEtudiant(e);
 			initAll();
 			FacesContext.getCurrentInstance().addMessage("success", new FacesMessage(FacesMessage.SEVERITY_INFO, "Success !", "votre inscription a été enregistrée avec succès."));
 			
@@ -118,8 +121,8 @@ public class UserBean implements Serializable {
 		if(isAuetur) 
 			FacesContext.getCurrentInstance().addMessage("inscri", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Il exite déjà un compte auteur avec cette adresse email."));
 		else {
-			Utilisateur u = new Utilisateur(nom,prenom,password,email);
-			metier.addUser(u, "auteur");
+			Auteur a = new Auteur(nom,prenom,password,email);
+			metier.addAuteur(a);
 			initAll();
 			FacesContext.getCurrentInstance().addMessage("success", new FacesMessage(FacesMessage.SEVERITY_INFO, "Success !", "votre inscription a été enregistrée avec succès."));
 		}
