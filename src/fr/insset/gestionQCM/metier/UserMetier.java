@@ -20,4 +20,9 @@ public interface UserMetier {
 	
 	public Utilisateur finByOne(Integer id);
 	
+	public Etudiant getEtudiant(Integer id);
+	
+	public Auteur getAuteur(Integer id);
+
+	
 }

@@ -51,6 +51,18 @@ public class UserMetierImpl implements UserMetier {
 		return daoUser.addAuteur(a);
 	}
 
+	@Override
+	public Etudiant getEtudiant(Integer id) {
+		
+		return daoUser.getEtudiant(id);
+	}
+
+	@Override
+	public Auteur getAuteur(Integer id) {
+		
+		return daoUser.getAuteur(id);
+	}
+
 
 
 }

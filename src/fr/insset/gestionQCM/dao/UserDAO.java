@@ -19,5 +19,9 @@ public interface UserDAO {
 	public boolean findbyAdresseAndRole(String adresse, String role);
 	
 	public Utilisateur finByOne(Integer id);
+	
+	public Etudiant getEtudiant(Integer id);
+	
+	public Auteur getAuteur(Integer id);
 
 }

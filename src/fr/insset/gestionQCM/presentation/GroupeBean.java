@@ -15,6 +15,7 @@ import javax.faces.bean.ViewScoped;
 import org.apache.log4j.Logger;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import fr.insset.gestionQCM.dao.entity.Auteur;
 import fr.insset.gestionQCM.dao.entity.Groupe;
 import fr.insset.gestionQCM.dao.entity.Utilisateur;
 
@@ -33,7 +34,7 @@ public class GroupeBean implements Serializable {
 	private String NomGroupe;
 	private Date dateCreation;
 	
-	private int idUser = 1;
+	private Integer idUser = 1;
 	
 	private UserMetier metier;
 	
@@ -51,8 +52,9 @@ public class GroupeBean implements Serializable {
 		UserMetier metier = (UserMetier) context.getBean("metier"); 
 		this.metier = metier;
 		context.close();
-		Utilisateur u = metier.finByOne(idUser);
-		listeGroupes = u.getListOfGroupe();
+		Auteur a = metier.getAuteur(idUser);
+		
+		listeGroupes = a.getListGroupes();
 	}
 
 

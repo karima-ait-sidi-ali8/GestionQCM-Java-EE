@@ -99,6 +99,18 @@ public class UserDAOImpl implements UserDAO {
 		
 	}
 
+	@Override
+	public Etudiant getEtudiant(Integer id) {
+		
+		return (Etudiant)session.get(Etudiant.class, id);
+	}
+
+	@Override
+	public Auteur getAuteur(Integer id) {
+		
+		return (Auteur)session.get(Auteur.class, id);
+	}
+
 
 	
 	
