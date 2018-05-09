@@ -18,6 +18,7 @@ import javax.persistence.JoinColumn;
 
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,17 +33,20 @@ public class Groupe implements java.io.Serializable {
 	private Integer idGroupe;
 	private String nomGroupe;
 	private Date dateCreation;
-	private int idUser;
+	
+	private Integer id_Auteur;
+	
+	
+	private Auteur auteur;
 
-	private List<Utilisateur> listOfUsers = new ArrayList<Utilisateur>();
 	
 	public Groupe() {
 	}
 
-	public Groupe(String nomGroupe, Date dateCreation, int idUser) {
+	public Groupe(String nomGroupe, Date dateCreation) {
 		this.nomGroupe = nomGroupe;
 		this.dateCreation = dateCreation;
-		this.idUser = idUser;
+		
 	}
 
 	@Id
@@ -78,25 +82,31 @@ public class Groupe implements java.io.Serializable {
 		this.dateCreation = dateCreation;
 	}
 
-	@Column(name = "idUser", nullable = false)
-	public int getIdUser() {
-		return this.idUser;
-	}
 
-	public void setIdUser(int idUser) {
-		this.idUser = idUser;
-	}
+
 
 	
-	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(name="groupe_utilisateur",
-	joinColumns={@JoinColumn(name="idGroupe")}, inverseJoinColumns={@JoinColumn(name="idUser")})
-	public List<Utilisateur> getListOfUsers() {
-		return listOfUsers;
+	
+
+
+
+	
+	@ManyToOne
+	@JoinColumn(name="id_Auteur",insertable=false, updatable=false)
+	public Auteur getAuteur() {
+		return auteur;
 	}
 
-	public void setListOfUsers(List<Utilisateur> listOfUsers) {
-		this.listOfUsers = listOfUsers;
+	public void setAuteur(Auteur auteur) {
+		this.auteur = auteur;
+	}
+
+	public Integer getId_Auteur() {
+		return id_Auteur;
+	}
+
+	public void setId_Auteur(Integer id_Auteur) {
+		this.id_Auteur = id_Auteur;
 	}
 	
 	

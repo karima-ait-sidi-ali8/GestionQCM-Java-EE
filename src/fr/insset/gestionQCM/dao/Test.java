@@ -13,6 +13,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import fr.insset.gestionQCM.dao.entity.Auteur;
 import fr.insset.gestionQCM.dao.entity.Etudiant;
+import fr.insset.gestionQCM.dao.entity.Groupe;
 import fr.insset.gestionQCM.dao.entity.Role;
 import fr.insset.gestionQCM.dao.entity.Utilisateur;
 import fr.insset.gestionQCM.metier.UserMetier;
@@ -33,10 +34,15 @@ public class Test {
 		UserMetier metier = (UserMetier) context.getBean("metier"); 
 		context.close();
 		
-		metier.addEtudiant(new Etudiant("ALEX","BERNOIS","123","ALEX@gmail.com"));
+		//metier.addAuteur(new Auteur("ALEX","BERNOIS","123","ALEX@gmail.com"));
 		
-		//Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		
+	
+		Auteur a = (Auteur)session.get(Auteur.class, new Integer(1));
+		
+		Groupe g = a.getListGroupes().get(0);
+		System.out.println(g.getNomGroupe());
 
 
 		

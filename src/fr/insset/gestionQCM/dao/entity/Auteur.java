@@ -1,6 +1,15 @@
 package fr.insset.gestionQCM.dao.entity;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -8,16 +17,37 @@ import javax.persistence.Table;
 public class Auteur extends Utilisateur {
 
 	private static final long serialVersionUID = 1L;
+	
+	private List<Groupe> listGroupes;
+	
 
+	
 	public Auteur() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public Auteur(String nom, String prenom, String password, String email) {
 		super(nom, prenom, password, email);
-		// TODO Auto-generated constructor stub
+		
 	}
 
+	
+	
+	@OneToMany(targetEntity=Groupe.class, mappedBy="auteur",  fetch=FetchType.LAZY)
+	public List<Groupe> getListGroupes() {
+		return listGroupes;
+	}
+
+	public void setListGroupes(List<Groupe> listGroupes) {
+		this.listGroupes = listGroupes;
+	}
+	
+
+
+	
+	
+	
+	
 	
 }
