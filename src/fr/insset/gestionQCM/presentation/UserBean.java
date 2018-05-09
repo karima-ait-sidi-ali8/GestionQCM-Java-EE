@@ -1,15 +1,16 @@
 package fr.insset.gestionQCM.presentation;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -18,12 +19,13 @@ import fr.insset.gestionQCM.dao.entity.Auteur;
 import fr.insset.gestionQCM.dao.entity.Etudiant;
 import fr.insset.gestionQCM.dao.entity.Utilisateur;
 import fr.insset.gestionQCM.metier.UserMetier;
+import fr.insset.gestionQCM.utils.SessionUtil;
 
 
 
 
 @ManagedBean(name="UserLogin")
-@ViewScoped
+@SessionScoped
 public class UserBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -65,8 +67,10 @@ public class UserBean implements Serializable {
 					FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_INFO, "Info !", "Cette adresse email est enregistrée"
 							+ " avec un compte AUTEUR. Inscrivez-vous en tant que étudiant ou bien vérifiez votre adesse email si vous vous êtes trompé"));
 				}
-				else
+				else{
 					FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_INFO, "Done !", "Connecté."));
+
+				}
 			}
 			
 		}	
@@ -89,11 +93,25 @@ public class UserBean implements Serializable {
 					FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_INFO, "Done !", "Cette adresse email est enregistrée"
 							+ " avec un compte étudiant. Inscrivez-vous en tant que auteur ou bien vérifiez votre adesse email si vous vous êtes trompé"));
 				}
-				else
-					FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_INFO, "Done !", "Connecté."));
+				else{
+					String username=listUser.get(0).getPrenom()+" "+listUser.get(0).getNom();
+					Integer idUser = new Integer(listUser.get(0).getIdUser());
+					System.out.println(idUser+" "+username);
+					HttpSession hs = SessionUtil.getSession();
+					hs.setAttribute("username", username);
+					hs.setAttribute("idUser", idUser);
+					try {
+						FacesContext.getCurrentInstance().getExternalContext().redirect("classes.xhtml");
+					} catch (IOException e) {
+						
+						e.printStackTrace();
+					}
+					FacesContext.getCurrentInstance().responseComplete();
+				}
 			}
 			
-		}	
+		}
+	
 	}
 	
 	public void inscriptionEtudiant(){

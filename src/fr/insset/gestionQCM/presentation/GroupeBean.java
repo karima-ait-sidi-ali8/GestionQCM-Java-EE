@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 
 import javax.faces.bean.ViewScoped;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -20,6 +21,7 @@ import fr.insset.gestionQCM.dao.entity.Groupe;
 import fr.insset.gestionQCM.dao.entity.Utilisateur;
 
 import fr.insset.gestionQCM.metier.UserMetier;
+import fr.insset.gestionQCM.utils.SessionUtil;
 
 
 
@@ -34,7 +36,7 @@ public class GroupeBean implements Serializable {
 	private String NomGroupe;
 	private Date dateCreation;
 	
-	private Integer idUser = 1;
+	private Integer idUser;
 	
 	private UserMetier metier;
 	
@@ -52,6 +54,9 @@ public class GroupeBean implements Serializable {
 		UserMetier metier = (UserMetier) context.getBean("metier"); 
 		this.metier = metier;
 		context.close();
+		
+		HttpSession hs = SessionUtil.getSession();
+		this.idUser = (Integer) hs.getAttribute("idUser");
 		Auteur a = metier.getAuteur(idUser);
 		
 		listeGroupes = a.getListGroupes();
