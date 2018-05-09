@@ -1,5 +1,6 @@
 package fr.insset.gestionQCM.dao.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -15,7 +16,7 @@ public class Auteur extends Utilisateur {
 	
 	private List<Groupe> listGroupes;
 	
-
+	private List<Qcm> qcms = new ArrayList<Qcm>();
 	
 	public Auteur() {
 		super();
@@ -36,6 +37,15 @@ public class Auteur extends Utilisateur {
 
 	public void setListGroupes(List<Groupe> listGroupes) {
 		this.listGroupes = listGroupes;
+	}
+
+	@OneToMany(targetEntity=Qcm.class, mappedBy="auteur", fetch=FetchType.LAZY)
+	public List<Qcm> getQcms() {
+		return qcms;
+	}
+
+	public void setQcms(List<Qcm> qcms) {
+		this.qcms = qcms;
 	}
 	
 

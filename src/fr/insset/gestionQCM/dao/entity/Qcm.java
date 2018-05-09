@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -29,6 +31,9 @@ public class Qcm implements java.io.Serializable {
 	private int idAuteur;
 	
 	private List<Session> sessions = new ArrayList<Session>();
+	
+	
+	private Auteur auteur;
 
 	public Qcm() {
 	}
@@ -85,6 +90,16 @@ public class Qcm implements java.io.Serializable {
 
 	public void setSessions(List<Session> sessions) {
 		this.sessions = sessions;
+	}
+
+	@ManyToOne
+	@JoinColumn(name="idAuteur", insertable=false, updatable=false)
+	public Auteur getAuteur() {
+		return auteur;
+	}
+
+	public void setAuteur(Auteur auteur) {
+		this.auteur = auteur;
 	}
 
 }
