@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,6 +26,8 @@ public class Session implements java.io.Serializable {
 	private boolean showResult;
 	private boolean chatAutorisation;
 	private int idQcm;
+	
+	private Qcm qcm;
 
 	public Session() {
 	}
@@ -114,6 +118,16 @@ public class Session implements java.io.Serializable {
 
 	public void setIdQcm(int idQcm) {
 		this.idQcm = idQcm;
+	}
+
+	@ManyToOne
+	@JoinColumn(name="idQcm", referencedColumnName="id", insertable=false, updatable=false)
+	public Qcm getQcm() {
+		return qcm;
+	}
+
+	public void setQcm(Qcm qcm) {
+		this.qcm = qcm;
 	}
 
 }

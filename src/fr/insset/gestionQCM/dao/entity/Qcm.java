@@ -3,9 +3,15 @@ package fr.insset.gestionQCM.dao.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -21,6 +27,8 @@ public class Qcm implements java.io.Serializable {
 	private String titre;
 	private String type;
 	private int idAuteur;
+	
+	private List<Session> sessions = new ArrayList<Session>();
 
 	public Qcm() {
 	}
@@ -68,6 +76,15 @@ public class Qcm implements java.io.Serializable {
 
 	public void setIdAuteur(int idAuteur) {
 		this.idAuteur = idAuteur;
+	}
+
+	@OneToMany(targetEntity=Session.class, mappedBy="qcm", fetch=FetchType.LAZY)
+	public List<Session> getSessions() {
+		return sessions;
+	}
+
+	public void setSessions(List<Session> sessions) {
+		this.sessions = sessions;
 	}
 
 }

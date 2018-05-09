@@ -7,15 +7,11 @@ package fr.insset.gestionQCM.dao;
 
 
 import org.apache.log4j.Logger;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import fr.insset.gestionQCM.dao.entity.Auteur;
-import fr.insset.gestionQCM.dao.entity.Etudiant;
 import fr.insset.gestionQCM.dao.entity.Groupe;
-import fr.insset.gestionQCM.dao.entity.Role;
-import fr.insset.gestionQCM.dao.entity.Utilisateur;
 import fr.insset.gestionQCM.metier.UserMetier;
 import fr.insset.gestionQCM.utils.HibernateUtil;
 

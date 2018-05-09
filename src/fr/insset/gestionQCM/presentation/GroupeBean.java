@@ -2,14 +2,10 @@ package fr.insset.gestionQCM.presentation;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
-
 import javax.faces.bean.ManagedBean;
-
 import javax.faces.bean.ViewScoped;
 import javax.servlet.http.HttpSession;
 
@@ -18,8 +14,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import fr.insset.gestionQCM.dao.entity.Auteur;
 import fr.insset.gestionQCM.dao.entity.Groupe;
-import fr.insset.gestionQCM.dao.entity.Utilisateur;
-
 import fr.insset.gestionQCM.metier.UserMetier;
 import fr.insset.gestionQCM.utils.SessionUtil;
 
@@ -52,7 +46,7 @@ public class GroupeBean implements Serializable {
 	public void initBean(){
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"config/config.xml"});
 		UserMetier metier = (UserMetier) context.getBean("metier"); 
-		this.metier = metier;
+		this.setMetier(metier);
 		context.close();
 		
 		HttpSession hs = SessionUtil.getSession();
@@ -100,6 +94,16 @@ public class GroupeBean implements Serializable {
 
 	public void setListeGroupes(List<Groupe> listeGroupes) {
 		this.listeGroupes = listeGroupes;
+	}
+
+
+	public UserMetier getMetier() {
+		return metier;
+	}
+
+
+	public void setMetier(UserMetier metier) {
+		this.metier = metier;
 	}
 
 
