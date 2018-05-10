@@ -24,7 +24,7 @@ public class Session implements java.io.Serializable {
 	private Date dateFin;
 	private double duree;
 	private boolean showResult;
-	private boolean chatAutorisation;
+
 	private int idQcm;
 	
 	private Qcm qcm;
@@ -33,14 +33,14 @@ public class Session implements java.io.Serializable {
 	}
 
 	public Session(int id, int nbEssai, Date dateDeb, Date dateFin, double duree, boolean showResult,
-			boolean chatAutorisation, int idQcm) {
+			 int idQcm) {
 		this.id = id;
 		this.nbEssai = nbEssai;
 		this.dateDeb = dateDeb;
 		this.dateFin = dateFin;
 		this.duree = duree;
 		this.showResult = showResult;
-		this.chatAutorisation = chatAutorisation;
+
 		this.idQcm = idQcm;
 	}
 
@@ -102,14 +102,7 @@ public class Session implements java.io.Serializable {
 		this.showResult = showResult;
 	}
 
-	@Column(name = "ChatAutorisation", nullable = false)
-	public boolean isChatAutorisation() {
-		return this.chatAutorisation;
-	}
 
-	public void setChatAutorisation(boolean chatAutorisation) {
-		this.chatAutorisation = chatAutorisation;
-	}
 
 	@Column(name = "id_qcm", nullable = false)
 	public int getIdQcm() {
@@ -121,7 +114,7 @@ public class Session implements java.io.Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name="idQcm", referencedColumnName="id", insertable=false, updatable=false)
+	@JoinColumn(name="id_qcm", referencedColumnName="id", insertable=false, updatable=false)
 	public Qcm getQcm() {
 		return qcm;
 	}
