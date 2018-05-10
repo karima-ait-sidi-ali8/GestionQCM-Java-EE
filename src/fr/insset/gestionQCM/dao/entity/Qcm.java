@@ -21,9 +21,7 @@ import javax.persistence.Table;
 @Table(name = "qcm", catalog = "qcm_db")
 public class Qcm implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String titre;
@@ -93,7 +91,7 @@ public class Qcm implements java.io.Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name="idAuteur", insertable=false, updatable=false)
+	@JoinColumn(name="id_auteur", insertable=false, updatable=false)
 	public Auteur getAuteur() {
 		return auteur;
 	}

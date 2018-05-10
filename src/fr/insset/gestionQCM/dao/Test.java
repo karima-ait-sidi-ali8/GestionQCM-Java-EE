@@ -32,13 +32,13 @@ public class Test {
 		
 		//metier.addAuteur(new Auteur("ALEX","BERNOIS","123","ALEX@gmail.com"));
 		
-		Session session = HibernateUtil.getSessionFactory().openSession();
+	/*	Session session = HibernateUtil.getSessionFactory().openSession();
 		
 	
 		Auteur a = (Auteur)session.get(Auteur.class, new Integer(1));
 		
 		Groupe g = a.getListGroupes().get(0);
-		System.out.println(g.getNomGroupe());
+		System.out.println(g.getNomGroupe());*/
 
 
 		
