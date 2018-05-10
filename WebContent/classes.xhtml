@@ -7,7 +7,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Dashboard Template for BootsFaces</title>
+        <title>Easy Eval</title>
         <meta name="author" content="Riccardo Massera"></meta>
         
     </h:head>
@@ -31,7 +31,7 @@
                     <hr /> 
                    <b:panel>
 					  <f:facet name="heading">
-					    <i class="sign-out"  style="padding-right:20px" />
+					    <i class="fa fa-reorder"  style="padding-right:20px" />
 					    <h:outputText value="Liste de vos classes " />
 					    <b:badge style="margin-left:10px; background-color:#5cb85c" value="#{groupeBean.nbGroupes} classe(s)"  />
 
@@ -58,7 +58,7 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header"><h:outputText value="Nombre des étudiants" /></f:facet>
-                            <b:label value="0" severity="danger"/>
+                            <b:label value="#{item.listOfEtudiants.size()}" severity="danger"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header"><h:outputText value="" /></f:facet>
