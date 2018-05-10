@@ -1,12 +1,17 @@
 package fr.insset.gestionQCM.presentation;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -14,6 +19,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import fr.insset.gestionQCM.dao.entity.Auteur;
 import fr.insset.gestionQCM.dao.entity.Groupe;
+import fr.insset.gestionQCM.metier.GroupeMetier;
 import fr.insset.gestionQCM.metier.UserMetier;
 import fr.insset.gestionQCM.utils.SessionUtil;
 
@@ -62,6 +68,21 @@ public class GroupeBean implements Serializable {
 	}
 
 
+	public void addGroupe() throws IOException{
+		String date= new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+		Groupe gp = new Groupe();
+		gp.setId_Auteur(idUser);
+		gp.setDateCreation(date);
+		gp.setNomGroupe(NomGroupe);
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"config/config.xml"});
+		GroupeMetier metier = (GroupeMetier) context.getBean("groupeMetier"); 
+		context.close();
+		metier.addGroupe(gp);
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+		
+	}
+	
 	public String getNomGroupe() {
 		return NomGroupe;
 	}

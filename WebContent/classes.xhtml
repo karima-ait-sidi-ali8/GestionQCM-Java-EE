@@ -46,7 +46,8 @@
                         <h:column>
                             <f:facet name="header"><h:outputText value="#" /></f:facet>
                             
-                            <b:badge value="#{dtPaginatorView.rowIndex + 1}"/>
+                            <b:badge value="#{groupeBean.listeGroupes.indexOf(item)+1}"/>
+                            
                         </h:column>
                         <h:column>
                             <f:facet name="header"><h:outputText value="Nom de classe" /></f:facet>
@@ -75,9 +76,12 @@
                             
 
 					 <b:row>
-				        <h:form>
-				        <b:inputText span="2"></b:inputText>
-						<b:commandButton span="3" size="sm" look="success" value="Ajouter une nouvelle classe" icon-awesome="plus-circle"/> 
+				        <h:form >
+				        <b:inputText span="2" value="#{groupeBean.nomGroupe}"></b:inputText>
+						<b:commandButton  span="3" size="sm" look="success" value="Ajouter une nouvelle classe" icon-awesome="plus-circle">
+						
+						<f:ajax execute="@form"  listener="#{groupeBean.addGroupe}" ></f:ajax>
+						</b:commandButton> 
 						</h:form>
 		            </b:row>
         

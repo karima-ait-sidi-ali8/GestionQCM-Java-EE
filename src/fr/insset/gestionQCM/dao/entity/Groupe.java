@@ -30,7 +30,7 @@ public class Groupe implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer idGroupe;
 	private String nomGroupe;
-	private Date dateCreation;
+	private String dateCreation;
 	
 	private Integer id_Auteur;
 	
@@ -42,7 +42,7 @@ public class Groupe implements java.io.Serializable {
 	public Groupe() {
 	}
 
-	public Groupe(String nomGroupe, Date dateCreation) {
+	public Groupe(String nomGroupe, String dateCreation) {
 		this.nomGroupe = nomGroupe;
 		this.dateCreation = dateCreation;
 		
@@ -71,13 +71,13 @@ public class Groupe implements java.io.Serializable {
 		this.nomGroupe = nomGroupe;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "DateCreation", nullable = false, length = 10)
-	public Date getDateCreation() {
+	
+	@Column(name = "DateCreation", nullable = false, length=10)
+	public String getDateCreation() {
 		return this.dateCreation;
 	}
 
-	public void setDateCreation(Date dateCreation) {
+	public void setDateCreation(String dateCreation) {
 		this.dateCreation = dateCreation;
 	}
 
