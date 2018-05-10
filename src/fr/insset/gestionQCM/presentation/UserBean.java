@@ -66,10 +66,21 @@ public class UserBean implements Serializable {
 					FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_INFO, "Info !", "Cette adresse email est enregistrée"
 							+ " avec un compte AUTEUR. Inscrivez-vous en tant que étudiant ou bien vérifiez votre adesse email si vous vous êtes trompé"));
 				}
-				else{
-					FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_INFO, "Done !", "Connecté."));
-
+				else {
+				String username=listUser.get(0).getPrenom()+" "+listUser.get(0).getNom();
+				Integer idUser = new Integer(listUser.get(0).getIdUser());
+				System.out.println(idUser+" "+username);
+				HttpSession hs = SessionUtil.getSession();
+				hs.setAttribute("username", username);
+				hs.setAttribute("idUser", idUser);
+				try {
+					FacesContext.getCurrentInstance().getExternalContext().redirect("Etudiant/QCM.xhtml");
+				} catch (IOException e) {
+					
+					e.printStackTrace();
 				}
+				FacesContext.getCurrentInstance().responseComplete();
+			}
 			}
 			
 		}	
