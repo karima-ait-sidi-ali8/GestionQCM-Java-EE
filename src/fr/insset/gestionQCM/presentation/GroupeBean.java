@@ -35,6 +35,8 @@ public class GroupeBean implements Serializable {
 	private UserMetier metier;
 	
 	private List<Groupe> listeGroupes ; 
+	
+	private String username;
 
 
 	public GroupeBean() {
@@ -51,6 +53,7 @@ public class GroupeBean implements Serializable {
 		
 		HttpSession hs = SessionUtil.getSession();
 		this.idUser = (Integer) hs.getAttribute("idUser");
+		this.username = (String) hs.getAttribute("username");
 		Auteur a = metier.getAuteur(idUser);
 		
 		listeGroupes = a.getListGroupes();
@@ -107,6 +110,16 @@ public class GroupeBean implements Serializable {
 	}
 
 
+	public String getUsername() {
+		return username;
+	}
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	
 
 	
 	

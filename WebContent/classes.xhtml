@@ -29,12 +29,20 @@
                 
                     <b:navLink header="Accueil / Classes" />
                     <hr /> 
+                   <b:panel>
+					  <f:facet name="heading">
+					    <i class="sign-out"  style="padding-right:20px" />
+					    <h:outputText value="Liste de vos classes " />
+					    <b:badge style="margin-left:10px; background-color:#5cb85c" value="20 classes"  />
+
+					  </f:facet>
+					  
+					
                    
-                    <br /><br />
-                    <b:row styleClass="placeholders">
+                    <b:row styleClass="placeholders" >
 							
 							
-                    <h:dataTable styleClass="table table-bordered" value="#{groupeBean.listeGroupes}" var="item" >
+                    <h:dataTable styleClass="table table-bordered" value="#{groupeBean.listeGroupes}" var="item" style="width:700px;margin-left:150px;" >
                         <h:column>
                             <f:facet name="header"><h:outputText value="#" /></f:facet>
                             
@@ -62,7 +70,7 @@
 							
 							
                     </b:row>
-                    
+                    </b:panel>
                     <hr/>
                             
 
