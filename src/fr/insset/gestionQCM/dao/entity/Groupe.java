@@ -39,6 +39,8 @@ public class Groupe implements java.io.Serializable {
 	
 	private List<Etudiant> listOfEtudiants;
 	
+	private List<Qcm> listQcms;
+	
 	public Groupe() {
 	}
 
@@ -118,6 +120,18 @@ public class Groupe implements java.io.Serializable {
 
 	public void setListOfEtudiants(List<Etudiant> listOfEtudiants) {
 		this.listOfEtudiants = listOfEtudiants;
+	}
+
+	
+	@ManyToMany
+	@JoinTable(name="Qcm_groupe", 
+	joinColumns={@JoinColumn(name="id_groupe")}, inverseJoinColumns={@JoinColumn(name="id_qcm")})
+	public List<Qcm> getListQcms() {
+		return listQcms;
+	}
+
+	public void setListQcms(List<Qcm> listQcms) {
+		this.listQcms = listQcms;
 	}
 	
 	

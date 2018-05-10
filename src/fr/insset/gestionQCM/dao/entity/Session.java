@@ -114,7 +114,7 @@ public class Session implements java.io.Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name="id_qcm", referencedColumnName="id", insertable=false, updatable=false)
+	@JoinColumn(name="id_qcm", referencedColumnName="id_qcm", insertable=false, updatable=false)
 	public Qcm getQcm() {
 		return qcm;
 	}

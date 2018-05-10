@@ -12,6 +12,8 @@ import java.util.List;
 
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -30,7 +32,7 @@ public class Qcm implements java.io.Serializable {
 	
 	private List<Session> sessions = new ArrayList<Session>();
 	
-	
+	private List<Groupe> listGroupes;
 	private Auteur auteur;
 
 	public Qcm() {
@@ -45,7 +47,7 @@ public class Qcm implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 
-	@Column(name = "id", unique = true, nullable = false)
+	@Column(name = "id_qcm", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
 	}
@@ -99,5 +101,19 @@ public class Qcm implements java.io.Serializable {
 	public void setAuteur(Auteur auteur) {
 		this.auteur = auteur;
 	}
+
+	
+	@ManyToMany
+	@JoinTable(name="Qcm_groupe", 
+	joinColumns={@JoinColumn(name="id_qcm")}, inverseJoinColumns={@JoinColumn(name="id_groupe")})
+	public List<Groupe> getListGroupes() {
+		return listGroupes;
+	}
+
+	public void setListGroupes(List<Groupe> listGroupes) {
+		this.listGroupes = listGroupes;
+	}
+	
+	
 
 }
