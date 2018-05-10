@@ -5,13 +5,18 @@ package fr.insset.gestionQCM.dao.entity;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,7 +36,8 @@ public class Groupe implements java.io.Serializable {
 	
 	
 	private Auteur auteur;
-
+	
+	private List<Etudiant> listOfEtudiants;
 	
 	public Groupe() {
 	}
@@ -100,6 +106,18 @@ public class Groupe implements java.io.Serializable {
 
 	public void setId_Auteur(Integer id_Auteur) {
 		this.id_Auteur = id_Auteur;
+	}
+	
+	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="membre_groupe",
+	joinColumns={@JoinColumn(name="id_groupe")}, inverseJoinColumns={@JoinColumn(name="id_user")})
+	public List<Etudiant> getListOfEtudiants() {
+		return listOfEtudiants;
+	}
+
+	public void setListOfEtudiants(List<Etudiant> listOfEtudiants) {
+		this.listOfEtudiants = listOfEtudiants;
 	}
 	
 	

@@ -38,7 +38,8 @@ public class GroupeBean implements Serializable {
 	
 	private String username;
 
-
+	private int  nbGroupes;
+	
 	public GroupeBean() {
 		super();
 	}
@@ -57,6 +58,7 @@ public class GroupeBean implements Serializable {
 		Auteur a = metier.getAuteur(idUser);
 		
 		listeGroupes = a.getListGroupes();
+		nbGroupes = listeGroupes.size();
 	}
 
 
@@ -117,6 +119,16 @@ public class GroupeBean implements Serializable {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+
+	public int getNbGroupes() {
+		return nbGroupes;
+	}
+
+
+	public void setNbGroupes(int nbGroupes) {
+		this.nbGroupes = nbGroupes;
 	}
 
 	

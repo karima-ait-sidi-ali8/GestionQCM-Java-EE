@@ -22,7 +22,7 @@
         <mapping class="fr.insset.gestionQCM.dao.entity.Etudiant" />
         <mapping class="fr.insset.gestionQCM.dao.entity.Groupe" />
         <mapping class="fr.insset.gestionQCM.dao.entity.Resultat" />
-        <mapping class="fr.insset.gestionQCM.dao.entity.Membre" />
+        
         <mapping class="fr.insset.gestionQCM.dao.entity.Commentaire" />
         <mapping class="fr.insset.gestionQCM.dao.entity.Page" />
         <mapping class="fr.insset.gestionQCM.dao.entity.QcmAffGroupe" />
