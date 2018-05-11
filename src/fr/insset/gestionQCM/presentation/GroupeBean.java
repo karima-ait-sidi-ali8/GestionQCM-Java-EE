@@ -23,6 +23,7 @@ import fr.insset.gestionQCM.dao.entity.Auteur;
 import fr.insset.gestionQCM.dao.entity.Groupe;
 import fr.insset.gestionQCM.metier.GroupeMetier;
 import fr.insset.gestionQCM.metier.UserMetier;
+import fr.insset.gestionQCM.utils.Logout;
 import fr.insset.gestionQCM.utils.SessionUtil;
 
 
@@ -104,6 +105,10 @@ public class GroupeBean implements Serializable {
 		metier.deleteGroupe(Integer.valueOf(param.get("id")));
 		ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
 		
+	}
+	
+	public void logout(){
+		Logout.logOut();
 	}
 	
 	public String getNomGroupe() {
