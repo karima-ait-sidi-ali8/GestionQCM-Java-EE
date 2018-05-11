@@ -9,7 +9,14 @@
     <h:head>
         <title>Easy Eval</title>
         <meta name="author" content="Riccardo Massera"></meta>
+       
+        <script>
         
+        	function confirmDelete(){
+        		return confirm("Êtes-vous sûr de vouloir supprimer ?");
+        	}
+        
+        </script>
     </h:head>
     <h:body style="padding-top: 60px">
         <h:outputScript library="holder" name="holder.js" />
@@ -63,8 +70,11 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header"><h:outputText value="" /></f:facet>
-                            <b:link icon-awesome="times" tooltip="Supprimer cette classe" style="margin-right:5px"></b:link>
-               				<b:link icon-awesome="pencil" tooltip="Afficher et modifier cette classe"></b:link>
+                            <b:commandLink onclick="return confirmDelete();" icon-awesome="times" tooltip="Supprimer cette classe" styleClass="btnDel" style="margin-right:5px">
+	                            <f:param name="id" value="#{item.idGroupe}"></f:param>
+	                            <f:ajax   listener="#{groupeBean.deleteGroupe}" ></f:ajax>
+                            </b:commandLink>
+               				<b:commandLink icon-awesome="pencil" tooltip="Afficher et modifier cette classe" />
 
                         </h:column>
                     </h:dataTable>		

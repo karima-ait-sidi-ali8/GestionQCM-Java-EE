@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -46,6 +47,8 @@ public class GroupeBean implements Serializable {
 
 	private int  nbGroupes;
 	
+	private int idGroupe;
+	
 	public GroupeBean() {
 		super();
 	}
@@ -79,6 +82,18 @@ public class GroupeBean implements Serializable {
 		context.close();
 		metier.addGroupe(gp);
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+		
+	}
+	
+	public void deleteGroupe() throws IOException{
+		
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, String> param = ec.getRequestParameterMap(); 
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"config/config.xml"});
+		GroupeMetier metier = (GroupeMetier) context.getBean("groupeMetier"); 
+		context.close();
+		metier.deleteGroupe(Integer.valueOf(param.get("id")));
 		ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
 		
 	}
@@ -150,6 +165,16 @@ public class GroupeBean implements Serializable {
 
 	public void setNbGroupes(int nbGroupes) {
 		this.nbGroupes = nbGroupes;
+	}
+
+
+	public int getIdGroupe() {
+		return idGroupe;
+	}
+
+
+	public void setIdGroupe(int idGroupe) {
+		this.idGroupe = idGroupe;
 	}
 
 	
