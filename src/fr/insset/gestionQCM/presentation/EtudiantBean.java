@@ -1,10 +1,12 @@
 package fr.insset.gestionQCM.presentation;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -63,6 +65,18 @@ public class EtudiantBean {
 		
 		}
 
+	}
+
+	public void logout(){
+		HttpSession hs = SessionUtil.getSession();
+		hs.invalidate();
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("../login.xhtml");
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		FacesContext.getCurrentInstance().responseComplete();
 	}
 
 
