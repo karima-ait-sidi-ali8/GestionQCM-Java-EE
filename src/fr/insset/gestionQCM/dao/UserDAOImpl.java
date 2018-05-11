@@ -44,23 +44,13 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public boolean findbyAdresseAndRole(String adresse, String role) {
+	public boolean findbyAdresse(String adresse) {
 		boolean verif = true;
 		Query q = session.createQuery("from Utilisateur u where u.email=:x");
 		q.setParameter("x", adresse);
 		if(q.list().isEmpty())
 			verif = false;
-		else{
-			
-			Utilisateur user = (Utilisateur) q.list().get(0);
-			Query q2 = session.createSQLQuery("select * from avoir_role INNER JOIN role ON avoir_role.idRole = role.id_role where avoir_role.idUser=:x and role.NomRole=:y");
-			q2.setParameter("x", user.getIdUser());
-			q2.setParameter("y", role);
-			
-			if(q2.list().isEmpty()) verif = false;
-			
-		}
-		
+
 		
 		return verif;
 	}
@@ -110,6 +100,30 @@ public class UserDAOImpl implements UserDAO {
 	public Auteur getAuteur(Integer id) {
 		
 		return (Auteur)session.get(Auteur.class, id);
+	}
+
+	@Override
+	public Boolean isEtudiant(Integer id) {
+
+			Query q2 = session.createSQLQuery("select * from avoir_role INNER JOIN role ON avoir_role.idRole = role.id_role where avoir_role.idUser=:x and role.NomRole=:y");
+			q2.setParameter("x", id);
+			q2.setParameter("y", "etudiant");
+			
+			if(q2.list().isEmpty()) return false;
+
+		return true;
+	}
+
+	@Override
+	public Boolean isAuteur(Integer id) {
+		
+		Query q2 = session.createSQLQuery("select * from avoir_role INNER JOIN role ON avoir_role.idRole = role.id_role where avoir_role.idUser=:x and role.NomRole=:y");
+		q2.setParameter("x", id);
+		q2.setParameter("y", "auteur");
+		
+		if(q2.list().isEmpty()) return false;
+
+	return true;
 	}
 
 

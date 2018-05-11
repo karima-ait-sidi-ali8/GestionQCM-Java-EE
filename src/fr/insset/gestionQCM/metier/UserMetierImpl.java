@@ -28,9 +28,9 @@ public class UserMetierImpl implements UserMetier {
 	}
 
 	@Override
-	public boolean findbyAdresseAndRole(String adresse, String role) {
+	public boolean findbyAdresse(String adresse) {
 		
-		return daoUser.findbyAdresseAndRole(adresse, role);
+		return daoUser.findbyAdresse(adresse);
 	}
 
 	@Override
@@ -61,6 +61,18 @@ public class UserMetierImpl implements UserMetier {
 	public Auteur getAuteur(Integer id) {
 		
 		return daoUser.getAuteur(id);
+	}
+
+	@Override
+	public Boolean isEtudiant(Integer id) {
+		
+		return daoUser.isEtudiant(id);
+	}
+
+	@Override
+	public Boolean isAuteur(Integer id) {
+		
+		return daoUser.isAuteur(id);
 	}
 
 

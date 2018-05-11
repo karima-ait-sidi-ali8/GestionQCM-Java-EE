@@ -61,15 +61,15 @@ public class UserBean implements Serializable {
 			
 			else{
 				
-				Boolean  isEtudiant =	metier.findbyAdresseAndRole(listUser.get(0).getEmail(), "etudiant");
+				Boolean  isEtudiant =	metier.isEtudiant((listUser.get(0).getIdUser()));
 				if(!isEtudiant){
-					FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_INFO, "Info !", "Cette adresse email est enregistrée"
-							+ " avec un compte AUTEUR. Inscrivez-vous en tant que étudiant ou bien vérifiez votre adesse email si vous vous êtes trompé"));
+					FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur!", "Login ou Mot de passe sont incorrectes."));
+
 				}
 				else {
 				String username=listUser.get(0).getPrenom()+" "+listUser.get(0).getNom();
 				Integer idUser = new Integer(listUser.get(0).getIdUser());
-				System.out.println(idUser+" "+username);
+				
 				HttpSession hs = SessionUtil.getSession();
 				hs.setAttribute("username", username);
 				hs.setAttribute("idUser", idUser);
@@ -92,16 +92,18 @@ public class UserBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur!", "Login ou Mot de passe ne doivent pas être vides"));	
 		}
 		else {
+			
 			List<Utilisateur> listUser = metier.getStatus(email, password);
+			
+			
 			if(listUser.isEmpty())
 				FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur!", "Login ou Mot de passe sont incorrectes."));
 			
 			else{
+				Boolean  isAuteur =	metier.isAuteur(listUser.get(0).getIdUser());
 				
-				Boolean  isAuteur =	metier.findbyAdresseAndRole(listUser.get(0).getEmail(), "auteur");
 				if(!isAuteur){
-					FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_INFO, "Done !", "Cette adresse email est enregistrée"
-							+ " avec un compte étudiant. Inscrivez-vous en tant que auteur ou bien vérifiez votre adesse email si vous vous êtes trompé"));
+					FacesContext.getCurrentInstance().addMessage("auth", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur!", "Login ou Mot de passe sont incorrectes."));
 				}
 				else{
 					String username=listUser.get(0).getPrenom()+" "+listUser.get(0).getNom();
@@ -126,10 +128,10 @@ public class UserBean implements Serializable {
 	
 	public void inscriptionEtudiant(){
 		
-		boolean isEtudiant = metier.findbyAdresseAndRole(email, "etudiant");
+		boolean isEtudiant = metier.findbyAdresse(email);
 		
 		if(isEtudiant) 
-			FacesContext.getCurrentInstance().addMessage("inscri", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Il exite déjà un compte étudiant avec cette adresse email."));
+			FacesContext.getCurrentInstance().addMessage("inscri", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Il exite déjà un compte avec cette adresse email."));
 		else {
 			Etudiant e = new Etudiant(nom,prenom,password,email);
 			metier.addEtudiant(e);
@@ -144,10 +146,10 @@ public class UserBean implements Serializable {
 	
 	public void inscriptionAuteur(){
 
-		boolean isAuetur = metier.findbyAdresseAndRole(email, "auteur");
+		boolean isAuetur = metier.findbyAdresse(email);
 		
 		if(isAuetur) 
-			FacesContext.getCurrentInstance().addMessage("inscri", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Il exite déjà un compte auteur avec cette adresse email."));
+			FacesContext.getCurrentInstance().addMessage("inscri", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Il exite déjà un compte avec cette adresse email."));
 		else {
 			Auteur a = new Auteur(nom,prenom,password,email);
 			metier.addAuteur(a);

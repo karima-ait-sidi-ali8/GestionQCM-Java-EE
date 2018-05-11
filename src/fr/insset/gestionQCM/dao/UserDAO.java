@@ -16,12 +16,16 @@ public interface UserDAO {
 	
 	public Utilisateur addAuteur(Auteur a);
 	
-	public boolean findbyAdresseAndRole(String adresse, String role);
+	public boolean findbyAdresse(String adresse);
 	
 	public Utilisateur finByOne(Integer id);
 	
 	public Etudiant getEtudiant(Integer id);
 	
 	public Auteur getAuteur(Integer id);
+	
+	public Boolean isEtudiant(Integer id);
+	
+	public Boolean isAuteur(Integer id);
 
 }
