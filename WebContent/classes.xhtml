@@ -88,13 +88,17 @@
 					 <b:row>
 				        <h:form >
 				        <b:inputText span="2" value="#{groupeBean.nomGroupe}"></b:inputText>
+				       
 						<b:commandButton  span="3" size="sm" look="success" value="Ajouter une nouvelle classe" icon-awesome="plus-circle">
 						
 						<f:ajax execute="@form"  listener="#{groupeBean.addGroupe}" ></f:ajax>
 						</b:commandButton> 
+												
+						
 						</h:form>
+						
 		            </b:row>
-        
+        <b:messages for="inputNameGroupe"  id="inputNameGroupe" showDetail="true" col-xs="5" style="margin-left:-11px;"><p:autoUpdate></p:autoUpdate></b:messages>
                 </b:column>
  
             </b:row>

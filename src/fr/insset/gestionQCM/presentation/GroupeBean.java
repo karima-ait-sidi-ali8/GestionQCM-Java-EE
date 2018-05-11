@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
@@ -72,18 +73,25 @@ public class GroupeBean implements Serializable {
 
 
 	public void addGroupe() throws IOException{
-		String date= new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-		Groupe gp = new Groupe();
-		gp.setId_Auteur(idUser);
-		gp.setDateCreation(date);
-		gp.setNomGroupe(NomGroupe);
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"config/config.xml"});
-		GroupeMetier metier = (GroupeMetier) context.getBean("groupeMetier"); 
-		context.close();
-		metier.addGroupe(gp);
-		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-		ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
 		
+		if(NomGroupe.trim().isEmpty()){
+			FacesContext.getCurrentInstance().addMessage("inputNameGroupe", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur !", "Le titre du groupe est invalide !."));
+		}
+		else {
+			
+			
+			String date= new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+			Groupe gp = new Groupe();
+			gp.setId_Auteur(idUser);
+			gp.setDateCreation(date);
+			gp.setNomGroupe(NomGroupe);
+			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"config/config.xml"});
+			GroupeMetier metier = (GroupeMetier) context.getBean("groupeMetier"); 
+			context.close();
+			metier.addGroupe(gp);
+			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+			ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+		}
 	}
 	
 	public void deleteGroupe() throws IOException{
