@@ -30,4 +30,5 @@ public class GroupeMetierImpl implements  GroupeMetier {
 		return groupeDao.findById(id);
 	}
 
+
 }

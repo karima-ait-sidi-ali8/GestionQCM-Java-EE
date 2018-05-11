@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
@@ -30,14 +30,14 @@ import fr.insset.gestionQCM.utils.SessionUtil;
 
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class GroupeBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	public Logger log = Logger.getLogger(UserBean.class);
 	private String NomGroupe;
 	private Date dateCreation;
-	
+
 	private Integer idUser;
 	
 	private UserMetier metier;
@@ -65,8 +65,8 @@ public class GroupeBean implements Serializable {
 		HttpSession hs = SessionUtil.getSession();
 		this.idUser = (Integer) hs.getAttribute("idUser");
 		this.username = (String) hs.getAttribute("username");
+
 		Auteur a = metier.getAuteur(idUser);
-		
 		listeGroupes = a.getListGroupes();
 		nbGroupes = listeGroupes.size();
 	}
@@ -185,10 +185,13 @@ public class GroupeBean implements Serializable {
 		this.idGroupe = idGroupe;
 	}
 
-	
 
-	
-	
-	
 
 }
+
+
+
+
+
+
+

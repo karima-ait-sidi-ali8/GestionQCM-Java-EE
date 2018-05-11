@@ -15,6 +15,7 @@ import fr.insset.gestionQCM.utils.HibernateUtil;
 public class UserDAOImpl implements UserDAO {
 	
 	Session session = HibernateUtil.getSessionFactory().openSession();
+	
 
 	@SuppressWarnings("unchecked")
 	@Override

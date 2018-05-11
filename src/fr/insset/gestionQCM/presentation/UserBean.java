@@ -207,6 +207,16 @@ public class UserBean implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+
+	public UserMetier getMetier() {
+		return metier;
+	}
+
+
+	public void setMetier(UserMetier metier) {
+		this.metier = metier;
+	}
 	
 
 	

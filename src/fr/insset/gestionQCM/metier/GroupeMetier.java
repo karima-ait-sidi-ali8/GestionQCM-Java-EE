@@ -11,5 +11,6 @@ public interface GroupeMetier {
 	
 	public Groupe findById(Integer id);
 	
+	
 
 }

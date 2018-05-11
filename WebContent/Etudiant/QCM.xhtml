@@ -13,6 +13,7 @@
         <b:navBar brand="Easy Eval" brandHref="#" inverse="true" fixed="top" fluid="true">
             
             <b:navbarLinks pull="right">
+                Bienvenue <b:navLink value="#{etudiantBean.username}" href="#" icon-awesome="user"></b:navLink>
                 <b:navLink value="log out" href="#" icon-awesome="fa-sign-out"></b:navLink>
             </b:navbarLinks>
             <h:form styleClass="navbar-form navbar-right">
@@ -34,6 +35,48 @@
 					
                 </b:column>
             </b:row>
+            
+             <b:panel class="forme">
+					  <f:facet name="heading">
+					    <i class="fa fa-reorder"  style="padding-right:20px" />
+					    <h:outputText value="Liste de vos groupes " />
+					    <b:badge style="margin-left:10px; background-color:#5cb85c" value="#{etudiantBean.nbGroupesEtudiant} groupe(s)"  />
+					  </f:facet>
+					  
+					
+                   
+                    <b:row styleClass="placeholders" >
+							
+							
+                    <h:dataTable styleClass="table table-bordered" value="#{etudiantBean.lastListeGroupesEtudiant}" var="item" style="width:700px;margin-left:150px;" >
+                        <h:column>
+                            <f:facet name="header"><h:outputText value="#" /></f:facet>
+                            
+                            <b:badge value="#{etudiantBean.lastListeGroupesEtudiant.indexOf(item)+1}"/>
+                            
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"><h:outputText value="Nom de Groupe" /></f:facet>
+                            <h:outputText value="#{item.nomGroupe}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"><h:outputText value="Date de création" /></f:facet>
+                            <h:outputText value="#{item.dateCreation}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"><h:outputText value="Nombre des étudiants" /></f:facet>
+                            <b:label value="#{item.listOfEtudiants.size()}" severity="danger"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"><h:outputText value="Detail" /></f:facet>
+               				<b:commandLink icon-awesome="pencil" tooltip="Afficher detail de ce groupe" />
+                        </h:column>
+                    </h:dataTable>		
+							
+							
+                    </b:row>
+                    </b:panel>
+                    
         </b:container> 
         <style type="text/css">
         .sub-header {
@@ -101,9 +144,11 @@
             display: inline-block;
         }
         .forme {
-        	width: 1136px;
-        	margin-left: 228px;
+        	width: 1134px;
+        	margin-left: 225px;
+        	margin-right : 4px;
         }
+
         </style>
     </h:body>
 </html>
