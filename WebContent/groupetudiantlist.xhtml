@@ -32,79 +32,62 @@
 		            <ui:include src = "/templates/menu.xhtml" />
 		         </ui:insert>
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
-                 
+
                 
-                    <b:navLink header="Accueil / Classes" />
+                    <b:navLink header="Accueil / Classes / liste des étudiants" />
+                    
                     <hr /> 
+                    <b:label text="Classe :" severity="success" style="margin-right:5px"/> <b:label value="#{etudiants.nomGroupe}" severity="danger"/>
+                    <br /><br />
                    <b:panel>
 					  <f:facet name="heading">
 					    <i class="fa fa-reorder"  style="padding-right:20px" />
-					    <h:outputText value="Liste de vos classes " />
-					    <b:badge style="margin-left:10px; background-color:#5cb85c" value="#{groupeBean.nbGroupes} classe(s)"  />
+					    <h:outputText value="Liste des étudiants" />
+					    <b:badge style="margin-left:10px; background-color:#5cb85c" value="#{etudiants.listeEtudiants.size()} étudiant(s)"  />
 
 					  </f:facet>
 					  
-					
                    
                     <b:row styleClass="placeholders" >
-							
-							
-                    <h:dataTable styleClass="table table-bordered" value="#{groupeBean.listeGroupes}" var="item" style="width:700px;margin-left:150px;" >
+						<h:dataTable  styleClass="table table-bordered" value="#{etudiants.listeEtudiants}" var="et" style="width:700px;margin-left:150px;" >
                         <h:column>
                             <f:facet name="header"><h:outputText value="#" /></f:facet>
+                            <b:badge value="#{etudiants.listeEtudiants.indexOf(et)+1}"/>
                             
-                            <b:badge value="#{groupeBean.listeGroupes.indexOf(item)+1}"/>
                             
                         </h:column>
                         <h:column>
-                            <f:facet name="header"><h:outputText value="Nom de classe" /></f:facet>
-                            <h:outputText value="#{item.nomGroupe}" />
+                            <f:facet name="header"><h:outputText value="Prénom" /></f:facet>
+                            <h:outputText value="#{et.prenom}" />
                         </h:column>
                         <h:column>
-                            <f:facet name="header"><h:outputText value="Date de création" /></f:facet>
-                            <h:outputText value="#{item.dateCreation}" />
+                            <f:facet name="header"><h:outputText value="Nom" /></f:facet>
+                            <h:outputText value="#{et.nom}" />
                         </h:column>
                         <h:column>
-                            <f:facet name="header"><h:outputText value="Nombre des étudiants" /></f:facet>
-                            <b:label value="#{item.listOfEtudiants.size()}" severity="danger"/>
+                            <f:facet name="header"><h:outputText value="E-mail" /></f:facet>
+           
+                            <h:outputText value="#{et.email}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header"><h:outputText value="" /></f:facet>
-                            <b:commandLink onclick="return confirmDelete();" icon-awesome="times" tooltip="Supprimer cette classe" styleClass="btnDel" style="margin-right:5px">
-	                            <f:param name="id" value="#{item.idGroupe}"></f:param>
-	                            <f:ajax   listener="#{groupeBean.deleteGroupe}" ></f:ajax>
+                            <b:commandLink onclick="return confirmDelete();" icon-awesome="times" tooltip="Supprimer cet étudiant" styleClass="btnDel" style="margin-right:5px">
+	                           
+	                            
                             </b:commandLink>
-                            
-               				<b:commandLink icon-awesome="pencil" tooltip="Afficher et modifier cette classe">
-	                            <f:param name="idgrp" value="#{item.idGroupe}"></f:param>
-	                            <f:param name="Nomgrp" value="#{item.nomGroupe}"></f:param>
-	                            <f:ajax   listener="#{groupeBean.showGroupe}" ></f:ajax>               				
                				
-               				</b:commandLink>
 
                         </h:column>
-                    </h:dataTable>		
-							
-							
+                    </h:dataTable>
                     </b:row>
                     </b:panel>
                     <hr/>
                             
 
 					 <b:row>
-				        <h:form >
-				        <b:inputText span="2" value="#{groupeBean.nomGroupe}"></b:inputText>
-				       
-						<b:commandButton  span="3" size="sm" look="success" value="Ajouter une nouvelle classe" icon-awesome="plus-circle">
-						
-						<f:ajax execute="@form"  listener="#{groupeBean.addGroupe}" ></f:ajax>
-						</b:commandButton> 
-												
-						
-						</h:form>
+
 						
 		            </b:row>
-        <b:messages for="inputNameGroupe"  id="inputNameGroupe" showDetail="true" col-xs="5" style="margin-left:-11px;"><p:autoUpdate></p:autoUpdate></b:messages>
                 </b:column>
  
             </b:row>

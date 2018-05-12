@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import fr.insset.gestionQCM.dao.entity.Auteur;
+import fr.insset.gestionQCM.dao.entity.Etudiant;
 import fr.insset.gestionQCM.dao.entity.Groupe;
 import fr.insset.gestionQCM.metier.GroupeMetier;
 import fr.insset.gestionQCM.metier.UserMetier;
@@ -44,6 +45,8 @@ public class GroupeBean implements Serializable {
 	private UserMetier metier;
 	
 	private List<Groupe> listeGroupes ; 
+	
+
 	
 	private String username;
 
@@ -104,6 +107,25 @@ public class GroupeBean implements Serializable {
 		context.close();
 		metier.deleteGroupe(Integer.valueOf(param.get("id")));
 		ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+		
+	}
+	
+	public void showGroupe(){
+		
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, String> param = ec.getRequestParameterMap(); 
+		
+		HttpSession hs = SessionUtil.getSession();
+		hs.setAttribute("idGroupe", Integer.valueOf(param.get("idgrp")));
+		hs.setAttribute("NomGroupe", param.get("Nomgrp"));
+		
+		try {
+			ec.redirect("groupetudiantlist.xhtml");
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		FacesContext.getCurrentInstance().responseComplete();
 		
 	}
 	
@@ -189,6 +211,9 @@ public class GroupeBean implements Serializable {
 	public void setIdGroupe(int idGroupe) {
 		this.idGroupe = idGroupe;
 	}
+
+
+
 
 
 
