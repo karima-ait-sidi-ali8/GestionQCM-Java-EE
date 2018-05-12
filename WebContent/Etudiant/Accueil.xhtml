@@ -28,8 +28,8 @@
             <b:row>
                 <b:column col-sm="3" col-md="2" styleClass="sidebar">
                     <b:listLinks>
-                   	 <b:navLink href="Accueil.xhtml" value="Accueil" icon-awesome="home" />
-                   	 <b:navLink href="#" value="QCMs" active="true" icon-awesome="fa-check-square"/>
+                   	 <b:navLink href="#" value="Accueil" active="true" icon-awesome="home" />
+                   	 <b:navLink href="QCM.xhtml" value="QCMs"  icon-awesome="fa-check-square"/>
                      <b:navLink href="ResultatEtudiant.xhtml" value="Résultats"  icon-awesome="fa-list-alt"/>
                      <b:navLink href="#" value="Aide" icon-awesome="info-circle" />                       
                     </b:listLinks>
@@ -38,50 +38,7 @@
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
 					
                 </b:column>
-            </b:row>
-            
-             <b:panel class="forme">
-					  <f:facet name="heading">
-					    <i class="fa fa-reorder"  style="padding-right:20px" />
-					    <h:outputText value="Liste de vos groupes " />
-					    <b:badge style="margin-left:10px; background-color:#5cb85c" value="#{etudiantBean.nbGroupesEtudiant} groupe(s)"  />
-					  </f:facet>
-					  
-					
-                   
-                    <b:row styleClass="placeholders" >
-							
-							
-                    <h:dataTable styleClass="table table-bordered" value="#{etudiantBean.lastListeGroupesEtudiant}" var="item" style="width:700px;margin-left:150px;" >
-                        <h:column>
-                            <f:facet name="header"><h:outputText value="#" /></f:facet>
-                            
-                            <b:badge value="#{etudiantBean.lastListeGroupesEtudiant.indexOf(item)+1}"/>
-                            
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header"><h:outputText value="Nom de Groupe" /></f:facet>
-                            <h:outputText value="#{item.nomGroupe}" />
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header"><h:outputText value="Date de création" /></f:facet>
-                            <h:outputText value="#{item.dateCreation}" />
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header"><h:outputText value="Nombre des étudiants" /></f:facet>
-                            <b:label value="#{item.listOfEtudiants.size()}" severity="danger"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header"><h:outputText value="Detail" /></f:facet>
-                            
-               				<b:commandLink icon-awesome="pencil" tooltip="Afficher detail de ce groupe" />
-               				
-                        </h:column>
-                    </h:dataTable>		
-							
-							
-                    </b:row>
-                    </b:panel>
+            </b:row>       
                     
         </b:container> 
         <style type="text/css">

@@ -12,4 +12,9 @@
 <bean id="groupeMetier" class="fr.insset.gestionQCM.metier.GroupeMetierImpl">
 	<property name="groupeDao" ref="groupeDaoImpl"></property>
 </bean>
+
+<bean id="qcmDaoImpl" class="fr.insset.gestionQCM.dao.QcmDAOImpl"></bean>
+<bean id="qcmMetier" class="fr.insset.gestionQCM.metier.QcmMetierImpl">
+	<property name="qcmDao" ref="qcmDaoImpl"></property>
+</bean>
 </beans>

@@ -1,17 +1,17 @@
 package fr.insset.gestionQCM.dao;
 
-import javax.servlet.http.HttpSession;
+
 
 import org.hibernate.Session;
 
 import fr.insset.gestionQCM.dao.entity.Groupe;
 import fr.insset.gestionQCM.utils.HibernateUtil;
-import fr.insset.gestionQCM.utils.SessionUtil;
+
 
 public class GroupeDAOImpl implements GroupeDAO {
 	
 	Session session = HibernateUtil.getSessionFactory().openSession();
-	HttpSession hs = SessionUtil.getSession();
+	
 
 	@Override
 	public Groupe addGroupe(Groupe g) {
