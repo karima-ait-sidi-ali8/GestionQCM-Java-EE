@@ -6,7 +6,7 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        
+        <title>Easy Eval</title>
     </h:head>
     <h:body style="padding-top: 60px">
         <h:outputScript library="holder" name="holder.js" />
@@ -28,8 +28,10 @@
             <b:row>
                 <b:column col-sm="3" col-md="2" styleClass="sidebar">
                     <b:listLinks>
-                        <b:navLink href="#" value="QCMs" active="true" icon-awesome="fa-check-square-o"/>
-                        <b:navLink href="ResultatEtudiant.xhtml" value="Résultats"  icon-awesome="fa-list-alt"/>
+                   	 <b:navLink href="#" value="Accueil" icon-awesome="home" />
+                   	 <b:navLink href="#" value="QCMs" active="true" icon-awesome="fa-check-square"/>
+                     <b:navLink href="ResultatEtudiant.xhtml" value="Résultats"  icon-awesome="fa-list-alt"/>
+                     <b:navLink href="#" value="Aide" icon-awesome="info-circle" />                       
                     </b:listLinks>
                    
                 </b:column>
@@ -71,7 +73,9 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header"><h:outputText value="Detail" /></f:facet>
+                            
                				<b:commandLink icon-awesome="pencil" tooltip="Afficher detail de ce groupe" />
+               				
                         </h:column>
                     </h:dataTable>		
 							
