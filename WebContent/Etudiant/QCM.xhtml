@@ -14,7 +14,9 @@
             
             <b:navbarLinks pull="right">
                 Bienvenue <b:navLink value="#{etudiantBean.username}" href="#" icon-awesome="user"></b:navLink>
-                <b:navLink value="log out" href="#" icon-awesome="fa-sign-out"></b:navLink>
+                <b:navLink value="log out" href="#" icon-awesome="fa-sign-out">
+                	<f:ajax listener="#{etudiantBean.logout}"></f:ajax>
+                </b:navLink>
             </b:navbarLinks>
             <h:form styleClass="navbar-form navbar-right">
                 <div class="form-group">
