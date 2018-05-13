@@ -1,6 +1,7 @@
 package fr.insset.gestionQCM.metier;
 
 import fr.insset.gestionQCM.dao.GroupeDAO;
+import fr.insset.gestionQCM.dao.entity.Etudiant;
 import fr.insset.gestionQCM.dao.entity.Groupe;
 
 public class GroupeMetierImpl implements  GroupeMetier {
@@ -28,6 +29,19 @@ public class GroupeMetierImpl implements  GroupeMetier {
 	@Override
 	public Groupe findById(Integer id) {
 		return groupeDao.findById(id);
+	}
+
+	@Override
+	public void addEtudiant(Etudiant e, Integer idGroupe) {
+		
+		groupeDao.addEtudiant(e, idGroupe);
+		
+	}
+
+	@Override
+	public void deleteEtudiant(Integer idEtudiant, Integer idGroupe) {
+		groupeDao.deleteEtudiant(idEtudiant, idGroupe);
+		
 	}
 
 
