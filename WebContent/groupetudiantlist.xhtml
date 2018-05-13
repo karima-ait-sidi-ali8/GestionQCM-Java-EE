@@ -85,8 +85,38 @@
                             
 
 					 <b:row>
-
+						<h:form>
+						  <b:row>
+						    <b:column col-sm="6">
+							    <b:well >
 						
+							      <h4>Ajouter un nouveau étudiant à votre classe</h4>
+							      L'adresse mail de votre étudiant est suffisante pour l'identifier
+						
+									    <br /><br />  
+								        <b:inputText span="5"  value="#{groupeBean.nomGroupe}"></b:inputText>
+								       
+										<b:commandButton  span="6" size="sm" look="success" value="Ajouter un nouveau étudiant" icon-awesome="plus-circle">
+										
+										<f:ajax execute="@form"  listener="#{groupeBean.addGroupe}" ></f:ajax>
+										</b:commandButton> 
+																
+										
+					
+										
+								<br /><br />
+						
+							    </b:well>
+						    </b:column>
+						    <b:column col-sm="6">
+							      <b:well id="messages">
+							        Détails de l'étudiant :
+
+							      </b:well>
+						    </b:column>
+						  </b:row>
+						</h:form>
+											
 		            </b:row>
                 </b:column>
  
