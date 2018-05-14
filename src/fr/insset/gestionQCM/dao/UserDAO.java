@@ -27,5 +27,7 @@ public interface UserDAO {
 	public Boolean isEtudiant(Integer id);
 	
 	public Boolean isAuteur(Integer id);
+	
+	public Utilisateur getByAdresse(String adresse);
 
 }

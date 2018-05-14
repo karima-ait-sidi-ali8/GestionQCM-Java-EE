@@ -25,13 +25,12 @@ public class Test {
 		
 
 		UserMetier metier = (UserMetier) context.getBean("metier"); 
-		GroupeMetier metier1 = (GroupeMetier) context.getBean("groupeMetier"); 
+		
 		context.close();
 		
 		
-
-		metier1.deleteEtudiant(11, 8);
-	
+		Utilisateur u = metier.getByAdresse("frifita1@gmail.com");
+		System.out.println(u.getIdUser());
 
 		
 

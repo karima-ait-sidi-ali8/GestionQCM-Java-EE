@@ -126,6 +126,16 @@ public class UserDAOImpl implements UserDAO {
 	return true;
 	}
 
+	@Override
+	public Utilisateur getByAdresse(String adresse) {
+
+		Query q = session.createQuery("from Utilisateur u where u.email=:x");
+		q.setParameter("x", adresse);
+		Utilisateur u = (Utilisateur) q.list().get(0);
+		
+		return u;
+	}
+
 
 	
 	

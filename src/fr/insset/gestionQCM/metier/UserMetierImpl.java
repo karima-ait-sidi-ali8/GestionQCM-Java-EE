@@ -75,6 +75,12 @@ public class UserMetierImpl implements UserMetier {
 		return daoUser.isAuteur(id);
 	}
 
+	@Override
+	public Utilisateur getByAdresse(String adresse) {
+		
+		return daoUser.getByAdresse(adresse);
+	}
+
 
 
 }
