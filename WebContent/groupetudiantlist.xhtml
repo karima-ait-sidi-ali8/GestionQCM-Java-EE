@@ -72,8 +72,8 @@
                         <h:column>
                             <f:facet name="header"><h:outputText value="" /></f:facet>
                             <b:commandLink onclick="return confirmDelete();" icon-awesome="times" tooltip="Supprimer cet étudiant" styleClass="btnDel" style="margin-right:5px">
-	                           
-	                            
+	                           <f:param name="idEtudiant" value="#{et.idUser}"></f:param>
+	                            <f:ajax   listener="#{etudiants.DeleteEtuFromGroupe}" ></f:ajax>               				
                             </b:commandLink>
                				
 

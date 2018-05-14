@@ -4,10 +4,11 @@ package fr.insset.gestionQCM.presentation;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.Map;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
+
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -17,6 +18,7 @@ import javax.faces.bean.RequestScoped;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -129,6 +131,16 @@ public class EtudiantsOfGroupeBean implements Serializable {
 		
 	}
 		
+	}
+	
+	public void DeleteEtuFromGroupe() throws IOException{
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, String> param = ec.getRequestParameterMap(); 
+		GroupeMetier metierGr = (GroupeMetier) ContextUtil.getContext().getBean("groupeMetier"); 
+		ContextUtil.getContext().close();
+		HttpSession hs = SessionUtil.getSession();
+		metierGr.deleteEtudiant(Integer.valueOf(param.get("idEtudiant")), (Integer) hs.getAttribute("idGroupe"));
+		ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
 	}
 
 	public List<Etudiant> getListeEtudiants() {
