@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
@@ -48,7 +50,14 @@ public class EtudiantsOfGroupeBean implements Serializable {
 		super();
 	}
 
-	
+	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = 
+		    Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+		public static boolean validate(String emailStr) {
+		        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+		        return matcher.find();
+		}
+	 
 	@PostConstruct
 	public void initBean(){
 
@@ -77,6 +86,14 @@ public class EtudiantsOfGroupeBean implements Serializable {
 
 
 	public void AddEtudiantToGroupe(){
+		System.out.println(validate(email));
+		if(email.trim().isEmpty() || !validate(email)){
+			FacesContext.getCurrentInstance().addMessage("AjoutDetail", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur !", "Adresse mail est invalide !."));
+		} else{
+		
+		
+		
+		
 		UserMetier metier = (UserMetier) ContextUtil.getContext().getBean("metier"); 
 		ContextUtil.getContext().close();
 		boolean find = metier.findbyAdresse(email);
@@ -110,7 +127,7 @@ public class EtudiantsOfGroupeBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage("AjoutDetail", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur!", "Il n'y a pas un étudiant avec cette adresse email."));
 		}
 		
-		
+	}
 		
 	}
 
