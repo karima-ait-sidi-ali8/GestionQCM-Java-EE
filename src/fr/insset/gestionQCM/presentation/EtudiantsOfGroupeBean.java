@@ -26,6 +26,7 @@ import org.apache.log4j.Logger;
 
 import fr.insset.gestionQCM.dao.entity.Etudiant;
 import fr.insset.gestionQCM.dao.entity.Groupe;
+import fr.insset.gestionQCM.dao.entity.Utilisateur;
 import fr.insset.gestionQCM.metier.GroupeMetier;
 import fr.insset.gestionQCM.metier.UserMetier;
 import fr.insset.gestionQCM.utils.ContextUtil;
@@ -88,50 +89,32 @@ public class EtudiantsOfGroupeBean implements Serializable {
 
 
 	public void AddEtudiantToGroupe(){
-		System.out.println(validate(email));
+		
 		if(email.trim().isEmpty() || !validate(email)){
 			FacesContext.getCurrentInstance().addMessage("AjoutDetail", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur !", "Adresse mail est invalide !."));
-		} else{
-		
-		
-		
-		
-		UserMetier metier = (UserMetier) ContextUtil.getContext().getBean("metier"); 
-		ContextUtil.getContext().close();
-		boolean find = metier.findbyAdresse(email);
-		if(find){
-				
-			if(searchEtudiant(email)){
+		} else if(isEtudiant(email)){
+			
+			if(isMembre(email)){
 				
 				FacesContext.getCurrentInstance().addMessage("AjoutDetail", new FacesMessage(FacesMessage.SEVERITY_WARN, "Erreur!", "l'étudiant existe déjà !."));
-
 			}
 			else{
-				GroupeMetier metierGr = (GroupeMetier) ContextUtil.getContext().getBean("groupeMetier"); 
-				ContextUtil.getContext().close();
-				HttpSession hs = SessionUtil.getSession();
-				metierGr.addEtudiant((Etudiant)metier.getByAdresse(email), (Integer) hs.getAttribute("idGroupe"));
-				FacesContext.getCurrentInstance().addMessage("AjoutDetail", new FacesMessage(FacesMessage.SEVERITY_INFO, "Succès !", "L'étudiant à été ajouté avec succès."));
-
-				
-				try {
-					FacesContext.getCurrentInstance().getExternalContext().redirect("groupetudiantlist.xhtml");
-				} catch (IOException e) {
-					
-					e.printStackTrace();
-				}
-				FacesContext.getCurrentInstance().responseComplete();
+				addMembre();
 			}
 			
-		}
-		
+			
+		}		
+			
 		else{
 			FacesContext.getCurrentInstance().addMessage("AjoutDetail", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur!", "Il n'y a pas un étudiant avec cette adresse email."));
 		}
+	
 		
-	}
+
 		
-	}
+		
+		
+	}// end of function
 	
 	public void DeleteEtuFromGroupe() throws IOException{
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
@@ -173,13 +156,59 @@ public class EtudiantsOfGroupeBean implements Serializable {
 	}
 
 
+	public boolean isEtudiant(String email){
+		UserMetier metier = (UserMetier) ContextUtil.getContext().getBean("metier"); 
+		ContextUtil.getContext().close();
+		
+		
+		boolean verif = metier.findbyAdresse(email);
+		if(verif){
+			Utilisateur u  = (Utilisateur) metier.getByAdresse(email);
+			return metier.isEtudiant((Integer)u.getIdUser());
+		}
+	
+		
+		return false;
+		
+	}
 
 
 
 
+	public boolean isMembre(String email){
+		HttpSession hs = SessionUtil.getSession();
+		UserMetier metier = (UserMetier) ContextUtil.getContext().getBean("metier"); 
+		ContextUtil.getContext().close();
+		Etudiant etu = (Etudiant) metier.getByAdresse(email);
+		GroupeMetier metierGp = (GroupeMetier) ContextUtil.getContext().getBean("groupeMetier"); 
+		ContextUtil.getContext().close();
+		
+		return metierGp.isMembre((Integer)etu.getIdUser(), (Integer) hs.getAttribute("idGroupe"));
+		
+		
+	}
 
+	public void addMembre(){
+		HttpSession hs = SessionUtil.getSession();
+		UserMetier metier = (UserMetier) ContextUtil.getContext().getBean("metier"); 
+		ContextUtil.getContext().close();
+		
+		GroupeMetier metierGp = (GroupeMetier) ContextUtil.getContext().getBean("groupeMetier"); 
+		ContextUtil.getContext().close();
+		
+		
+		metierGp.addEtudiant((Etudiant)metier.getByAdresse(email), (Integer) hs.getAttribute("idGroupe"));
+		FacesContext.getCurrentInstance().addMessage("AjoutDetail", new FacesMessage(FacesMessage.SEVERITY_INFO, "Succès !", "L'étudiant à été ajouté avec succès."));
 
-
+		
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("groupetudiantlist.xhtml");
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		FacesContext.getCurrentInstance().responseComplete();
+	}
 
 }
 

@@ -30,6 +30,7 @@ public class Groupe implements java.io.Serializable {
 	
 	private Integer id_Auteur;
 	
+	private boolean chatAuth;
 	
 	private Auteur auteur;
 	
@@ -131,6 +132,14 @@ public class Groupe implements java.io.Serializable {
 
 	public void setListQcms(List<Qcm> listQcms) {
 		this.listQcms = listQcms;
+	}
+
+	public boolean isChatAuth() {
+		return chatAuth;
+	}
+
+	public void setChatAuth(boolean chatAuth) {
+		this.chatAuth = chatAuth;
 	}
 	
 	

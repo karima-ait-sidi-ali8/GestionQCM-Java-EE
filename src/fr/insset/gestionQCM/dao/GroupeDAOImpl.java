@@ -75,6 +75,16 @@ public class GroupeDAOImpl implements GroupeDAO {
 		
 	}
 
+	@Override
+	public boolean isMembre(Integer idEtudiant, Integer idGroupe) {
+		Query q2 = session.createSQLQuery("SELECT * FROM membre_groupe WHERE id_groupe=:a and id_user=:b");
+		q2.setParameter("a", idGroupe);
+		q2.setParameter("b", idEtudiant);
+		if(q2.list().isEmpty()) return false;
+
+	return true;
+	}
+
 
 	
 

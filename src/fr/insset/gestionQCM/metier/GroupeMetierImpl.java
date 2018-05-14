@@ -44,5 +44,11 @@ public class GroupeMetierImpl implements  GroupeMetier {
 		
 	}
 
+	@Override
+	public boolean isMembre(Integer idEtudiant, Integer idGroupe) {
+		
+		return groupeDao.isMembre(idEtudiant, idGroupe);
+	}
+
 
 }

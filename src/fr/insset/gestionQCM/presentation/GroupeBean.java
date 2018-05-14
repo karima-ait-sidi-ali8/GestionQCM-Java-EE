@@ -20,7 +20,7 @@ import org.apache.log4j.Logger;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import fr.insset.gestionQCM.dao.entity.Auteur;
-import fr.insset.gestionQCM.dao.entity.Etudiant;
+
 import fr.insset.gestionQCM.dao.entity.Groupe;
 import fr.insset.gestionQCM.metier.GroupeMetier;
 import fr.insset.gestionQCM.metier.UserMetier;
@@ -89,6 +89,7 @@ public class GroupeBean implements Serializable {
 			gp.setId_Auteur(idUser);
 			gp.setDateCreation(date);
 			gp.setNomGroupe(NomGroupe);
+			gp.setChatAuth(false);
 			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"config/config.xml"});
 			GroupeMetier metier = (GroupeMetier) context.getBean("groupeMetier"); 
 			context.close();

@@ -16,6 +16,6 @@ public interface GroupeMetier {
 	
 	public void deleteEtudiant(Integer idEtudiant, Integer idGroupe);
 	
-	
+	public boolean isMembre(Integer idEtudiant, Integer idGroupe);
 
 }

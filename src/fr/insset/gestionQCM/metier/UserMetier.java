@@ -29,6 +29,8 @@ public interface UserMetier {
 	public Boolean isAuteur(Integer id);
 	
 	public Utilisateur getByAdresse(String adresse);
+	
+	
 
 	
 }

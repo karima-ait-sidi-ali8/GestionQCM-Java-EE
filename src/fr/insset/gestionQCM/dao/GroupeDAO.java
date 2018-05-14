@@ -15,6 +15,7 @@ public interface GroupeDAO {
 	
 	public void deleteEtudiant(Integer idEtudiant, Integer idGroupe);
 	
+	public boolean isMembre(Integer idEtudiant, Integer idGroupe);
 	
 
 }
