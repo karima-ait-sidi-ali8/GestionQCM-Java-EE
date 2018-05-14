@@ -49,6 +49,8 @@ public class EtudiantsOfGroupeBean implements Serializable {
 	
 	private String email;
 	
+	private boolean chat = true;
+	
 	public EtudiantsOfGroupeBean() {
 		super();
 	}
@@ -63,7 +65,7 @@ public class EtudiantsOfGroupeBean implements Serializable {
 	 
 	@PostConstruct
 	public void initBean(){
-
+		chat = true;
 		
 		GroupeMetier metier = (GroupeMetier) ContextUtil.getContext().getBean("groupeMetier"); 
 		ContextUtil.getContext().close();
@@ -209,6 +211,20 @@ public class EtudiantsOfGroupeBean implements Serializable {
 		}
 		FacesContext.getCurrentInstance().responseComplete();
 	}
+
+	public boolean isChat() {
+		return chat;
+	}
+
+	public void setChat(boolean chat) {
+		this.chat = chat;
+	}
+
+	public void UpdateChatAuth(){
+		System.out.println(chat);
+	}
+	
+	
 
 }
 

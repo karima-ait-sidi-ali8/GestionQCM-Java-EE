@@ -31,13 +31,16 @@
 		         <ui:insert name = "menu" >
 		            <ui:include src = "/templates/menu.xhtml" />
 		         </ui:insert>
+		         
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
-
+		
                 
                     <b:navLink header="Accueil / Classes / liste des étudiants" />
                     
                     <hr /> 
+				
                     <b:label text="Classe :" severity="success" style="margin-right:5px"/> <b:label value="#{etudiants.nomGroupe}" severity="danger"/>
+                    	
                     <br /><br />
                    <b:panel>
 					  <f:facet name="heading">
@@ -82,9 +85,10 @@
                     </b:row>
                     </b:panel>
                     <hr/>
-                            
+                       
 
 					 <b:row>
+
 						<h:form>
 						  <b:row>
 						    <b:column col-sm="6">
@@ -109,14 +113,28 @@
 							    </b:well>
 						    </b:column>
 						    <b:column col-sm="6">
+						    
 							      <b:well id="messages">
 							        Détails de l'opération d'ajout :
 									<p:messages id="AjoutDetail" for="AjoutDetail" showDetail="true"><p:autoUpdate></p:autoUpdate></p:messages>
 							      </b:well>
+	
 						    </b:column>
+						    
 						  </b:row>
 						</h:form>
-											
+						<hr />
+						<center>
+						 <b:well col-sm="5" offset-sm="3">
+						 <h4>Opérations possibles sur ce groupe :</h4>
+						 <h:form>
+							<b:switch  id="chatA" style="float:right" value="#{etudiants.chat}" offColor="success" label="Chat :" onColor="info">
+								<f:ajax execute="@form" listener="#{etudiants.UpdateChatAuth}"></f:ajax>
+							
+							</b:switch>
+							</h:form>
+						</b:well>	
+						</center>				
 		            </b:row>
                 </b:column>
  
