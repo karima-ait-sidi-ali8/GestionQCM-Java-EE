@@ -29,7 +29,7 @@ import fr.insset.gestionQCM.utils.SessionUtil;
 
 
 
-@ManagedBean(name="etudiants")
+@ManagedBean
 @SessionScoped
 public class QcmAuteurBean implements Serializable {
 
