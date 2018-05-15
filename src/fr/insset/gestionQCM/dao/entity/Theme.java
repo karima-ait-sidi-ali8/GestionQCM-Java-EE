@@ -4,6 +4,8 @@ package fr.insset.gestionQCM.dao.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -16,6 +18,9 @@ public class Theme implements java.io.Serializable {
 	private String titreTheme;
 	private int idQcm;
 
+	private Qcm qcm;
+	
+	
 	public Theme() {
 	}
 
@@ -27,7 +32,7 @@ public class Theme implements java.io.Serializable {
 
 	@Id
 
-	@Column(name = "id", unique = true, nullable = false)
+	@Column(name = "id_theme", unique = true, nullable = false)
 	public int getId() {
 		return this.id;
 	}
@@ -36,7 +41,7 @@ public class Theme implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "TitreTheme", nullable = false)
+	@Column(name = "titre_theme", nullable = false)
 	public String getTitreTheme() {
 		return this.titreTheme;
 	}
@@ -54,4 +59,17 @@ public class Theme implements java.io.Serializable {
 		this.idQcm = idQcm;
 	}
 
+	
+	@ManyToOne
+	@JoinColumn(name="id_qcm", referencedColumnName="id_qcm", insertable=false, updatable=false)
+	public Qcm getQcm() {
+		return qcm;
+	}
+
+	public void setQcm(Qcm qcm) {
+		this.qcm = qcm;
+	}
+
+	
+	
 }

@@ -33,6 +33,9 @@ public class Qcm implements java.io.Serializable {
 	private List<Session> sessions = new ArrayList<Session>();
 	
 	private List<Groupe> listGroupes;
+	
+	private List<Theme> listThemes;
+	
 	private Auteur auteur;
 
 	public Qcm() {
@@ -112,6 +115,15 @@ public class Qcm implements java.io.Serializable {
 
 	public void setListGroupes(List<Groupe> listGroupes) {
 		this.listGroupes = listGroupes;
+	}
+
+	@OneToMany(targetEntity=Theme.class, mappedBy="qcm")
+	public List<Theme> getListThemes() {
+		return listThemes;
+	}
+
+	public void setListThemes(List<Theme> listThemes) {
+		this.listThemes = listThemes;
 	}
 	
 	

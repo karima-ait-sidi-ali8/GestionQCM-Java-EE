@@ -28,9 +28,6 @@ public class Test {
 		
 		context.close();
 		
-		
-		Utilisateur u = metier.getByAdresse("frifita1@gmail.com");
-		System.out.println(u.getIdUser());
 
 		
 
