@@ -39,7 +39,7 @@ public class Utilisateur implements java.io.Serializable {
 	
 	
 	private List<Role> userRoles = new ArrayList<Role>();
-	private List<Groupe> listOfGroupe = new ArrayList<Groupe>();
+
 	
 	public Utilisateur() {
 	}
@@ -114,17 +114,8 @@ public class Utilisateur implements java.io.Serializable {
 	}
 
 	
-	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(name="groupe_utilisateur",
-	joinColumns={@JoinColumn(name="idUser")}, inverseJoinColumns={@JoinColumn(name="idGroupe")})
-	public List<Groupe> getListOfGroupe() {
-		return listOfGroupe;
-	}
 
-	public void setListOfGroupe(List<Groupe> listOfGroupe) {
-		this.listOfGroupe = listOfGroupe;
-	}
-	
+
 	
 
 }

@@ -18,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 
 @Entity
 @Table(name = "qcm", catalog = "qcm_db")
@@ -27,6 +29,8 @@ public class Qcm implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String titre;
+	
+	private String description;
 	private String type;
 	private int idAuteur;
 	
@@ -124,6 +128,16 @@ public class Qcm implements java.io.Serializable {
 
 	public void setListThemes(List<Theme> listThemes) {
 		this.listThemes = listThemes;
+	}
+
+	@Column(name = "description")
+	@Type(type="text")
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	
