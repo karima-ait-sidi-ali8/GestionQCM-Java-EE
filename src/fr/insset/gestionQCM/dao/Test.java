@@ -4,10 +4,14 @@ package fr.insset.gestionQCM.dao;
 
 
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
+import fr.insset.gestionQCM.dao.entity.Qcm;
+import fr.insset.gestionQCM.dao.entity.Theme;
+import fr.insset.gestionQCM.metier.QcmMetier;
 
-import fr.insset.gestionQCM.metier.UserMetier;
 import fr.insset.gestionQCM.utils.ContextUtil;
 
 
@@ -18,10 +22,9 @@ public class Test {
 	public static void main(String[] args) {
 		
 		
-		UserMetier metier = (UserMetier) ContextUtil.getContext().getBean("metier"); 
+		QcmMetier metier = (QcmMetier) ContextUtil.getContext().getBean("qcmMetier"); 
 		ContextUtil.getContext().close();
-		
-	
+
 
 	}
 

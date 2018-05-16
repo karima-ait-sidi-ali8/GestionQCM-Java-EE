@@ -77,11 +77,13 @@
                             <f:facet name="header"><h:outputText value="" /></f:facet>
                             <b:commandLink onclick="return confirmDelete();" icon-awesome="times" tooltip="Supprimer cette classe" styleClass="btnDel" style="margin-right:5px">
 								<f:param name="idQcm" value="#{qcm.id}"></f:param>
-								<f:ajax listener="#{qcmAuteurBean.deleteQcm}"></f:ajax>
+								<f:ajax  listener="#{qcmAuteurBean.deleteQcm}"></f:ajax>
                             </b:commandLink>
                             
-               				<b:commandLink icon-awesome="pencil" tooltip="Afficher et modifier cette classe">
-           				
+               				<b:commandLink ajax="true"  icon-awesome="pencil" tooltip="Afficher et modifier cette classe" oncomplete="$('.modalThemes').modal()">
+           						<f:param name="idForTheme" value="#{qcm.id}"></f:param>
+   
+           						<f:ajax render="todoForm:todoTable"  listener="#{qcmAuteurBean.showThemes}"></f:ajax>	
                				
                				</b:commandLink>
 
@@ -136,7 +138,67 @@
 		</b:modal>
 		 </h:form>       
         
-        
+             <h:form id="todoForm">
+		<b:modal id="modalThemes" title="Liste des thèmes pour ce QCM"  styleClass="modalThemes">
+		  		 
+                  <h:panelGrid id="panelShowThemes" width="565" styleClass="theme" >
+	                    <b:well>
+	                    	<b:label text="Info :" severity="info"/>
+	                    	<h:outputText value=" L'orde des thèmes est pris en compte"></h:outputText>
+	                    	<br />
+	                    	<b:label text="Astuce :" severity="primary"/>
+	                    	<h:outputText value=" Créez vos thèmes et après regroupez vos qeustions par page"></h:outputText>
+	                    </b:well>
+	                    
+					    <h:dataTable styleClass="table table-bordered" value="#{qcmAuteurBean.listThemes}" var="theme" id="todoTable" >
+                       
+                        <h:column>
+                 
+                            <f:facet name="header"><h:outputText value="#" /></f:facet>
+                            
+                            <b:badge value="#{qcmAuteurBean.listThemes.indexOf(theme)+1}"/>
+                          
+                        </h:column>
+                         
+                        <h:column>
+                            <f:facet name="header"><h:outputText value="Intitulé" /></f:facet>
+                            <h:outputText value="#{theme.titreTheme}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"><h:outputText value="Ordre" /></f:facet>
+                           
+                           <b:label value="#{qcmAuteurBean.listThemes.indexOf(theme)+1}" severity="success"/>
+                           
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"><h:outputText value="Nombre des questions" /></f:facet>
+                            <b:label text="0" severity="danger"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"><h:outputText value="" /></f:facet>
+                            <b:commandLink onclick="return confirmDelete();" icon-awesome="times" tooltip="Supprimer ce thème" styleClass="btnDel" style="margin-right:5px">
+							
+                            </b:commandLink>
+                            
+               				<b:commandLink icon-awesome="pencil" tooltip=" ">
+           				
+               				
+               				</b:commandLink>
+
+                        </h:column>
+                      
+                    </h:dataTable>
+				 
+				 </h:panelGrid>
+				 
+		  <f:facet name="footer">
+
+		
+		    
+		    <b:button value="Fermer" look="danger" dismiss="modal" icon-awesome="times" />
+		  </f:facet>
+		</b:modal>
+		 </h:form>   
         
         
         

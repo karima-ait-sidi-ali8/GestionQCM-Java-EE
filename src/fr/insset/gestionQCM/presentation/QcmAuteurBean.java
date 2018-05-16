@@ -19,10 +19,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.primefaces.context.RequestContext;
 
 import fr.insset.gestionQCM.dao.entity.Auteur;
 
 import fr.insset.gestionQCM.dao.entity.Qcm;
+import fr.insset.gestionQCM.dao.entity.Theme;
 import fr.insset.gestionQCM.metier.QcmMetier;
 import fr.insset.gestionQCM.metier.UserMetier;
 import fr.insset.gestionQCM.utils.ContextUtil;
@@ -47,7 +49,7 @@ public class QcmAuteurBean implements Serializable {
 	
 	private String description = "- Téléphone interdit - Documents interdits.";
 
-
+	private List<Theme> listThemes;
 	
 	public QcmAuteurBean() {
 		super();
@@ -57,8 +59,8 @@ public class QcmAuteurBean implements Serializable {
 	 
 	@PostConstruct
 	public void initBean(){
-
-
+		description = "- Téléphone interdit - Documents interdits.";
+		type = "Conformité stricte avec pénalité";
 		HttpSession hs = SessionUtil.getSession();
 		
 		UserMetier metier = (UserMetier) ContextUtil.getContext().getBean("metier"); 
@@ -99,6 +101,21 @@ public class QcmAuteurBean implements Serializable {
 		
 	}
 
+
+	public void showThemes(){
+		
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, String> param = ec.getRequestParameterMap();
+		
+		log.info(Integer.valueOf(param.get("idForTheme")));
+		
+		QcmMetier metier = (QcmMetier) ContextUtil.getContext().getBean("qcmMetier"); 
+		ContextUtil.getContext().close();
+		Qcm qcm = metier.findByOne(Integer.valueOf(param.get("idForTheme")));
+		setListThemes(qcm.getListThemes());
+		
+		
+	}
 	public List<Qcm> getListeQcms() {
 		return ListeQcms;
 	}
@@ -143,6 +160,18 @@ public class QcmAuteurBean implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+
+
+	public List<Theme> getListThemes() {
+		return listThemes;
+	}
+
+
+
+	public void setListThemes(List<Theme> listThemes) {
+		this.listThemes = listThemes;
 	}
 	
 	

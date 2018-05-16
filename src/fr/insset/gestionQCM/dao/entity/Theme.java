@@ -1,8 +1,11 @@
 package fr.insset.gestionQCM.dao.entity;
 
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,7 +20,9 @@ public class Theme implements java.io.Serializable {
 	private int id;
 	private String titreTheme;
 	private int idQcm;
-
+	
+	
+	
 	private Qcm qcm;
 	
 	
@@ -31,7 +36,7 @@ public class Theme implements java.io.Serializable {
 	}
 
 	@Id
-
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id_theme", unique = true, nullable = false)
 	public int getId() {
 		return this.id;
@@ -69,6 +74,8 @@ public class Theme implements java.io.Serializable {
 	public void setQcm(Qcm qcm) {
 		this.qcm = qcm;
 	}
+
+
 
 	
 	
