@@ -5,8 +5,7 @@ package fr.insset.gestionQCM.presentation;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
-
-
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
@@ -86,6 +85,18 @@ public class QcmAuteurBean implements Serializable {
 		initBean();
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 		ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+	}
+	
+	public void deleteQcm() throws IOException{
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, String> param = ec.getRequestParameterMap(); 
+		
+		QcmMetier metier = (QcmMetier) ContextUtil.getContext().getBean("qcmMetier"); 
+		ContextUtil.getContext().close();
+		metier.deleteQcm(Integer.valueOf(param.get("idQcm")));
+		initBean();
+		ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+		
 	}
 
 	public List<Qcm> getListeQcms() {
