@@ -2,6 +2,7 @@ package fr.insset.gestionQCM.presentation;
 
 
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,7 +14,9 @@ import javax.faces.bean.ManagedBean;
 
 
 import javax.faces.bean.SessionScoped;
-
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -21,7 +24,7 @@ import org.apache.log4j.Logger;
 import fr.insset.gestionQCM.dao.entity.Auteur;
 
 import fr.insset.gestionQCM.dao.entity.Qcm;
-
+import fr.insset.gestionQCM.metier.QcmMetier;
 import fr.insset.gestionQCM.metier.UserMetier;
 import fr.insset.gestionQCM.utils.ContextUtil;
 import fr.insset.gestionQCM.utils.SessionUtil;
@@ -39,9 +42,9 @@ public class QcmAuteurBean implements Serializable {
 	
 	private List<Qcm> ListeQcms;
 	
-	private String titre = "Conformité stricte avec pénalité";
+	private String titre ;
 	
-	private String type;
+	private String type = "Conformité stricte avec pénalité";
 	
 	private String description = "- Téléphone interdit - Documents interdits.";
 
@@ -70,7 +73,20 @@ public class QcmAuteurBean implements Serializable {
 
 	}
 
-
+	public void addQcm() throws IOException{
+		HttpSession hs = SessionUtil.getSession();
+		QcmMetier metier = (QcmMetier) ContextUtil.getContext().getBean("qcmMetier"); 
+		ContextUtil.getContext().close();
+		Qcm qcm = new Qcm();
+		if(!"".equalsIgnoreCase(description)) qcm.setDescription(description);
+		qcm.setTitre(titre);
+		qcm.setIdAuteur((Integer) hs.getAttribute("idUser"));
+		qcm.setType(type);
+		metier.addQcm(qcm);
+		initBean();
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+	}
 
 	public List<Qcm> getListeQcms() {
 		return ListeQcms;
