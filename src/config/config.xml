@@ -17,4 +17,10 @@
 <bean id="qcmMetier" class="fr.insset.gestionQCM.metier.QcmMetierImpl">
 	<property name="qcmDao" ref="qcmDaoImpl"></property>
 </bean>
+
+
+<bean id="ThemeDaoImpl"  class="fr.insset.gestionQCM.dao.ThemeDAOImpl"></bean>
+<bean id="ThemeMetier" class="fr.insset.gestionQCM.metier.ThemeMetierImpl">
+<property name="themeDao" ref="ThemeDaoImpl"></property>
+</bean>
 </beans>
