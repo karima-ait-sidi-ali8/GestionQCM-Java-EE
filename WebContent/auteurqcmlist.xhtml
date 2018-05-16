@@ -49,20 +49,25 @@
                     <b:row styleClass="placeholders" >
 							
 						<b:panelGrid columns="1" col-sm="10" offset-sm="1">
-                    <h:dataTable styleClass="table table-bordered" value="#{qcmAuteurBean.listeQcms}" var="qcm"  >
+                    <h:dataTable styleClass="table table-bordered" value="#{qcmAuteurBean.listeQcms}" var="qcm" style="" >
+                       
                         <h:column>
+                 
                             <f:facet name="header"><h:outputText value="#" /></f:facet>
                             
                             <b:badge value="#{qcmAuteurBean.listeQcms.indexOf(qcm)+1}"/>
-                            
+                          
                         </h:column>
+                         
                         <h:column>
                             <f:facet name="header"><h:outputText value="Titre" /></f:facet>
                             <h:outputText value="#{qcm.titre}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header"><h:outputText value="Type de qcm" /></f:facet>
+                           
                             <h:outputText value="#{qcm.type}" />
+                           
                         </h:column>
                         <h:column>
                             <f:facet name="header"><h:outputText value="Nombre de session" /></f:facet>
@@ -80,7 +85,9 @@
                				</b:commandLink>
 
                         </h:column>
-                    </h:dataTable>		
+                      
+                    </h:dataTable>
+                    		
 						</b:panelGrid>	
                     </b:row>
                     </b:panel>
@@ -88,8 +95,11 @@
                             
 
 					 <b:row>
-
+					 
+						<b:button span="2" size="sm" look="success" value="Nouveau QCM" icon-awesome="plus-circle" onclick="$('.modalPseudoClass').modal()">
 						
+						</b:button>
+					
 		            </b:row>
        
                 </b:column>
@@ -98,9 +108,32 @@
 
 
         </b:container> 
-        
-
-        
+        <h:form>
+		<b:modal id="modalAddQcm" title="Ajout d'un nouveau QCM"  styleClass="modalPseudoClass">
+		  		 <p:messages for="success" showDetail="true"  ><p:autoUpdate></p:autoUpdate></p:messages>
+                  <h:panelGrid id="panelAddQCM" width="565" >
+				 <b:inputText id="TitreQcm" placeholder="Epreuve de [ECOLE] - Partie [MATIERE OU MODULE]"  label="Titre" col-sm="12"  value="#{qcmAuteurBean.titre}" required="true">
+				 	<f:validateLength minimum = "4"  />
+				 </b:inputText>
+				 <b:message for="TitreQcm"><p:autoUpdate></p:autoUpdate></b:message>
+				 <b:inputTextarea id="Description"  label="Informations affichées au début d'un exam ou en haut de page sur papier"  colMd="12"  value="#{qcmAuteurBean.description}" >
+				 	<f:validateLength minimum = "3"  />
+				 </b:inputTextarea>
+				 <b:message for="Description"><p:autoUpdate></p:autoUpdate></b:message>
+				 
+				 
+				 </h:panelGrid>
+				 
+		  <f:facet name="footer">
+			 <b:commandButton  ajax="true" update="panelAddQCM" value="Sauvegarder" look="success" style="width:130px;margin-right:5px;" icon-awesome="save">
+				<f:ajax  execute="@form"  ></f:ajax>
+						
+			</b:commandButton>
+		    
+		    <b:button value="Fermer" look="danger" dismiss="modal" icon-awesome="times" />
+		  </f:facet>
+		</b:modal>
+		 </h:form>       
         
         
         

@@ -38,6 +38,12 @@ public class QcmAuteurBean implements Serializable {
 
 	
 	private List<Qcm> ListeQcms;
+	
+	private String titre = "Conformité stricte avec pénalité";
+	
+	private String type;
+	
+	private String description = "- Téléphone interdit - Documents interdits.";
 
 
 	
@@ -75,6 +81,43 @@ public class QcmAuteurBean implements Serializable {
 	public void setListeQcms(List<Qcm> listeQcms) {
 		ListeQcms = listeQcms;
 	}
+
+
+
+	public String getTitre() {
+		return titre;
+	}
+
+
+
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
+
+
+
+	public String getType() {
+		return type;
+	}
+
+
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 	
 
 
