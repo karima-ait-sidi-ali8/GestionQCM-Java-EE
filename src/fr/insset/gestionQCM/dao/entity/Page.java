@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -13,24 +15,22 @@ import javax.persistence.Table;
 @Table(name = "page", catalog = "qcm_db")
 public class Page implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private Integer id;
-	private int idQues;
+	
+	private Integer idTheme;
+	
+	private Theme theme;
 
 	public Page() {
 	}
 
-	public Page(int idQues) {
-		this.idQues = idQues;
-	}
+
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "id", unique = true, nullable = false)
+	@Column(name = "id_page", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
 	}
@@ -39,13 +39,37 @@ public class Page implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "id_ques", nullable = false)
-	public int getIdQues() {
-		return this.idQues;
+
+
+	
+	@ManyToOne
+	@JoinColumn(name="id_page", referencedColumnName="id_theme", insertable=false, updatable= false)
+	public Theme getTheme() {
+		return theme;
 	}
 
-	public void setIdQues(int idQues) {
-		this.idQues = idQues;
+
+
+	public void setTheme(Theme theme) {
+		this.theme = theme;
 	}
+
+
+	@Column(name = "id_theme",  nullable = false)
+	public Integer getIdTheme() {
+		return idTheme;
+	}
+
+
+
+	public void setIdTheme(Integer idTheme) {
+		this.idTheme = idTheme;
+	}
+
+
+
+
+
+
 
 }

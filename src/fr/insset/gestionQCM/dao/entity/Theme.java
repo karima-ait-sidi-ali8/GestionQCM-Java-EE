@@ -3,12 +3,15 @@ package fr.insset.gestionQCM.dao.entity;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -25,6 +28,7 @@ public class Theme implements java.io.Serializable {
 	
 	private Qcm qcm;
 	
+	private List<Page> listPages;
 	
 	public Theme() {
 	}
@@ -73,6 +77,15 @@ public class Theme implements java.io.Serializable {
 
 	public void setQcm(Qcm qcm) {
 		this.qcm = qcm;
+	}
+
+	@OneToMany(targetEntity=Page.class, mappedBy="theme")
+	public List<Page> getListPages() {
+		return listPages;
+	}
+
+	public void setListPages(List<Page> listPages) {
+		this.listPages = listPages;
 	}
 
 
