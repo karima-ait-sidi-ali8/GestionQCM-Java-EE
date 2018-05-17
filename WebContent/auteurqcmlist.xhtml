@@ -156,7 +156,7 @@
                  
                             <f:facet name="header"><h:outputText value="#" /></f:facet>
                             
-                            <b:badge value="#{qcmAuteurBean.listThemes.indexOf(theme)+1}"/>
+                            <b:badge value="TH#{theme.id}"/>
                           
                         </h:column>
                          
@@ -180,7 +180,7 @@
 							
                             </b:commandLink>
                             
-               				<b:commandLink icon-awesome="pencil" tooltip=" ">
+               				<b:commandLink icon-awesome="pencil" tooltip="Afficher le contenu">
            				
                				
                				</b:commandLink>
@@ -188,9 +188,24 @@
                         </h:column>
                       
                     </h:dataTable>
-				 
+                    <hr />
+				
+                    <b:inputText value="#{qcmAuteurBean.titre}" span="6" offset-sm="3" required="true"  required-message="Erreur : Intitulé du thème invalide.">
+                    	<f:validateRequired></f:validateRequired>
+                    	
+                    </b:inputText>
+
+                    <b:commandButton span="6" size="sm" offset-sm="3" look="success" value="Nouveau thème" icon-awesome="plus-circle">
+						<f:ajax execute="@form" render="todoForm:todoTable"  listener="#{qcmAuteurBean.addTheme}" ></f:ajax>
+					</b:commandButton>
+		
+					<br />
+					
+				
+				 	
+				 	
 				 </h:panelGrid>
-				 
+				 <b:messages id="MsgTheme"  showDetail="true"  ><p:autoUpdate></p:autoUpdate></b:messages>
 		  <f:facet name="footer">
 
 		

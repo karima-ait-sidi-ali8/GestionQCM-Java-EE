@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 
 
@@ -19,13 +19,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.primefaces.context.RequestContext;
+
 
 import fr.insset.gestionQCM.dao.entity.Auteur;
 
 import fr.insset.gestionQCM.dao.entity.Qcm;
 import fr.insset.gestionQCM.dao.entity.Theme;
 import fr.insset.gestionQCM.metier.QcmMetier;
+import fr.insset.gestionQCM.metier.ThemeMetier;
 import fr.insset.gestionQCM.metier.UserMetier;
 import fr.insset.gestionQCM.utils.ContextUtil;
 import fr.insset.gestionQCM.utils.SessionUtil;
@@ -45,22 +46,28 @@ public class QcmAuteurBean implements Serializable {
 	
 	private String titre ;
 	
-	private String type = "Conformité stricte avec pénalité";
+	private String type ;
 	
-	private String description = "- Téléphone interdit - Documents interdits.";
+	private String description ;
 
 	private List<Theme> listThemes;
+	
+
 	
 	public QcmAuteurBean() {
 		super();
 	}
 
 
+	public void initAttr(){
+		description = "- Téléphone interdit - Documents interdits.";
+		type = "Conformité stricte avec pénalité";
+		titre ="";
+	}
 	 
 	@PostConstruct
 	public void initBean(){
-		description = "- Téléphone interdit - Documents interdits.";
-		type = "Conformité stricte avec pénalité";
+		initAttr();
 		HttpSession hs = SessionUtil.getSession();
 		
 		UserMetier metier = (UserMetier) ContextUtil.getContext().getBean("metier"); 
@@ -103,17 +110,46 @@ public class QcmAuteurBean implements Serializable {
 
 
 	public void showThemes(){
-		
+		HttpSession hs = SessionUtil.getSession();
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 		Map<String, String> param = ec.getRequestParameterMap();
 		
-		log.info(Integer.valueOf(param.get("idForTheme")));
+		
 		
 		QcmMetier metier = (QcmMetier) ContextUtil.getContext().getBean("qcmMetier"); 
 		ContextUtil.getContext().close();
-		Qcm qcm = metier.findByOne(Integer.valueOf(param.get("idForTheme")));
+		hs.setAttribute("CurrtIdQcm", Integer.valueOf(param.get("idForTheme")));
+	
+		Qcm qcm = metier.findByOne((Integer) hs.getAttribute("CurrtIdQcm"));
 		setListThemes(qcm.getListThemes());
 		
+		
+	}
+	public void ReloadThemes(){
+		HttpSession hs = SessionUtil.getSession();
+		QcmMetier metier = (QcmMetier) ContextUtil.getContext().getBean("qcmMetier"); 
+		ContextUtil.getContext().close();
+		Qcm qcm = metier.findByOne((Integer) hs.getAttribute("CurrtIdQcm"));
+		setListThemes(qcm.getListThemes());
+		
+		
+	}
+	
+	public void addTheme(){
+		if(titre.trim().isEmpty()){
+			FacesContext.getCurrentInstance().addMessage("MsgTheme", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur !", "Intitulé du thème invalide"));
+		} 
+		else{
+			HttpSession hs = SessionUtil.getSession();
+			ThemeMetier metier = (ThemeMetier) ContextUtil.getContext().getBean("ThemeMetier"); 
+			ContextUtil.getContext().close();
+			Theme theme = new Theme();
+			theme.setIdQcm((Integer) hs.getAttribute("CurrtIdQcm"));
+			theme.setTitreTheme(titre);
+			metier.addTheme(theme);
+			ReloadThemes();
+			initAttr();
+		}
 		
 	}
 	public List<Qcm> getListeQcms() {
@@ -173,8 +209,9 @@ public class QcmAuteurBean implements Serializable {
 	public void setListThemes(List<Theme> listThemes) {
 		this.listThemes = listThemes;
 	}
-	
-	
+
+
+
 
 
 }
