@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-
+import org.primefaces.context.RequestContext;
 
 import fr.insset.gestionQCM.dao.entity.Auteur;
 
@@ -131,7 +131,7 @@ public class QcmAuteurBean implements Serializable {
 		ContextUtil.getContext().close();
 		Qcm qcm = metier.findByOne((Integer) hs.getAttribute("CurrtIdQcm"));
 		setListThemes(qcm.getListThemes());
-		
+		System.out.println(listThemes.size());
 		
 	}
 	
@@ -150,6 +150,19 @@ public class QcmAuteurBean implements Serializable {
 			ReloadThemes();
 			initAttr();
 		}
+		
+	}
+	
+
+	public void DeleteTheme(){
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, String> param = ec.getRequestParameterMap();
+		ThemeMetier metier = (ThemeMetier) ContextUtil.getContext().getBean("ThemeMetier"); 
+		ContextUtil.getContext().close();
+		metier.deleteTheme(Integer.valueOf(param.get("idTheme")));
+		
+		ReloadThemes();
+	
 		
 	}
 	public List<Qcm> getListeQcms() {

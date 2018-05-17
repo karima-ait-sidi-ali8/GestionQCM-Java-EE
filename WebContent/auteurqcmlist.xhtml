@@ -147,9 +147,9 @@
 	                    	<h:outputText value=" L'orde des thèmes est pris en compte"></h:outputText>
 	                    	<br />
 	                    	<b:label text="Astuce :" severity="primary"/>
-	                    	<h:outputText value=" Créez vos thèmes et après regroupez vos qeustions par page"></h:outputText>
+	                    	<h:outputText value=" Créez vos thèmes et après regroupez vos questions par page"></h:outputText>
 	                    </b:well>
-	                    
+						
 					    <h:dataTable styleClass="table table-bordered" value="#{qcmAuteurBean.listThemes}" var="theme" id="todoTable" >
                        
                         <h:column>
@@ -176,8 +176,12 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header"><h:outputText value="" /></f:facet>
-                            <b:commandLink onclick="return confirmDelete();" icon-awesome="times" tooltip="Supprimer ce thème" styleClass="btnDel" style="margin-right:5px">
-							
+                            <b:commandLink   onclick="return confirmDelete();" icon-awesome="times" tooltip="Supprimer ce thème" styleClass="btnDel" style="margin-right:5px">
+								<f:param name="idTheme" value="#{theme.id}"></f:param>
+								<f:ajax render="todoForm:panelShowThemes"  listener="#{qcmAuteurBean.DeleteTheme}" ></f:ajax>
+								
+								
+								
                             </b:commandLink>
                             
                				<b:commandLink icon-awesome="pencil" tooltip="Afficher le contenu">
@@ -188,6 +192,7 @@
                         </h:column>
                       
                     </h:dataTable>
+    		
                     <hr />
 				
                     <b:inputText value="#{qcmAuteurBean.titre}" span="6" offset-sm="3" required="true"  required-message="Erreur : Intitulé du thème invalide.">
@@ -201,7 +206,7 @@
 		
 					<br />
 					
-				
+	
 				 	
 				 	
 				 </h:panelGrid>
