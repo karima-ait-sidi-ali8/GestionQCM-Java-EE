@@ -1,6 +1,7 @@
 package fr.insset.gestionQCM.dao.entity;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -121,7 +122,7 @@ public class Qcm implements java.io.Serializable {
 		this.listGroupes = listGroupes;
 	}
 
-	@OneToMany(targetEntity=Theme.class, mappedBy="qcm")
+	@OneToMany(targetEntity=Theme.class, mappedBy="qcm", cascade=CascadeType.REMOVE)
 	public List<Theme> getListThemes() {
 		return listThemes;
 	}
