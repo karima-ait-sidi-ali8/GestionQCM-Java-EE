@@ -23,4 +23,9 @@
 <bean id="ThemeMetier" class="fr.insset.gestionQCM.metier.ThemeMetierImpl">
 <property name="themeDao" ref="ThemeDaoImpl"></property>
 </bean>
+
+<bean id="QuestionDaoImpl"  class="fr.insset.gestionQCM.dao.QuestionDAOImpl"></bean>
+<bean id="QuestionMetier" class="fr.insset.gestionQCM.metier.QuestionMetierImpl">
+<property name="questionDAO" ref="QuestionDaoImpl"></property>
+</bean>
 </beans>
