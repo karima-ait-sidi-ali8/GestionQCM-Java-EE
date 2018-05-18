@@ -75,12 +75,12 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header"><h:outputText value="" /></f:facet>
-                            <b:commandLink onclick="return confirmDelete();" icon-awesome="times" tooltip="Supprimer cette classe" styleClass="btnDel" style="margin-right:5px">
+                            <b:commandLink onclick="return confirmDelete();" icon-awesome="times" tooltip="Supprimer ce QCM" styleClass="btnDel" style="margin-right:5px">
 								<f:param name="idQcm" value="#{qcm.id}"></f:param>
 								<f:ajax  listener="#{qcmAuteurBean.deleteQcm}"></f:ajax>
                             </b:commandLink>
                             
-               				<b:commandLink ajax="true"  icon-awesome="pencil" tooltip="Afficher et modifier cette classe" oncomplete="$('.modalThemes').modal()">
+               				<b:commandLink ajax="true"  icon-awesome="pencil" tooltip="Gérer ce QCM" oncomplete="$('.modalThemes').modal()">
            						<f:param name="idForTheme" value="#{qcm.id}"></f:param>
    
            						<f:ajax render="todoForm:todoTable"  listener="#{qcmAuteurBean.showThemes}"></f:ajax>	
@@ -180,13 +180,12 @@
 								<f:param name="idTheme" value="#{theme.id}"></f:param>
 								<f:ajax render="todoForm:panelShowThemes"  listener="#{qcmAuteurBean.DeleteTheme}" ></f:ajax>
 								
-								
-								
                             </b:commandLink>
                             
                				<b:commandLink icon-awesome="pencil" tooltip="Afficher le contenu">
-           				
-               				
+           						<f:param name="idThemeContent" value="#{theme.id}"></f:param>
+               					<f:ajax   listener="#{qcmAuteurBean.showThemePages}" ></f:ajax>
+               					
                				</b:commandLink>
 
                         </h:column>
