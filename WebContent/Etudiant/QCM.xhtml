@@ -7,6 +7,10 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>Easy Eval</title>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			<script>		
+			</script>
     </h:head>
     <h:body style="padding-top: 60px">
         <h:outputScript library="holder" name="holder.js" />
@@ -18,11 +22,6 @@
                 	<f:ajax listener="#{etudiantBean.logout}"></f:ajax>
                 </b:navLink>
             </b:navbarLinks>
-            <h:form styleClass="navbar-form navbar-right">
-                <div class="form-group">
-                    <b:inputText placeholder="Search..." fieldSize="sm"/>
-                </div>
-            </h:form>
         </b:navBar>
         <b:container fluid="true">
             <b:row>
@@ -39,12 +38,12 @@
 					
                 </b:column>
             </b:row>
-            
+
              <b:panel class="forme">
 					  <f:facet name="heading">
 					    <i class="fa fa-reorder"  style="padding-right:20px" />
 					    <h:outputText value="Liste de vos groupes " />
-					    <b:badge style="margin-left:10px; background-color:#5cb85c" value="#{etudiantBean.nbGroupesEtudiant} groupe(s)"  />
+					    <b:badge style="margin-left:10px; background-color:#117A65" value="#{etudiantBean.nbGroupesEtudiant} groupe(s)"  />
 					  </f:facet>
 					  
 					
@@ -69,19 +68,62 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header"><h:outputText value="Nombre des étudiants" /></f:facet>
-                            <b:label value="#{item.listOfEtudiants.size()}" severity="danger"/>
+                            <b:label value="#{item.listOfEtudiants.size()}" severity="warning"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header"><h:outputText value="Detail" /></f:facet>
-                            
-               				<b:commandLink icon-awesome="pencil" tooltip="Afficher detail de ce groupe" />
-               				
+                            <b:form>
+               				<b:commandButton styleClass="show" ajax="true" icon-awesome="pencil" tooltip="Afficher les QCMs de ce groupe" oncomplete="$('.modalPseudoClass').show();">              				     				
+               					<f:param name="idgrp" value="#{item.idGroupe}"></f:param>
+	                            <f:param name="Nomgrp" value="#{item.nomGroupe}"></f:param>
+	                            <f:ajax execute="@form" render="idForme" listener="#{qcmEtudiantBean.QcmAjax}" ></f:ajax>  
+               				</b:commandButton>
+               				</b:form>
                         </h:column>
                     </h:dataTable>		
 							
 							
                     </b:row>
                     </b:panel>
+                    <b:form id="idForme">
+                    <b:modal closable="false" id="amodal" layout="block" title="La liste des QCMs  : " styleClass="modalPseudoClass" style="widh:400px">
+			  			<b:panel >				  	
+					  	<b:well>
+						    <h:outputText value="Groupe :" />
+						    <b:badge style="margin-left:10px; background-color:#117A65" value="#{qcmEtudiantBean.nomGroupe}"  />
+						   <br/>
+						    <h:outputText value="Nombre de Qcms :  " />
+						    <b:badge style="margin-left:10px; background-color:#C39BD3" value="#{qcmEtudiantBean.nbQcms} qcm(s)"  />
+	                    </b:well>
+					  	
+			  			<h:dataTable id="idQcmTable" styleClass="table table-bordered" value="#{qcmEtudiantBean.listeQcms}" var="myQcm" style="width:500px;margin-left:20px;" >
+                        <h:column>
+                            <f:facet name="header"><h:outputText value="#" /></f:facet>                       
+                            <b:badge value="#{qcmEtudiantBean.listeQcms.indexOf(myQcm)+1}"/>                            
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"><h:outputText value="Titre de QCM" /></f:facet>
+                            <h:outputText value="#{myQcm.titre}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"><h:outputText value="Nom d'auteur" /></f:facet>
+                            <h:outputText value="#{myQcm.auteur.nom}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"><h:outputText value="Nombre de sessions" /></f:facet>
+                            <b:label value="#{myQcm.sessions.size()}" severity="warning"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"><h:outputText value="Etat" /></f:facet>
+                            <b:label value="#{qcmEtudiantBean.etat}" severity="#{qcmEtudiantBean.colorEtat}"/>
+                        </h:column>
+                    </h:dataTable>
+                    </b:panel>		
+			  			<f:facet name="footer">			
+						<b:button value="Fermer" styleClass="fermer" look="default" dismiss="modal" onclick="$('.modalPseudoClass').hide();"/>				 
+			  			</f:facet>
+					</b:modal>
+					</b:form>
                     
         </b:container> 
         <style type="text/css">
