@@ -1,6 +1,5 @@
 package fr.insset.gestionQCM.dao.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -16,7 +15,7 @@ public class Auteur extends Utilisateur {
 	
 	private List<Groupe> listGroupes;
 	
-	private List<Qcm> qcms = new ArrayList<Qcm>();
+	private List<Qcm> qcms;
 	
 	public Auteur() {
 		super();
