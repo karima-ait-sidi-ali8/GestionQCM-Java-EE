@@ -42,6 +42,8 @@ public class ThemeContentBean implements Serializable {
 		
 	}
 	
+	
+	
 
 	public List<Page> getListPage() {
 		return listPage;
