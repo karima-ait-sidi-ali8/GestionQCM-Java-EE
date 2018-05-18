@@ -39,13 +39,27 @@
 	                    <br /><br />
           
                    <ui:repeat value="#{bean.listPage}"  var="page">
-				    <b:panel span="6" >
+				    <b:panel span="10" offset-sm="1">
 					    <f:facet name="heading">
 						    <i class="fa fa-file" style="padding-right:20px" />
 							<h:outputText value="Page " />
 						    <b:badge style="margin-left:10px; background-color:#5cb85c" value="#{bean.listPage.indexOf(page)+1}"  />
 					  	</f:facet>
-					  <h:outputText value="sss" />
+					  	
+					  	
+					  	
+					  	
+					  	
+					  	
+					  <b:well>
+						<ui:repeat value="#{page.listQuestions}"  var="q">
+							<b:label value="Q#{page.listQuestions.indexOf(q)+1}" severity="info"/>
+							<h:outputText value=" #{q.textQuestion}" />
+							<br />
+						
+						</ui:repeat>
+						
+					  </b:well>
 					</b:panel>
 				   
 				    </ui:repeat>
