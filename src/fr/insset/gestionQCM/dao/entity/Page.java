@@ -5,9 +5,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
+
+import java.util.List;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -22,8 +26,19 @@ public class Page implements java.io.Serializable {
 	private Integer idTheme;
 	
 	private Theme theme;
+	
+	private List<Question> listQuestions;
 
 	public Page() {
+	}
+
+
+
+	public Page(Integer idTheme, Theme theme, List<Question> listQuestions) {
+		super();
+		this.idTheme = idTheme;
+		this.theme = theme;
+		this.listQuestions = listQuestions;
 	}
 
 
@@ -43,7 +58,7 @@ public class Page implements java.io.Serializable {
 
 	
 	@ManyToOne
-	@JoinColumn(name="id_page", referencedColumnName="id_theme", insertable=false, updatable= false)
+	@JoinColumn(name="id_theme", referencedColumnName="id_theme", insertable=false, updatable= false)
 	public Theme getTheme() {
 		return theme;
 	}
@@ -64,6 +79,19 @@ public class Page implements java.io.Serializable {
 
 	public void setIdTheme(Integer idTheme) {
 		this.idTheme = idTheme;
+	}
+
+
+
+	@OneToMany(targetEntity=Question.class, mappedBy="page")
+	public List<Question> getListQuestions() {
+		return listQuestions;
+	}
+
+
+
+	public void setListQuestions(List<Question> listQuestions) {
+		this.listQuestions = listQuestions;
 	}
 
 

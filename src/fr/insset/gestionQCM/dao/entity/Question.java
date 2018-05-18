@@ -1,10 +1,17 @@
 package fr.insset.gestionQCM.dao.entity;
 
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
 
 
 @Entity
@@ -13,36 +20,50 @@ public class Question implements java.io.Serializable {
 
 	
 	private static final long serialVersionUID = 1L;
-	private int id;
+	private Integer idQuestion;
 	private String textQuestion;
 	private boolean estMarquee;
-	private int idTheme;
+	
+	private Integer idPage;
+	
+	private Page page;
 
 	public Question() {
 	}
 
-	public Question(int id, String textQuestion, boolean estMarquee, int idTheme) {
-		this.id = id;
+
+
+	public Question(String textQuestion, boolean estMarquee, Integer idPage) {
+		super();
 		this.textQuestion = textQuestion;
 		this.estMarquee = estMarquee;
-		this.idTheme = idTheme;
+		this.idPage = idPage;
 	}
+
+
 
 	@Id
-
-	@Column(name = "id", unique = true, nullable = false)
-	public int getId() {
-		return this.id;
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id_question", unique = true, nullable = false)
+	public Integer getIdQuestion() {
+		return idQuestion;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+
+
+	public void setIdQuestion(Integer idQuestion) {
+		this.idQuestion = idQuestion;
 	}
 
 	@Column(name = "TextQuestion", nullable = false)
+	@Type(type="text")
 	public String getTextQuestion() {
 		return this.textQuestion;
 	}
+
+
+
+
 
 	public void setTextQuestion(String textQuestion) {
 		this.textQuestion = textQuestion;
@@ -57,13 +78,28 @@ public class Question implements java.io.Serializable {
 		this.estMarquee = estMarquee;
 	}
 
-	@Column(name = "id_theme", nullable = false)
-	public int getIdTheme() {
-		return this.idTheme;
+	@ManyToOne
+	@JoinColumn(name="id_page", referencedColumnName="id_page",insertable=false, updatable=false)
+	public Page getPage() {
+		return page;
 	}
 
-	public void setIdTheme(int idTheme) {
-		this.idTheme = idTheme;
+	public void setPage(Page page) {
+		this.page = page;
 	}
+
+
+	@Column(name = "id_page", nullable = false)
+	public Integer getIdPage() {
+		return idPage;
+	}
+
+
+
+	public void setIdPage(Integer idPage) {
+		this.idPage = idPage;
+	}
+
+
 
 }
