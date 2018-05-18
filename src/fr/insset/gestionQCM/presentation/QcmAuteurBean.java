@@ -131,7 +131,7 @@ public class QcmAuteurBean implements Serializable {
 		ContextUtil.getContext().close();
 		Qcm qcm = metier.findByOne((Integer) hs.getAttribute("CurrtIdQcm"));
 		setListThemes(qcm.getListThemes());
-		System.out.println(listThemes.size());
+		
 		
 	}
 	
@@ -166,13 +166,14 @@ public class QcmAuteurBean implements Serializable {
 		
 	}
 	
-	public void showThemePages(){
+	public void showThemePages() throws IOException{
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 		Map<String, String> param = ec.getRequestParameterMap();
 		HttpSession hs = SessionUtil.getSession();
 		hs.setAttribute("idTheme", Integer.valueOf(param.get("idThemeContent")));
+		ec.redirect("themecontent.xhtml");
+		FacesContext.getCurrentInstance().responseComplete();
 		
-		System.out.println((Integer)hs.getAttribute("idTheme"));
 		
 	}
 	public List<Qcm> getListeQcms() {
