@@ -20,6 +20,8 @@ import fr.insset.gestionQCM.metier.GroupeMetier;
 import fr.insset.gestionQCM.utils.ContextUtil;
 import fr.insset.gestionQCM.utils.SessionUtil;
 
+
+//QCMs list for each groupe
 @ManagedBean (name="qcmEtudiantBean")
 @SessionScoped
 public class QcmEtudiantBean implements Serializable{
