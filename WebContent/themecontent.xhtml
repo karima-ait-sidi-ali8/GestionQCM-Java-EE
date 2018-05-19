@@ -77,12 +77,21 @@
 							</ui:repeat>
 
 							<br />
+							<b:label text="Réponse : " severity="danger"/>
+							<br /><br />
+							<b:inputText id="textRep"></b:inputText>
+							<b:commandButton   span="3"   size="sm"   look="success" value="Nouvelle réponse" icon-awesome="plus">
+						
+							
+						
+						    </b:commandButton>
+						    <br />
 							</b:well>
 						</ui:repeat>
 						<br />
 
-					
-						      	
+						<b:label text="Question : " severity="danger"/>
+						<br /><br />  	
 						<b:inputTextarea id="textq"  cols="78" rows="3" value="#{bean.questText}"></b:inputTextarea>
 						<b:commandButton   span="3"   size="sm"   look="info" value="Nouvelle question" icon-awesome="plus">
 						
