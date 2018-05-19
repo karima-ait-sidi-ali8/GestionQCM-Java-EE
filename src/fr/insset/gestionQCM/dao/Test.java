@@ -6,9 +6,8 @@ package fr.insset.gestionQCM.dao;
 
 import org.apache.log4j.Logger;
 
-import fr.insset.gestionQCM.metier.PageMetier;
-
-
+import fr.insset.gestionQCM.dao.entity.Reponse;
+import fr.insset.gestionQCM.metier.ReponseMetier;
 import fr.insset.gestionQCM.utils.ContextUtil;
 
 
@@ -19,10 +18,10 @@ public class Test {
 	public static void main(String[] args) {
 		
 		
-		PageMetier metier = (PageMetier) ContextUtil.getContext().getBean("PageMetier"); 
+		ReponseMetier metier = (ReponseMetier) ContextUtil.getContext().getBean("ReponseMetier"); 
 		ContextUtil.getContext().close();
 
-	
+		metier.deleteReponse(4);
 	}
 
 }

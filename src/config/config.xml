@@ -33,4 +33,9 @@
 <bean id="PageMetier" class="fr.insset.gestionQCM.metier.PageMetierImpl">
 <property name="pageDAO" ref="PageDAOImpl"></property>
 </bean>
+
+<bean id="ReponseDAOImpl"  class="fr.insset.gestionQCM.dao.ReponseDAOImpl"></bean>
+<bean id="ReponseMetier" class="fr.insset.gestionQCM.metier.ReponseMetierImpl">
+<property name="reponseDAO" ref="ReponseDAOImpl"></property>
+</bean>
 </beans>
