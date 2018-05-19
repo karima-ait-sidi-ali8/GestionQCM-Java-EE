@@ -3,12 +3,16 @@ package fr.insset.gestionQCM.dao.entity;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -28,6 +32,8 @@ public class Question implements java.io.Serializable {
 	
 	private Page page;
 
+	private List<Reponse> listReponses;
+	
 	public Question() {
 	}
 
@@ -101,5 +107,18 @@ public class Question implements java.io.Serializable {
 	}
 
 
+
+	@OneToMany(targetEntity=Reponse.class, mappedBy="question",cascade=CascadeType.REMOVE)
+	public List<Reponse> getListReponses() {
+		return listReponses;
+	}
+
+
+
+	public void setListReponses(List<Reponse> listReponses) {
+		this.listReponses = listReponses;
+	}
+
+	
 
 }
