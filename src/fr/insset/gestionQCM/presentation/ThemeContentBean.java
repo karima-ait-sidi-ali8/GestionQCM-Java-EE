@@ -38,7 +38,7 @@ public class ThemeContentBean implements Serializable {
 	
 	@PostConstruct
 	public void initBean(){
-		questText = "";
+		
 		HttpSession hs = SessionUtil.getSession();
 		ThemeMetier metier = (ThemeMetier) ContextUtil.getContext().getBean("ThemeMetier"); 
 		ContextUtil.getContext().close();
@@ -54,7 +54,7 @@ public class ThemeContentBean implements Serializable {
 		if(!questText.trim().isEmpty()){		
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 		Map<String, String> param = ec.getRequestParameterMap(); 
-		System.out.println(Integer.valueOf(param.get("idPage")));
+	
 		QuestionMetier metier = (QuestionMetier) ContextUtil.getContext().getBean("QuestionMetier"); 
 		ContextUtil.getContext().close();
 		Question qst = new Question();
@@ -63,10 +63,19 @@ public class ThemeContentBean implements Serializable {
 		qst.setTextQuestion(questText);
 		metier.addQuestion(qst);
 		initBean();
-		
+		questText = "";
 		
 		
 		}
+	}
+	
+	public void deleteQuestion(){
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, String> param = ec.getRequestParameterMap();
+		QuestionMetier metier = (QuestionMetier) ContextUtil.getContext().getBean("QuestionMetier"); 
+		ContextUtil.getContext().close();
+		metier.deleteQuestion(Integer.valueOf(param.get("idQst")));
+		initBean();
 	}
 
 	public List<Page> getListPage() {

@@ -9,7 +9,13 @@
     <h:head>
         <title>Dashboard Template for BootsFaces</title>
         <meta name="author" content="Riccardo Massera"></meta>
+        <script>
         
+        	function confirmDelete(){
+        		return confirm("Êtes-vous sûr de vouloir supprimer ?");
+        	}
+        
+        </script>
     </h:head>
     <h:body style="padding-top: 60px">
     <f:metadata>
@@ -39,6 +45,7 @@
 	                    </h:form>
 	                    <br /><br />
           			<h:panelGrid id="pages">
+          			<h:form>
                    <ui:repeat value="#{bean.listPage}"  var="page">
 				    <b:panel span="10" offset-sm="1">
 					    <f:facet name="heading">
@@ -56,29 +63,36 @@
 						<ui:repeat value="#{page.listQuestions}"  var="q">
 							<b:well>
 							<b:label value="Q#{page.listQuestions.indexOf(q)+1}" severity="info"/>
-							<h:outputText value=" #{q.textQuestion}" />
+							<h:outputText value=" #{q.textQuestion} " />
+							 <b:commandLink onclick="return confirmDelete();" icon-awesome="times" tooltip="Supprimer cette question" styleClass="btnDel" style="margin-right:5px">
+						
+								 <f:param name="idQst" value="#{q.idQuestion}"></f:param>
+								 
+								 <f:ajax  render=":pages" listener="#{bean.deleteQuestion}"></f:ajax>
+                            </b:commandLink>
 							<br />
 							</b:well>
 						</ui:repeat>
 						<br />
 
-						<h:form>
+					
 						      	
-						<h:inputTextarea cols="78" rows="3" value="#{bean.questText}"></h:inputTextarea>
+						<h:inputTextarea id="textq" cols="78" rows="3" value="#{bean.questText}"></h:inputTextarea>
 						<b:commandButton   span="3"   size="sm"   look="info" value="Nouvelle question" icon-awesome="plus">
 						
 							 <f:param name="idPage" value="#{page.id}"></f:param>
 							 
-							<f:ajax execute="@form" render=":pages" listener="#{bean.addQuestion}"></f:ajax>	
+							<f:ajax execute="textq" render=":pages" listener="#{bean.addQuestion}"></f:ajax>	
 						
 						</b:commandButton>
-						</h:form>
+				
 						
 						<br />
 					
 					</b:panel>
 				   
 				    </ui:repeat>
+				    </h:form>
 				     </h:panelGrid>
 				     <h:form>
 	                    	<b:commandButton   span="3" offset-sm="8" size="sm"  look="danger" value="Ajouter une nouvelle page" icon-awesome="plus">
