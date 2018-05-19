@@ -28,4 +28,9 @@
 <bean id="QuestionMetier" class="fr.insset.gestionQCM.metier.QuestionMetierImpl">
 <property name="questionDAO" ref="QuestionDaoImpl"></property>
 </bean>
+
+<bean id="PageDAOImpl"  class="fr.insset.gestionQCM.dao.PageDAOImpl"></bean>
+<bean id="PageMetier" class="fr.insset.gestionQCM.metier.PageMetierImpl">
+<property name="pageDAO" ref="PageDAOImpl"></property>
+</bean>
 </beans>
