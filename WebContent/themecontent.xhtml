@@ -47,7 +47,7 @@
           			<h:panelGrid id="pages">
           			<h:form>
                    <ui:repeat value="#{bean.listPage}"  var="page">
-				    <b:panel span="10" offset-sm="1">
+				    <b:panel span="11" >
 					    <f:facet name="heading">
 						    <i class="fa fa-file" style="padding-right:20px" />
 							<h:outputText value="Page " />
@@ -64,12 +64,18 @@
 							<b:well>
 							<b:label value="Q#{page.listQuestions.indexOf(q)+1}" severity="info"/>
 							<h:outputText value=" #{q.textQuestion} " />
-							 <b:commandLink onclick="return confirmDelete();" icon-awesome="times" tooltip="Supprimer cette question" styleClass="btnDel" style="margin-right:5px">
+							<b:commandLink onclick="return confirmDelete();" icon-awesome="times" tooltip="Supprimer cette question" styleClass="btnDel" style="margin-right:5px">
 						
 								 <f:param name="idQst" value="#{q.idQuestion}"></f:param>
 								 
 								 <f:ajax  render=":pages" listener="#{bean.deleteQuestion}"></f:ajax>
-                            </b:commandLink>
+                            </b:commandLink><br/>
+							<ui:repeat value="#{q.listReponses}"  var="r">
+							<b:label value="Reponse #{q.listReponses.indexOf(r)+1}:" severity="success"/>
+							
+							<h:outputText value=" #{r.textReponse} " /><br/>
+							</ui:repeat>
+
 							<br />
 							</b:well>
 						</ui:repeat>
@@ -77,7 +83,7 @@
 
 					
 						      	
-						<h:inputTextarea id="textq" cols="78" rows="3" value="#{bean.questText}"></h:inputTextarea>
+						<b:inputTextarea id="textq"  cols="78" rows="3" value="#{bean.questText}"></b:inputTextarea>
 						<b:commandButton   span="3"   size="sm"   look="info" value="Nouvelle question" icon-awesome="plus">
 						
 							 <f:param name="idPage" value="#{page.id}"></f:param>
