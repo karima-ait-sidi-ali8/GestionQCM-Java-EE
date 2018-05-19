@@ -34,26 +34,26 @@
 		         <ui:insert name = "menu" >
 		            <ui:include src = "/templates/menu.xhtml" />
 		         </ui:insert>
-                <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
+                <b:column col-sm="9" offset-sm="2"  styleClass="main">
                     <b:navLink header="Accueil / Qcms / Themes / Questions" />
                     <hr/>
           
 	                    <h:form>
-	                    	<b:commandButton action="auteurqcmlist.xhtml"  span="3" offset-sm="8" size="sm"  look="danger" value="Retour à la liste de thèmes" icon-awesome="undo">
+	                    	<b:commandButton action="auteurqcmlist.xhtml"  span="3" offset-sm="9" size="sm"  look="danger" value="Retour à la liste de thèmes" icon-awesome="undo">
 	                    	
 	                    	</b:commandButton>
 	                    </h:form>
 	                    <br /><br />
-          			<h:panelGrid id="pages">
+          			<h:panelGrid id="pages" style="width:980px">
           			<h:form>
                    <ui:repeat value="#{bean.listPage}"  var="page">
-				    <b:panel span="11" >
+				    <b:panel >
 					    <f:facet name="heading">
 						    <i class="fa fa-file" style="padding-right:20px" />
 							<h:outputText value="Page " />
 						    <b:badge style="margin-left:10px; background-color:#5cb85c" value="#{bean.listPage.indexOf(page)+1}"  />
 					  	</f:facet>
-					  	
+					
 					  	
 					  	
 					  	
@@ -94,25 +94,23 @@
 				
 						
 						<br />
-					
+				
 					</b:panel>
 				   
 				    </ui:repeat>
 				    </h:form>
 				     </h:panelGrid>
 				     <h:form>
-	                    	<b:commandButton   span="3" offset-sm="8" size="sm"  look="danger" value="Ajouter une nouvelle page" icon-awesome="plus">
+	                    	<b:commandButton   span="3" offset-sm="9" size="sm"  look="danger" value="Ajouter une nouvelle page" icon-awesome="plus">
 	                    			<f:ajax render=":pages"  listener="#{bean.addPage}"></f:ajax>	
 	                    	</b:commandButton>
 	                 </h:form>
-                    <b:row styleClass="placeholders">
+                  
 	
-                    </b:row>
+                  
                    
                     <hr/>
-                    <b:row styleClass="table-responsive">
-
-                    </b:row>
+ 
                 </b:column>
             </b:row>
         </b:container> 
