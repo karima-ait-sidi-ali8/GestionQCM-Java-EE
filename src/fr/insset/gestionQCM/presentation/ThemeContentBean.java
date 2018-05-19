@@ -1,5 +1,6 @@
 package fr.insset.gestionQCM.presentation;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -9,11 +10,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import fr.insset.gestionQCM.dao.entity.Page;
 import fr.insset.gestionQCM.dao.entity.Question;
 import fr.insset.gestionQCM.dao.entity.Theme;
+import fr.insset.gestionQCM.metier.PageMetier;
 import fr.insset.gestionQCM.metier.QuestionMetier;
 import fr.insset.gestionQCM.metier.ThemeMetier;
 import fr.insset.gestionQCM.utils.ContextUtil;
@@ -78,6 +81,21 @@ public class ThemeContentBean implements Serializable {
 		initBean();
 	}
 
+	
+	public void addPage() throws IOException{
+		HttpSession hs = SessionUtil.getSession();
+		PageMetier metier = (PageMetier) ContextUtil.getContext().getBean("PageMetier"); 
+		ContextUtil.getContext().close();
+		Page p = new Page();
+		p.setIdTheme((Integer)hs.getAttribute("idTheme"));
+		metier.addPage(p);
+		initBean();
+		questText = "";
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+		
+		
+	}
 	public List<Page> getListPage() {
 		return listPage;
 	}

@@ -96,7 +96,7 @@
 				     </h:panelGrid>
 				     <h:form>
 	                    	<b:commandButton   span="3" offset-sm="8" size="sm"  look="danger" value="Ajouter une nouvelle page" icon-awesome="plus">
-	                    	
+	                    			<f:ajax render=":pages"  listener="#{bean.addPage}"></f:ajax>	
 	                    	</b:commandButton>
 	                 </h:form>
                     <b:row styleClass="placeholders">
