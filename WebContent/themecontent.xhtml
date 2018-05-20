@@ -73,14 +73,19 @@
 							<ui:repeat value="#{q.listReponses}"  var="r">
 							<b:label value="Reponse #{q.listReponses.indexOf(r)+1}:" severity="success"/>
 							
-							<h:outputText value=" #{r.textReponse} " /><br/>
+							<h:outputText value=" #{r.textReponse} " /><b:badge value=" #{r.correct}"/><br/>
 							</ui:repeat>
 
 							<br />
 							<b:label text="Réponse : " severity="danger"/>
 							<br /><br />
 							<b:inputText id="textRep"></b:inputText>
-							<b:commandButton   span="3"   size="sm"   look="success" value="Nouvelle réponse" icon-awesome="plus">
+							
+							    <b:radiobutton value="#{bean.questText}"  itemLabel="Vrai" itemValue="6" />
+							    <b:radiobutton value="#{bean.questText}" itemLabel="Faux" itemValue="7" />
+	
+							 
+							<b:commandButton   span="2"   size="sm"   look="success" value="Ajouter" icon-awesome="plus">
 						
 							
 						
@@ -93,7 +98,7 @@
 						<b:label text="Question : " severity="danger"/>
 						<br /><br />  	
 						<b:inputTextarea id="textq"  cols="78" rows="3" value="#{bean.questText}"></b:inputTextarea>
-						<b:commandButton   span="3"   size="sm"   look="info" value="Nouvelle question" icon-awesome="plus">
+						<b:commandButton   span="2"   size="sm"   look="info" value="Ajouter" icon-awesome="plus">
 						
 							 <f:param name="idPage" value="#{page.id}"></f:param>
 							 
