@@ -15,9 +15,11 @@ import javax.servlet.http.HttpSession;
 
 import fr.insset.gestionQCM.dao.entity.Page;
 import fr.insset.gestionQCM.dao.entity.Question;
+import fr.insset.gestionQCM.dao.entity.Reponse;
 import fr.insset.gestionQCM.dao.entity.Theme;
 import fr.insset.gestionQCM.metier.PageMetier;
 import fr.insset.gestionQCM.metier.QuestionMetier;
+import fr.insset.gestionQCM.metier.ReponseMetier;
 import fr.insset.gestionQCM.metier.ThemeMetier;
 import fr.insset.gestionQCM.utils.ContextUtil;
 import fr.insset.gestionQCM.utils.SessionUtil;
@@ -36,6 +38,10 @@ public class ThemeContentBean implements Serializable {
 	}
 
 	private String questText;
+	
+	private String RespText;
+	
+	private String isTrue;
 	
 	private List<Page> listPage;
 	
@@ -96,6 +102,29 @@ public class ThemeContentBean implements Serializable {
 		
 		
 	}
+	
+	public void addReponse(){
+		System.out.println(RespText);
+		System.out.println("-------");
+		System.out.println(isTrue);
+		if(!"".equals(RespText) && !"".equals(isTrue)){
+			
+		
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, String> param = ec.getRequestParameterMap();
+		ReponseMetier metier = (ReponseMetier) ContextUtil.getContext().getBean("ReponseMetier"); 
+		ContextUtil.getContext().close();
+		Reponse reponse = new Reponse();
+		reponse.setCorrect(Boolean.valueOf(isTrue));
+		reponse.setTextReponse(RespText);
+		reponse.setIdQues(Integer.valueOf(param.get("idQst_Rep")));
+		metier.addReponse(reponse);
+		initBean();
+		RespText ="";
+		}
+		
+		
+	}
 	public List<Page> getListPage() {
 		return listPage;
 	}
@@ -112,6 +141,26 @@ public class ThemeContentBean implements Serializable {
 
 	public void setQuestText(String questText) {
 		this.questText = questText;
+	}
+
+
+	public String getIsTrue() {
+		return isTrue;
+	}
+
+
+	public void setIsTrue(String isTrue) {
+		this.isTrue = isTrue;
+	}
+
+
+	public String getRespText() {
+		return RespText;
+	}
+
+
+	public void setRespText(String respText) {
+		RespText = respText;
 	}
 	
 	
