@@ -23,24 +23,19 @@
 		         <ui:insert name = "menu" >
 		            <ui:include src = "/templates/menu.xhtml" />
 		         </ui:insert>
-                <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
-                    <b:navLink header="Accueil" />
+                <b:column col-sm="10" offset-sm="1" col-md="10" offset="2" styleClass="main">
+                    <b:navLink header="Accueil -- Gestion des sessions" />
                     
                     <hr/>
 
-                    <b:row >
-                   <b:panel>
-  <f:facet name="heading">
-    <i class="fa fa-reorder" style="padding-right:5px" />
-    <h:outputText value="Liste de vos groupes " />
-    <b:badge style="margin-left:10px; background-color:#5cb85c" value="#{homeBean.listeGroupes.size()}"  />
-  </f:facet>
- 
+            
+
+ 						<b:row>
                     <ui:repeat value="#{homeBean.listeGroupes}"  var="g">
+                    <b:column  style="width:530px">
                     
-                        <b:column col-xs="6" col-sm="10" offset="1" styleClass="placeholder">
 	                     
-	                        <b:panel   collapsible="false">
+	                        <b:panel   collapsible="false" >
 	                          <f:facet name="heading">
 							    <i class="fa fa-users" style="padding-right:20px" />
 	                            <b:label value="#{g.nomGroupe}" severity="success" style="margin-right:5px"/>
@@ -67,15 +62,15 @@
 	                       
 	                         </b:panel>  
 	                        
-                        </b:column>                    
+                       </b:column>               
                     
                     
                     
                     </ui:repeat>
- </b:panel> 
+					</b:row>
                     
                     
-                    </b:row>
+              
                  
                     <hr/>
                     <b:row styleClass="table-responsive">
