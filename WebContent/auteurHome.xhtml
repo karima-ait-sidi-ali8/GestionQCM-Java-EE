@@ -6,7 +6,7 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>Dashboard Template for BootsFaces</title>
+        <title>Easy Eval</title>
         <meta name="author" content="Riccardo Massera"></meta>
         
     </h:head>
@@ -24,55 +24,62 @@
 		            <ui:include src = "/templates/menu.xhtml" />
 		         </ui:insert>
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
-                    <h1>Accueil</h1>
+                    <b:navLink header="Accueil" />
+                    
                     <hr/>
-                    <b:row styleClass="placeholders">
-                        <b:column col-xs="6" col-sm="3" styleClass="placeholder">
-                            <img data-src="holder.js/200x200/sky" class="img-responsive" alt="Generic placeholder thumbnail"/>
-                            <h4>Label</h4>
-                            <span class="text-muted">Something else</span>
-                        </b:column>
-                        <b:column col-xs="6" col-sm="3" styleClass="placeholder">
-                            <img data-src="holder.js/200x200/vine" class="img-responsive" alt="Generic placeholder thumbnail"/>
-                            <h4>Label</h4>
-                            <span class="text-muted">Something else</span>
-                        </b:column>
-                        <b:column col-xs="6" col-sm="3" styleClass="placeholder">
-                            <img data-src="holder.js/200x200/sky" class="img-responsive" alt="Generic placeholder thumbnail"/>
-                            <h4>Label</h4>
-                            <span class="text-muted">Something else</span>
-                        </b:column>
-                        <b:column col-xs="6" col-sm="3" styleClass="placeholder">
-                            <img data-src="holder.js/200x200/vine" class="img-responsive" alt="Generic placeholder thumbnail"/>
-                            <h4>Label</h4>
-                            <span class="text-muted">Something else</span>
-                        </b:column>
+
+                    <b:row >
+                   <b:panel>
+  <f:facet name="heading">
+    <i class="fa fa-reorder" style="padding-right:5px" />
+    <h:outputText value="Liste de vos groupes " />
+    <b:badge style="margin-left:10px; background-color:#5cb85c" value="#{homeBean.listeGroupes.size()}"  />
+  </f:facet>
+ 
+                    <ui:repeat value="#{homeBean.listeGroupes}"  var="g">
+                    
+                        <b:column col-xs="6" col-sm="10" offset="1" styleClass="placeholder">
+	                     
+	                        <b:panel   collapsible="false">
+	                          <f:facet name="heading">
+							    <i class="fa fa-users" style="padding-right:20px" />
+	                            <b:label value="#{g.nomGroupe}" severity="success" style="margin-right:5px"/>
+	                            <b:label value=" #{g.listOfEtudiants.size()}" severity="danger"></b:label>
+	                            <span class="text-muted">étudiant(s)</span>
+							  </f:facet>
+	  							
+	                            <b:label value="#{g.listQcms.size()} QCMs " severity="primary"></b:label><br /><br />
+	                            <ui:repeat value="#{g.listQcms}"  var="q">
+	                            <b:well>
+	                            	<h:outputText value="- #{q.titre} "></h:outputText>
+	                           
+	                            <b:label value="#{q.sessions.size()} Session(s)" severity="info"></b:label><br />
+	                            	
+	                            <ui:repeat value="#{q.sessions}"  var="s">
+	                            <b:badge value="S#{q.sessions.indexOf(s)+1} "></b:badge>
+	                            <h:outputText value=" #{s.dateDeb} "></h:outputText>
+	                            <h:outputText value="- #{s.dateFin} "></h:outputText>	
+	                            <h:outputLabel value="#{s.nbEssai} tentative(s)"></h:outputLabel>
+	                            </ui:repeat>
+	                               </b:well>
+	                            </ui:repeat>
+	                            
+	                       
+	                         </b:panel>  
+	                        
+                        </b:column>                    
+                    
+                    
+                    
+                    </ui:repeat>
+ </b:panel> 
+                    
+                    
                     </b:row>
-                    <h1>Section title</h1>
+                 
                     <hr/>
                     <b:row styleClass="table-responsive">
-                        <h:dataTable styleClass="table table-striped" value="#{loremIpsumBean.items}" var="item" rows="15">
-                            <h:column>
-                                <f:facet name="header"><h:outputText value="#" /></f:facet>
-                                <h:outputText value="#{item.h1}" />
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header"><h:outputText value="Header" /></f:facet>
-                                <h:outputText value="#{item.h2}" />
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header"><h:outputText value="Header" /></f:facet>
-                                <h:outputText value="#{item.h3}" />
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header"><h:outputText value="Header" /></f:facet>
-                                <h:outputText value="#{item.h4}" />
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header"><h:outputText value="Header" /></f:facet>
-                                <h:outputText value="#{item.h5}" />
-                            </h:column>
-                        </h:dataTable>
+
                     </b:row>
                 </b:column>
             </b:row>
