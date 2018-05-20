@@ -64,7 +64,7 @@
 							<b:well>
 							<b:label value="Q#{page.listQuestions.indexOf(q)+1}" severity="info"/>
 							<h:outputText value=" #{q.textQuestion} " />
-							<b:commandLink onclick="return confirmDelete();" icon-awesome="times" tooltip="Supprimer cette question" styleClass="btnDel" style="margin-right:5px">
+							<b:commandLink onclick="return confirmDelete();" icon-awesome="times" tooltip="Supprimer cette question"  style="margin-right:5px">
 						
 								 <f:param name="idQst" value="#{q.idQuestion}"></f:param>
 								 
@@ -73,14 +73,22 @@
 							<ui:repeat value="#{q.listReponses}"  var="r">
 							<b:label value="Reponse #{q.listReponses.indexOf(r)+1}:" severity="success"/>
 							
-							<h:outputText value=" #{r.textReponse} " /><b:badge value=" #{r.correct}"/><br/>
+							<h:outputText value=" #{r.textReponse}  " /><b:badge value=" #{r.correct}"/>
+								<b:commandLink onclick="return confirmDelete();" icon-awesome="times" tooltip="Supprimer cette réponse"  style="margin-left:5px">
+							
+									 <f:param name="idRep" value="#{r.idReponse}"></f:param>
+									 
+									 <f:ajax  render=":pages" listener="#{bean.deleteReponse}"></f:ajax>
+	                            </b:commandLink>							
+							
+							<br/>
 							</ui:repeat>
 
 							<br />
 							<b:label text="Réponse : " severity="danger"/>
 							<br /><br />
 							<b:inputText id="textRep" value="#{bean.respText}"></b:inputText>
-							
+
 							    <b:radiobutton id="btnTrue" value="#{bean.isTrue}"  itemLabel="True" itemValue="true" />
 							    <b:radiobutton id="btnFalse" value="#{bean.isTrue}" itemLabel="False" itemValue="false" />
 	

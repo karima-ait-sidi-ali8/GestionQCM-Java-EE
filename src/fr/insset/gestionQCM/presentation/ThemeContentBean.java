@@ -104,9 +104,6 @@ public class ThemeContentBean implements Serializable {
 	}
 	
 	public void addReponse(){
-		System.out.println(RespText);
-		System.out.println("-------");
-		System.out.println(isTrue);
 		if(!"".equals(RespText) && !"".equals(isTrue)){
 			
 		
@@ -122,8 +119,15 @@ public class ThemeContentBean implements Serializable {
 		initBean();
 		RespText ="";
 		}
-		
-		
+	}
+	
+	public void deleteReponse(){
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, String> param = ec.getRequestParameterMap();
+		ReponseMetier metier = (ReponseMetier) ContextUtil.getContext().getBean("ReponseMetier"); 
+		ContextUtil.getContext().close();
+		metier.deleteReponse(Integer.valueOf(param.get("idRep")));
+		initBean();
 	}
 	public List<Page> getListPage() {
 		return listPage;
