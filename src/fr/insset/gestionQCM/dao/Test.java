@@ -21,7 +21,7 @@ public class Test {
 		ReponseMetier metier = (ReponseMetier) ContextUtil.getContext().getBean("ReponseMetier"); 
 		ContextUtil.getContext().close();
 
-		metier.deleteReponse(4);
+		
 	}
 
 }

@@ -1,9 +1,12 @@
 package fr.insset.gestionQCM.dao.entity;
 
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,7 +21,7 @@ public class Session implements java.io.Serializable {
 
 
 	private static final long serialVersionUID = 1L;
-	private int id;
+	private int idSession;
 	private int nbEssai;
 	private Date dateDeb;
 	private Date dateFin;
@@ -32,9 +35,9 @@ public class Session implements java.io.Serializable {
 	public Session() {
 	}
 
-	public Session(int id, int nbEssai, Date dateDeb, Date dateFin, double duree, boolean showResult,
+	public Session (int nbEssai, Date dateDeb, Date dateFin, double duree, boolean showResult,
 			 int idQcm) {
-		this.id = id;
+	
 		this.nbEssai = nbEssai;
 		this.dateDeb = dateDeb;
 		this.dateFin = dateFin;
@@ -45,20 +48,22 @@ public class Session implements java.io.Serializable {
 	}
 
 	@Id
-
-	@Column(name = "id", unique = true, nullable = false)
-	public int getId() {
-		return this.id;
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id_session", unique = true, nullable = false)
+	public int getIdSession() {
+		return idSession;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdSession(int idSession) {
+		this.idSession = idSession;
 	}
 
 	@Column(name = "NbEssai", nullable = false)
 	public int getNbEssai() {
 		return this.nbEssai;
 	}
+
+
 
 	public void setNbEssai(int nbEssai) {
 		this.nbEssai = nbEssai;
