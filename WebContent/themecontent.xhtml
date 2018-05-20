@@ -49,9 +49,11 @@
                    <ui:repeat value="#{bean.listPage}"  var="page">
 				    <b:panel >
 					    <f:facet name="heading">
-						    <i class="fa fa-file" style="padding-right:20px" />
+						    <i class="fa fa-file" style="padding-right:5px" />
 							<h:outputText value="Page " />
 						    <b:badge style="margin-left:10px; background-color:#5cb85c" value="#{bean.listPage.indexOf(page)+1}"  />
+						    <b:badge style="margin-left:10px; background-color:#5cb85c" value="#{page.listQuestions.size()} Question(s)"  />
+						   
 					  	</f:facet>
 					
 					  	
