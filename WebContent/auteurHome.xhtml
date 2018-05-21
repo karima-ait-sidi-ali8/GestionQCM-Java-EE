@@ -28,9 +28,15 @@
                     
                     <hr/>
 
+	                            <b:button ajax="true" offset-sm="11" onclick="$('.modalAddSession').modal()"  icon-awesome="plus" tooltip="Supprimer cette question" look="success" style="margin-right:5px" />
+	                            <br />
+									
+
+                                
             
 
  						<b:row>
+ 						<h:form>
                     <ui:repeat value="#{homeBean.listeGroupes}"  var="g">
                     <b:column  style="width:530px">
                     
@@ -46,7 +52,9 @@
 	                            <b:label value="#{g.listQcms.size()} QCMs " severity="primary"></b:label><br /><br />
 	                            <ui:repeat value="#{g.listQcms}"  var="q">
 	                            <b:well>
-	                            	<h:outputText value="- #{q.titre} "></h:outputText>
+	                            	 <b:label value="Q#{g.listQcms.indexOf(q)+1}" severity="primary"></b:label>
+	                            
+	                            	<h:outputText value=" #{q.titre} "></h:outputText>
 	                           
 	                            <b:label value="#{q.sessions.size()} Session(s)" severity="info"></b:label><br />
 	                            	
@@ -56,10 +64,20 @@
 	                            <h:outputText value="- #{s.dateFin} "></h:outputText>	
 	                            <h:outputLabel value="#{s.nbEssai} tentative(s)"></h:outputLabel>
 	                            </ui:repeat>
+
 	                               </b:well>
 	                            </ui:repeat>
-	                            
-	                       
+	     							                       
+	                             <b:selectOneMenu id="listQcm" value="#{homeBean.choixQcm}" colMd="4" required="true"  labelColMd="2">
+							      <f:selectItem itemLabel="(Qcms)" itemValue="" />
+								  <f:selectItems value="#{homeBean.listQcmItem}"></f:selectItems>
+						         </b:selectOneMenu>
+	                       	    <b:commandButton   span="2"   size="sm"   look="success"  icon-awesome="plus">
+								 <f:param name="idGroupe" value="#{g.idGroupe}"></f:param>
+								 
+								 <f:ajax execute="listQcm" listener="#{homeBean.addQcmToGroupe}"></f:ajax>
+						
+						        </b:commandButton>
 	                         </b:panel>  
 	                        
                        </b:column>               
@@ -67,6 +85,7 @@
                     
                     
                     </ui:repeat>
+                    </h:form>
 					</b:row>
                     
                     
@@ -79,6 +98,42 @@
                 </b:column>
             </b:row>
         </b:container> 
+        
+        <h:form>
+        
+        <b:modal id="amodal" title="Gestion des sessions" styleClass="modalAddSession" size="modal-sm">
+        <h:panelGrid >
+         <b:row>
+         <b:column>
+          <b:selectOneMenu value="#{selectOneMenuBean.brand}" colMd="2" required="true" label="Select your car's brand:" labelColMd="2">
+	      <f:selectItem itemLabel="(Please select)" itemValue="" />
+	      <f:selectItem itemLabel="Fiat" itemValue="1" />
+	      <f:selectItem itemLabel="Honda" itemValue="2" />
+	      <f:selectItem itemLabel="Opel" itemValue="3" />
+         </b:selectOneMenu>
+        <h:outputLabel value="Date de début :"></h:outputLabel><br />
+        <b:dateTimePicker id="dateDeb" value="#{homeBean.dateDeb}"    /><br />
+        <h:outputLabel value="Date de fin :"></h:outputLabel><br />
+        <b:dateTimePicker id="dateFin"  value="#{homeBean.dateFin}"  /><br />
+        <h:outputLabel value="Tentative :"></h:outputLabel><br />
+        <b:inputText id="nbTent" value="#{homeBean.nbTent}"></b:inputText><br />
+         <h:outputLabel value="Correction immédiate :"></h:outputLabel><br />
+         <b:radiobutton id="showResVrai" value="#{homeBean.showReslt}" itemLabel="Vrai" itemValue="true" />
+         <b:radiobutton id="showResFaux" value="#{homeBean.showReslt}" itemLabel="Faux" itemValue="false" />
+         </b:column>
+             </b:row>                                                
+        </h:panelGrid>
+   
+		  <f:facet name="footer">
+				<b:commandButton  span="6" size="sm" look="success" value="Ajouter" icon-awesome="plus-circle">
+				</b:commandButton> 
+		  </f:facet>
+		</b:modal>
+        
+        </h:form>
+        
+        
+        
         <style type="text/css">
         .sub-header {
             border-bottom: 1px solid #eee;
