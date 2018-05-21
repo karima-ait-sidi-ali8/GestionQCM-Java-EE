@@ -60,9 +60,16 @@
 	                            	
 	                            <ui:repeat value="#{q.sessions}"  var="s">
 	                            <b:badge value="S#{q.sessions.indexOf(s)+1} "></b:badge>
-	                            <h:outputText value=" #{s.dateDeb} "></h:outputText>
-	                            <h:outputText value="- #{s.dateFin} "></h:outputText>	
-	                            <h:outputLabel value="#{s.nbEssai} tentative(s)"></h:outputLabel>
+	                            <h:outputText value=" #{s.dateDeb} ">
+	                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />>
+	                            </h:outputText>
+	                            <h:outputText value="- #{s.dateFin} ">
+	                  				<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+	                            </h:outputText>	
+	                            <h:outputLabel value="#{s.nbEssai} tentative(s)"></h:outputLabel><br />
+	                            <h:outputLabel value="Durée #{s.duree}">
+	                            <f:convertDateTime pattern="HH:mm:ss" />
+	                            </h:outputLabel>
 	                            </ui:repeat>
 
 	                               </b:well>
@@ -112,13 +119,17 @@
       
          </b:selectOneMenu><br /><br />
         <h:outputLabel value="Date de début :"></h:outputLabel><br />
-        <b:dateTimePicker id="dateDeb" value="#{homeBean.dateDeb}"    /><br />
+        <b:dateTimePicker id="dateDeb" value="#{homeBean.dateDeb}" format="MM/DD/YYYY HH:mm:ss" required="true"  /><br />
         <h:outputLabel value="Date de fin :"></h:outputLabel><br />
-        <b:dateTimePicker id="dateFin"  value="#{homeBean.dateFin}"  /><br />
+        <b:dateTimePicker id="dateFin"  value="#{homeBean.dateFin}" format="MM/DD/YYYY HH:mm:ss" required="true"  /><br />
+        <h:outputLabel value="Durée :"></h:outputLabel><br />
+        <b:dateTimePicker id="time" value="#{homeBean.time}" required="true" show-date="false">
+        
+        </b:dateTimePicker><br />
         <h:outputLabel value="Tentative :"></h:outputLabel><br />
-        <b:inputText id="nbTent" value="#{homeBean.nbTent}"></b:inputText><br />
+        <b:inputText id="nbTent" value="#{homeBean.nbTent}" required="true"></b:inputText><br />
          <h:outputLabel value="Correction immédiate :"></h:outputLabel><br />
-         <b:radiobutton id="showResVrai" value="#{homeBean.showReslt}" itemLabel="Oui" itemValue="true" />
+         <b:radiobutton id="showResVrai" value="#{homeBean.showReslt}" itemLabel="Oui" itemValue="true"  />
          <b:radiobutton id="showResFaux" value="#{homeBean.showReslt}" itemLabel="Non" itemValue="false" />
          </b:column>
              </b:row>                                                
@@ -126,6 +137,7 @@
    
 		  <f:facet name="footer">
 				<b:commandButton  span="6" size="sm" look="success" value="Ajouter" icon-awesome="plus-circle">
+				<f:ajax execute="@form"  listener="#{homeBean.addSession}"></f:ajax>
 				</b:commandButton> 
 		  </f:facet>
 		</b:modal>
