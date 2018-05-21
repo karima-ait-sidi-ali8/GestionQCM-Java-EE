@@ -28,7 +28,7 @@
                     
                     <hr/>
 
-	                            <b:button ajax="true" offset-sm="11" onclick="$('.modalAddSession').modal()"  icon-awesome="plus" tooltip="Supprimer cette question" look="success" style="margin-right:5px" />
+	                            <b:button ajax="true" offset-sm="10" onclick="$('.modalAddSession').modal()" value="Gérer les sessions"  icon-awesome="plus" tooltip="Supprimer cette question" look="success" style="margin-right:5px" />
 	                            <br />
 									
 
@@ -105,12 +105,12 @@
         <h:panelGrid >
          <b:row>
          <b:column>
-          <b:selectOneMenu value="#{selectOneMenuBean.brand}" colMd="2" required="true" label="Select your car's brand:" labelColMd="2">
-	      <f:selectItem itemLabel="(Please select)" itemValue="" />
-	      <f:selectItem itemLabel="Fiat" itemValue="1" />
-	      <f:selectItem itemLabel="Honda" itemValue="2" />
-	      <f:selectItem itemLabel="Opel" itemValue="3" />
-         </b:selectOneMenu>
+          <h:outputLabel value="Choisisez un qcm :"></h:outputLabel><br />
+          <b:selectOneMenu id="listQcmSess" value="#{homeBean.choixQcm}" col-sm="11"  required="true"  labelColMd="2">
+	      <f:selectItem itemLabel="(Qcms)" itemValue="" />
+		  <f:selectItems value="#{homeBean.listQcmItem}"></f:selectItems>
+      
+         </b:selectOneMenu><br /><br />
         <h:outputLabel value="Date de début :"></h:outputLabel><br />
         <b:dateTimePicker id="dateDeb" value="#{homeBean.dateDeb}"    /><br />
         <h:outputLabel value="Date de fin :"></h:outputLabel><br />
@@ -118,8 +118,8 @@
         <h:outputLabel value="Tentative :"></h:outputLabel><br />
         <b:inputText id="nbTent" value="#{homeBean.nbTent}"></b:inputText><br />
          <h:outputLabel value="Correction immédiate :"></h:outputLabel><br />
-         <b:radiobutton id="showResVrai" value="#{homeBean.showReslt}" itemLabel="Vrai" itemValue="true" />
-         <b:radiobutton id="showResFaux" value="#{homeBean.showReslt}" itemLabel="Faux" itemValue="false" />
+         <b:radiobutton id="showResVrai" value="#{homeBean.showReslt}" itemLabel="Oui" itemValue="true" />
+         <b:radiobutton id="showResFaux" value="#{homeBean.showReslt}" itemLabel="Non" itemValue="false" />
          </b:column>
              </b:row>                                                
         </h:panelGrid>
