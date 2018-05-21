@@ -41,7 +41,7 @@
                     <b:column  style="width:530px">
                     
 	                     
-	                        <b:panel   collapsible="false" >
+	                        <b:panel id="PanelGroupe"  collapsible="false" >
 	                          <f:facet name="heading">
 							    <i class="fa fa-users" style="padding-right:20px" />
 	                            <b:label value="#{g.nomGroupe}" severity="success" style="margin-right:5px"/>
@@ -75,7 +75,7 @@
 	                       	    <b:commandButton   span="2"   size="sm"   look="success"  icon-awesome="plus">
 								 <f:param name="idGroupe" value="#{g.idGroupe}"></f:param>
 								 
-								 <f:ajax execute="listQcm" listener="#{homeBean.addQcmToGroupe}"></f:ajax>
+								 <f:ajax execute="listQcm" render="PanelGroupe" listener="#{homeBean.addQcmToGroupe}"></f:ajax>
 						
 						        </b:commandButton>
 	                         </b:panel>  

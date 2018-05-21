@@ -23,8 +23,10 @@ import fr.insset.gestionQCM.dao.entity.Auteur;
 
 import fr.insset.gestionQCM.dao.entity.Groupe;
 import fr.insset.gestionQCM.dao.entity.Qcm;
+import fr.insset.gestionQCM.metier.GroupeMetier;
+import fr.insset.gestionQCM.metier.QcmMetier;
 import fr.insset.gestionQCM.metier.UserMetier;
-
+import fr.insset.gestionQCM.utils.ContextUtil;
 import fr.insset.gestionQCM.utils.SessionUtil;
 
 
@@ -100,8 +102,21 @@ public class HomeBean implements Serializable {
 		System.out.println(choixQcm);
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 		Map<String, String> param = ec.getRequestParameterMap(); 
+		QcmMetier metier = (QcmMetier) ContextUtil.getContext().getBean("qcmMetier"); 
+		ContextUtil.getContext().close();
 		
-		System.out.println(Integer.valueOf(param.get("idGroupe")));
+		boolean verif = metier.isAffect(Integer.valueOf(choixQcm), Integer.valueOf(param.get("idGroupe")));
+		
+		if(!verif){
+			GroupeMetier metierGroupe = (GroupeMetier) ContextUtil.getContext().getBean("groupeMetier"); 
+			ContextUtil.getContext().close();
+			Groupe g = metierGroupe.findById(Integer.valueOf(param.get("idGroupe")));
+			metier.AffectQcmToGroupe(Integer.valueOf(choixQcm), g);
+			initBean();
+			
+		}
+		
+
 	}
 	public List<Groupe> getListeGroupes() {
 		return listeGroupes;
