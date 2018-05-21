@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 
 import fr.insset.gestionQCM.dao.entity.Reponse;
 import fr.insset.gestionQCM.metier.ReponseMetier;
+import fr.insset.gestionQCM.metier.SessionMetier;
 import fr.insset.gestionQCM.utils.ContextUtil;
 
 
@@ -18,7 +19,7 @@ public class Test {
 	public static void main(String[] args) {
 		
 		
-		ReponseMetier metier = (ReponseMetier) ContextUtil.getContext().getBean("ReponseMetier"); 
+		SessionMetier metier = (SessionMetier) ContextUtil.getContext().getBean("SessionMetier"); 
 		ContextUtil.getContext().close();
 
 		

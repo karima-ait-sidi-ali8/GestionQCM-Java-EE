@@ -38,4 +38,9 @@
 <bean id="ReponseMetier" class="fr.insset.gestionQCM.metier.ReponseMetierImpl">
 <property name="reponseDAO" ref="ReponseDAOImpl"></property>
 </bean>
+
+<bean id="SessionDAOImpl"  class="fr.insset.gestionQCM.dao.SessionDAOImpl"></bean>
+<bean id="SessionMetier" class="fr.insset.gestionQCM.metier.SessionMetierImpl">
+<property name="sessionDao" ref="SessionDAOImpl"></property>
+</bean>
 </beans>
