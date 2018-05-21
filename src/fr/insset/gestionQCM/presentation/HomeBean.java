@@ -11,7 +11,7 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
-
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -76,6 +76,7 @@ public class HomeBean implements Serializable {
 	
 	@PostConstruct
 	public void initBean(){
+		showReslt= "true";
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"config/config.xml"});
 		UserMetier metier = (UserMetier) context.getBean("metier"); 
 
@@ -101,7 +102,9 @@ public class HomeBean implements Serializable {
 
 	public void addSession() throws IOException{
 
-	
+		if(!dateFin.before(dateDeb) && dateFin.getTime()-dateDeb.getTime()>= time.getTime()){
+			
+
 		SessionMetier metier = (SessionMetier) ContextUtil.getContext().getBean("SessionMetier"); 
 		ContextUtil.getContext().close();
 		SessionEntity s = new SessionEntity();
@@ -115,6 +118,11 @@ public class HomeBean implements Serializable {
 		initBean();
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 		ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+		}
+		else{
+			FacesContext.getCurrentInstance().addMessage("msgbean", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur !", "Date est invalide."));
+
+		}
 	}
 
 	public void addQcmToGroupe(){

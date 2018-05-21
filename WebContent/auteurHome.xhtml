@@ -4,7 +4,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Easy Eval</title>
         <meta name="author" content="Riccardo Massera"></meta>
@@ -69,7 +70,7 @@
 	                            <h:outputLabel value="#{s.nbEssai} tentative(s)"></h:outputLabel><br />
 	                            <h:outputLabel value="Durée #{s.duree}">
 	                            <f:convertDateTime pattern="HH:mm:ss" />
-	                            </h:outputLabel>
+	                            </h:outputLabel><br/>
 	                            </ui:repeat>
 
 	                               </b:well>
@@ -108,32 +109,41 @@
         
         <h:form>
         
-        <b:modal id="amodal" title="Gestion des sessions" styleClass="modalAddSession" size="modal-sm">
+        <b:modal id="amodal" title="Gestion des sessions" styleClass="modalAddSession" size="modal-sm" >
         <h:panelGrid >
          <b:row>
-         <b:column>
+         <b:column >
           <h:outputLabel value="Choisisez un qcm :"></h:outputLabel><br />
-          <b:selectOneMenu id="listQcmSess" value="#{homeBean.choixQcm}" col-sm="11"  required="true"  labelColMd="2">
+          <b:selectOneMenu id="listQcmSess" value="#{homeBean.choixQcm}" col-sm="11"  required="true" required-message="Qcm est obligatoire !" labelColMd="2">
 	      <f:selectItem itemLabel="(Qcms)" itemValue="" />
 		  <f:selectItems value="#{homeBean.listQcmItem}"></f:selectItems>
       
          </b:selectOneMenu><br /><br />
+         <b:message for="listQcmSess"><p:autoUpdate></p:autoUpdate></b:message>
         <h:outputLabel value="Date de début :"></h:outputLabel><br />
-        <b:dateTimePicker id="dateDeb" value="#{homeBean.dateDeb}" format="MM/DD/YYYY HH:mm:ss" required="true"  /><br />
+        <b:dateTimePicker id="dateDeb" value="#{homeBean.dateDeb}" format="MM/DD/YYYY HH:mm:ss" required="true" required-message="Date début est obligatoire !"  /><br />
+        <b:message for="dateDeb"><p:autoUpdate></p:autoUpdate></b:message>
         <h:outputLabel value="Date de fin :"></h:outputLabel><br />
-        <b:dateTimePicker id="dateFin"  value="#{homeBean.dateFin}" format="MM/DD/YYYY HH:mm:ss" required="true"  /><br />
+        <b:dateTimePicker id="dateFin"  value="#{homeBean.dateFin}" format="MM/DD/YYYY HH:mm:ss" required="true" required-message="Date fin est obligatoire !" /><br />
+        <b:message for="dateFin"><p:autoUpdate></p:autoUpdate></b:message>
         <h:outputLabel value="Durée :"></h:outputLabel><br />
-        <b:dateTimePicker id="time" value="#{homeBean.time}" required="true" show-date="false">
+        <b:dateTimePicker id="time" value="#{homeBean.time}" required="true" required-message="Durée est obligatoire !" show-date="false">
+        <b:message for="time"><p:autoUpdate></p:autoUpdate></b:message>
         
         </b:dateTimePicker><br />
         <h:outputLabel value="Tentative :"></h:outputLabel><br />
-        <b:inputText id="nbTent" value="#{homeBean.nbTent}" required="true"></b:inputText><br />
+        <b:inputText id="nbTent" value="#{homeBean.nbTent}" required="true" validatorMessage="nb Tentative est numérique" required-message="Nb. Tentative est obligatoire !">
+        
+        <f:validateRegex pattern="[0-9]+"></f:validateRegex>
+        </b:inputText>
+        <b:message for="nbTent"><p:autoUpdate></p:autoUpdate></b:message><br />
          <h:outputLabel value="Correction immédiate :"></h:outputLabel><br />
-         <b:radiobutton id="showResVrai" value="#{homeBean.showReslt}" itemLabel="Oui" itemValue="true"  />
+         <b:radiobutton id="showResVrai" value="#{homeBean.showReslt}" itemLabel="Oui"  itemValue="true"  />
          <b:radiobutton id="showResFaux" value="#{homeBean.showReslt}" itemLabel="Non" itemValue="false" />
          </b:column>
              </b:row>                                                
         </h:panelGrid>
+            <p:messages id="msgbean" for="msgbean" showDetail="true"><p:autoUpdate></p:autoUpdate></p:messages>
    
 		  <f:facet name="footer">
 				<b:commandButton  span="6" size="sm" look="success" value="Ajouter" icon-awesome="plus-circle">
