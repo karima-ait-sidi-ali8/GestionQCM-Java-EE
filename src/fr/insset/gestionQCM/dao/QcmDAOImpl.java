@@ -1,6 +1,7 @@
 package fr.insset.gestionQCM.dao;
 
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import fr.insset.gestionQCM.dao.entity.Groupe;
@@ -56,6 +57,16 @@ public class QcmDAOImpl implements QcmDAO {
 		Qcm QcmUpdated = (Qcm) session.merge(q);
 		session.getTransaction().commit();
 		return QcmUpdated;
+	}
+
+	@Override
+	public boolean isAffect(Integer idq, Integer idg) {
+		Query q2 = session.createSQLQuery("SELECT * FROM Qcm_groupe WHERE id_groupe=:b and id_qcm=:a");
+		q2.setParameter("a", idq);
+		q2.setParameter("b", idg);
+		if(q2.list().isEmpty()) return false;
+
+	return true;
 	}
 
 

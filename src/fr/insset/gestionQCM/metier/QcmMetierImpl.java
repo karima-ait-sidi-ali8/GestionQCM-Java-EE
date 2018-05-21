@@ -43,6 +43,12 @@ public class QcmMetierImpl implements QcmMetier {
 		
 		return qcmDao.UpdateQcm(q);
 	}
+
+	@Override
+	public boolean isAffect(Integer idq, Integer idg) {
+		
+		return qcmDao.isAffect(idq, idg);
+	}
 	
 	
 	

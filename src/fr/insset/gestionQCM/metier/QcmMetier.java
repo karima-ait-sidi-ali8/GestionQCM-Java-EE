@@ -17,4 +17,6 @@ public interface QcmMetier {
 	
 	public Qcm UpdateQcm(Qcm q);
 	
+	public boolean isAffect(Integer idq, Integer idg);
+	
 }

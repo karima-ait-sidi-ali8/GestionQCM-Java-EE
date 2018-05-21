@@ -17,6 +17,8 @@ public interface QcmDAO {
 	
 	public Qcm UpdateQcm(Qcm q);
 	
+	public boolean isAffect(Integer idq, Integer idg);
+	
 
 	
 	
