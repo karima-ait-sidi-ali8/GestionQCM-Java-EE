@@ -3,7 +3,7 @@ package fr.insset.gestionQCM.dao.entity;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 
 @Entity
@@ -23,8 +21,8 @@ public class Session implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private int idSession;
 	private int nbEssai;
-	private Date dateDeb;
-	private Date dateFin;
+	private String  dateDeb;
+	private String dateFin;
 	private double duree;
 	private boolean showResult;
 
@@ -35,7 +33,7 @@ public class Session implements java.io.Serializable {
 	public Session() {
 	}
 
-	public Session (int nbEssai, Date dateDeb, Date dateFin, double duree, boolean showResult,
+	public Session (int nbEssai, String dateDeb, String dateFin, double duree, boolean showResult,
 			 int idQcm) {
 	
 		this.nbEssai = nbEssai;
@@ -69,23 +67,23 @@ public class Session implements java.io.Serializable {
 		this.nbEssai = nbEssai;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "DateDeb", nullable = false, length = 10)
-	public Date getDateDeb() {
+
+	@Column(name = "DateDeb", nullable = false)
+	public String getDateDeb() {
 		return this.dateDeb;
 	}
 
-	public void setDateDeb(Date dateDeb) {
+	public void setDateDeb(String dateDeb) {
 		this.dateDeb = dateDeb;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "DateFin", nullable = false, length = 10)
-	public Date getDateFin() {
+
+	@Column(name = "DateFin", nullable = false)
+	public String getDateFin() {
 		return this.dateFin;
 	}
 
-	public void setDateFin(Date dateFin) {
+	public void setDateFin(String dateFin) {
 		this.dateFin = dateFin;
 	}
 
