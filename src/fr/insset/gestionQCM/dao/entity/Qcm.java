@@ -35,7 +35,7 @@ public class Qcm implements java.io.Serializable {
 	private String type;
 	private int idAuteur;
 	
-	private List<Session> sessions = new ArrayList<Session>();
+	private List<SessionEntity> sessions = new ArrayList<SessionEntity>();
 	
 	private List<Groupe> listGroupes;
 	
@@ -91,12 +91,12 @@ public class Qcm implements java.io.Serializable {
 		this.idAuteur = idAuteur;
 	}
 
-	@OneToMany(targetEntity=Session.class, mappedBy="qcm", fetch=FetchType.LAZY)
-	public List<Session> getSessions() {
+	@OneToMany(targetEntity=SessionEntity.class, mappedBy="qcm", fetch=FetchType.LAZY)
+	public List<SessionEntity> getSessions() {
 		return sessions;
 	}
 
-	public void setSessions(List<Session> sessions) {
+	public void setSessions(List<SessionEntity> sessions) {
 		this.sessions = sessions;
 	}
 

@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "session", catalog = "qcm_db")
-public class Session implements java.io.Serializable {
+public class SessionEntity implements java.io.Serializable {
 
 
 	private static final long serialVersionUID = 1L;
@@ -23,17 +23,17 @@ public class Session implements java.io.Serializable {
 	private int nbEssai;
 	private String  dateDeb;
 	private String dateFin;
-	private double duree;
+	private String duree;
 	private boolean showResult;
 
 	private int idQcm;
 	
 	private Qcm qcm;
 
-	public Session() {
+	public SessionEntity() {
 	}
 
-	public Session (int nbEssai, String dateDeb, String dateFin, double duree, boolean showResult,
+	public SessionEntity (int nbEssai, String dateDeb, String dateFin, String duree, boolean showResult,
 			 int idQcm) {
 	
 		this.nbEssai = nbEssai;
@@ -87,12 +87,12 @@ public class Session implements java.io.Serializable {
 		this.dateFin = dateFin;
 	}
 
-	@Column(name = "Duree", nullable = false, precision = 22, scale = 0)
-	public double getDuree() {
+	@Column(name = "Duree", nullable = false)
+	public String getDuree() {
 		return this.duree;
 	}
 
-	public void setDuree(double duree) {
+	public void setDuree(String duree) {
 		this.duree = duree;
 	}
 
