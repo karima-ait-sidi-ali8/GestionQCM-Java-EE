@@ -3,6 +3,7 @@ package fr.insset.gestionQCM.dao.entity;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 @Entity
@@ -21,9 +24,9 @@ public class SessionEntity implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private int idSession;
 	private int nbEssai;
-	private String  dateDeb;
-	private String dateFin;
-	private String duree;
+	private Date  dateDeb;
+	private Date dateFin;
+	private Date duree;
 	private boolean showResult;
 
 	private int idQcm;
@@ -33,7 +36,7 @@ public class SessionEntity implements java.io.Serializable {
 	public SessionEntity() {
 	}
 
-	public SessionEntity (int nbEssai, String dateDeb, String dateFin, String duree, boolean showResult,
+	public SessionEntity (int nbEssai, Date dateDeb, Date dateFin, Date duree, boolean showResult,
 			 int idQcm) {
 	
 		this.nbEssai = nbEssai;
@@ -67,32 +70,33 @@ public class SessionEntity implements java.io.Serializable {
 		this.nbEssai = nbEssai;
 	}
 
-
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "DateDeb", nullable = false)
-	public String getDateDeb() {
+	public Date getDateDeb() {
 		return this.dateDeb;
 	}
 
-	public void setDateDeb(String dateDeb) {
+	public void setDateDeb(Date dateDeb) {
 		this.dateDeb = dateDeb;
 	}
 
-
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "DateFin", nullable = false)
-	public String getDateFin() {
+	public Date getDateFin() {
 		return this.dateFin;
 	}
 
-	public void setDateFin(String dateFin) {
+	public void setDateFin(Date dateFin) {
 		this.dateFin = dateFin;
 	}
-
+	
+	@Temporal(TemporalType.TIME)
 	@Column(name = "Duree", nullable = false)
-	public String getDuree() {
+	public Date getDuree() {
 		return this.duree;
 	}
 
-	public void setDuree(String duree) {
+	public void setDuree(Date duree) {
 		this.duree = duree;
 	}
 
