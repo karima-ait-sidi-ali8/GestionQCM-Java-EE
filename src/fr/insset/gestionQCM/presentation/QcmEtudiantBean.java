@@ -11,11 +11,12 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
+
 
 import fr.insset.gestionQCM.dao.entity.Groupe;
 import fr.insset.gestionQCM.dao.entity.Qcm;
-import fr.insset.gestionQCM.dao.entity.Session;
+
+import fr.insset.gestionQCM.dao.entity.SessionEntity;
 import fr.insset.gestionQCM.metier.GroupeMetier;
 import fr.insset.gestionQCM.utils.ContextUtil;
 import fr.insset.gestionQCM.utils.SessionUtil;
@@ -26,16 +27,14 @@ import fr.insset.gestionQCM.utils.SessionUtil;
 @SessionScoped
 public class QcmEtudiantBean implements Serializable{
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
-	private static final Logger log = Logger.getLogger(QcmEtudiantBean.class);
+
 
 
 	private GroupeMetier metier;	
 	private List<Qcm> listeQcms ; 
-	private List<Session> listeSessions;
+	private List<SessionEntity> listeSessions;
 	private int  nbQcms;
 	private int  nbSessions;
 	private String nomGroupe;
@@ -75,7 +74,7 @@ public class QcmEtudiantBean implements Serializable{
 		for (Qcm qcm : listeQcms) {
 				listeSessions = qcm.getSessions();
 				nbSessions = listeSessions.size();	
-				for (Session session : listeSessions)
+				for (SessionEntity session : listeSessions)
 				{
 					if(aujourdui.before(session.getDateFin()))
 					{
@@ -119,11 +118,11 @@ public class QcmEtudiantBean implements Serializable{
 		this.nbQcms = nbQcms;
 	}
 
-	public List<Session> getListeSessions() {
+	public List<SessionEntity> getListeSessions() {
 		return listeSessions;
 	}
 
-	public void setListeSessions(List<Session> listeSessions) {
+	public void setListeSessions(List<SessionEntity> listeSessions) {
 		this.listeSessions = listeSessions;
 	}
 

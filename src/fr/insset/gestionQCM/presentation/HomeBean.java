@@ -145,6 +145,16 @@ public class HomeBean implements Serializable {
 		
 
 	}
+	
+	public void DeleteSession(){
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, String> param = ec.getRequestParameterMap();
+		SessionMetier metier = (SessionMetier) ContextUtil.getContext().getBean("SessionMetier"); 
+		ContextUtil.getContext().close();
+		metier.deleteSession(Integer.valueOf(param.get("idSession")));
+		initBean();
+		
+	}
 	public List<Groupe> getListeGroupes() {
 		return listeGroupes;
 	}

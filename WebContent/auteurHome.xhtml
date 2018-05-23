@@ -9,7 +9,13 @@
     <h:head>
         <title>Easy Eval</title>
         <meta name="author" content="Riccardo Massera"></meta>
+                <script>
         
+        	function confirmDelete(){
+        		return confirm("Êtes-vous sûr de vouloir supprimer ?");
+        	}
+        
+        </script>
     </h:head>
     <h:body style="padding-top: 60px">
         <h:outputScript library="holder" name="holder.js" />
@@ -37,7 +43,7 @@
             
 
  						<b:row>
- 						<h:form>
+ 						<h:form id="formSes">
                     <ui:repeat value="#{homeBean.listeGroupes}"  var="g">
                     <b:column  style="width:530px">
                     
@@ -70,7 +76,14 @@
 	                            <h:outputLabel value="#{s.nbEssai} tentative(s)"></h:outputLabel><br />
 	                            <h:outputLabel value="Durée #{s.duree}">
 	                            <f:convertDateTime pattern="HH:mm:ss" />
-	                            </h:outputLabel><br/>
+	                            </h:outputLabel>
+	                            <b:commandLink onclick="return confirmDelete();" icon-awesome="times" tooltip="Supprimer cette session"  style="margin-left:5px">
+							
+									 <f:param name="idSession" value="#{s.idSession}"></f:param>
+									 
+									 <f:ajax  render="formSes" listener="#{homeBean.DeleteSession}"></f:ajax>
+	                            </b:commandLink>	
+	                            <br/>
 	                            </ui:repeat>
 
 	                               </b:well>

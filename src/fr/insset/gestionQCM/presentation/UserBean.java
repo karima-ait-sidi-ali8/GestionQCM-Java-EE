@@ -113,7 +113,7 @@ public class UserBean implements Serializable {
 					hs.setAttribute("username", username);
 					hs.setAttribute("idUser", idUser);
 					try {
-						FacesContext.getCurrentInstance().getExternalContext().redirect("classes.xhtml");
+						FacesContext.getCurrentInstance().getExternalContext().redirect("auteurHome.xhtml");
 					} catch (IOException e) {
 						
 						e.printStackTrace();

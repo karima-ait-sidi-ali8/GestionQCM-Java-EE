@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -79,7 +80,7 @@ public class Theme implements java.io.Serializable {
 		this.qcm = qcm;
 	}
 
-	@OneToMany(targetEntity=Page.class, mappedBy="theme")
+	@OneToMany(targetEntity=Page.class, mappedBy="theme", cascade=CascadeType.REMOVE)
 	public List<Page> getListPages() {
 		return listPages;
 	}

@@ -1,6 +1,7 @@
 package fr.insset.gestionQCM.dao.entity;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -83,7 +84,7 @@ public class Page implements java.io.Serializable {
 
 
 
-	@OneToMany(targetEntity=Question.class, mappedBy="page")
+	@OneToMany(targetEntity=Question.class, mappedBy="page", cascade=CascadeType.REMOVE)
 	public List<Question> getListQuestions() {
 		return listQuestions;
 	}
